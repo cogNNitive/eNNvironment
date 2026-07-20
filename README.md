@@ -2,30 +2,30 @@
 agent-bootstrap:
   version: "1.0"
   skills:
-    - name: innv0-innfo
-      repo: https://github.com/innV0/innv0-skills
-      path: skills/innv0-innfo
+    - name: nn-innfo
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/nn-innfo
       description: Crear, editar y validar modelos iNNfo
       mcp:
         - name: innfo-mcp
-          url: https://raw.githubusercontent.com/innV0/cogNNitive/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
-    - name: innv0-trannsform
-      repo: https://github.com/innV0/innv0-skills
-      path: skills/innv0-trannsform
+          url: https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
+    - name: nn-trannsform
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/nn-trannsform
       description: Pipeline de transformación de documentos
-    - name: innv0-workflow-orchestrator
-      repo: https://github.com/innV0/innv0-skills
-      path: skills/innv0-workflow-orchestrator
+    - name: nn-workflow-orchestrator
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/nn-workflow-orchestrator
       description: Ejecutar flujos multi-skill con stages secuenciales
   workflows:
     - id: cognnitive
       label: "CogNNitive — Crear un modelo iNNfo desde cero"
       description: Elegir template, nombrar modelo, configurar workspace
-      skill: innv0-innfo
+      skill: nn-innfo
     - id: transform
       label: "traNNsform — Pipeline de transformación de documentos"
       description: Importar/exportar documentos, procesar archivos
-      skill: innv0-trannsform
+      skill: nn-trannsform
 ---
 
 # eNNvironment
@@ -44,9 +44,9 @@ eNNvironment es la puerta de entrada al ecosistema iNNv0. Le dice al agente qué
 
 | Skill | Descripción |
 |-------|-------------|
-| `innv0-innfo` | Crear, editar y validar modelos iNNfo (delega al MCP de cogNNitive) |
-| `innv0-trannsform` | Pipeline de importación/exportación de documentos |
-| `innv0-workflow-orchestrator` | Orquestación multi-skill |
+| `nn-innfo` | Crear, editar y validar modelos iNNfo (delega al MCP de cogNNitive) |
+| `nn-trannsform` | Pipeline de importación/exportación de documentos |
+| `nn-workflow-orchestrator` | Orquestación multi-skill |
 
 ### Flujos disponibles
 
@@ -77,7 +77,7 @@ El bootstrap se encarga de todo: descarga, instalación, validación y registro 
 
 ## cogNNitive — Motor de iNNfo
 
-**Propósito**: Hub de especificaciones, tooling y motor del ecosistema [iNNfo](https://github.com/innV0/cogNNitive).
+**Propósito**: Hub de especificaciones, tooling y motor del ecosistema [iNNfo](https://github.com/cogNNitive/cogNNitive).
 
 - Define las especificaciones iNNfo (niveles 0-2: defiNNe, iNNfo, templates)
 - Implementa `@innv0/innfo-core` — parser, validador, resolvedor de cadenas de specs
@@ -85,18 +85,18 @@ El bootstrap se encarga de todo: descarga, instalación, validación y registro 
 - Incluye **iNNfo Modeler** — editor Vue 3 SPA para modelos iNNfo
 - Pipeline de validación CI (`pipeline-gates`)
 
-## iNNv0_skills — Skills de Agente
+## actioNN — Skills de Agente
 
 **Propósito**: Colección modular de skills para OpenCode (y agentes compatibles) que enseñan al AI agent a trabajar con el ecosistema iNNfo.
 
-Skills disponibles en https://github.com/innV0/innv0-skills
+Skills disponibles en https://github.com/cogNNitive/actioNN
 
 ---
 
 ## Cómo se Integran
 
 ```
-AI Agent → iNNv0_skills (instrucciones) → innfo-mcp (MCP server) → @innv0/innfo-core
+AI Agent → actioNN (instrucciones) → innfo-mcp (MCP server) → @innv0/innfo-core
                                                                        ↓
                                                            Specs en GitHub RAW
                                                            (cogNNitive/specs/latest/)
@@ -109,16 +109,16 @@ El MCP server es el puente. Vive en cogNNitive (`packages/innfo-mcp/`) y se dist
 ### URLs de especificaciones
 
 ```
-https://raw.githubusercontent.com/innV0/cogNNitive/main/specs/latest/level0/defiNNe_NN.md
-https://raw.githubusercontent.com/innV0/cogNNitive/main/specs/latest/level1/iNNfo_NN.md
-https://raw.githubusercontent.com/innV0/cogNNitive/main/specs/latest/level2/{template}/{template}_NN.md
+https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level0/defiNNe_NN.md
+https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level1/iNNfo_NN.md
+https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level2/{template}/{template}_NN.md
 ```
 
 ---
 
 ## División de Responsabilidades
 
-| Capa | cogNNitive | iNNv0_skills |
+| Capa | cogNNitive | actioNN |
 |------|-----------|--------------|
 | **Rol** | Motor + especificaciones | Instrucciones al agente |
 | **Contenido** | TypeScript, specs, tests, editor Vue | SKILL.md declarativos, scripts auxiliares |
@@ -126,10 +126,10 @@ https://raw.githubusercontent.com/innV0/cogNNitive/main/specs/latest/level2/{tem
 | **Output** | Editor web, MCP bundle, docs site | Skills instalables en `~/.agents/skills/` |
 | **Versiona** | Specs iNNfo + paquetes npm | Skills individualmente (V_x-y-z) |
 
-La separación es limpia: **cogNNitive define y ejecuta**, iNNv0_skills **instruye al agente** para usar lo que cogNNitive expone. El MCP server es la interfaz estable entre ambos.
+La separación es limpia: **cogNNitive define y ejecuta**, actioNN **instruye al agente** para usar lo que cogNNitive expone. El MCP server es la interfaz estable entre ambos.
 
 ---
 
 ## Documentación Relacionada
 
-- [`ecosystem-analysis_cogNNitive-vs-iNNv0_skills.md`](ecosystem-analysis_cogNNitive-vs-iNNv0_skills.md) — Análisis detallado de integración con propuestas de mejora
+- [`ecosystem-analysis_cogNNitive-vs-actioNN.md`](ecosystem-analysis_cogNNitive-vs-iNNv0_skills.md) — Análisis detallado de integración con propuestas de mejora
