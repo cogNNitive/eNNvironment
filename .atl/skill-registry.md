@@ -34,14 +34,14 @@ None installed in this project.
 | handoff | Compact conversation into handoff doc | `~/.agents/skills/handoff/SKILL.md` |
 | implement | Implement work from spec/tickets | `~/.agents/skills/implement/SKILL.md` |
 | improve-codebase-architecture | Scan + report + grill architecture | `~/.agents/skills/improve-codebase-architecture/SKILL.md` |
-| nn-design-presets | Visual design tokens reference | `~/.agents/skills/nn-design-presets/SKILL.md` |
-| nn-dev-opencode-model-router | Route tasks to OpenCode model | `~/.agents/skills/nn-dev-opencode-model-router/SKILL.md` |
-| nn-innfo | Create/edit/validate iNNfo models | `~/.agents/skills/nn-innfo/SKILL.md` |
-| nn-router | Entry point for iNNv0 skills | `~/.agents/skills/nn-router/SKILL.md` |
-| nn-site-generator | Create/edit websites | `~/.agents/skills/nn-site-generator/SKILL.md` |
-| nn-skills-lifecycle | Install, create, audit skills | `~/.agents/skills/nn-skills-lifecycle/SKILL.md` |
-| nn-trannsform | Document ingestion/transformation | `~/.agents/skills/nn-trannsform/SKILL.md` |
-| nn-workflow-orchestrator | Multi-skill workflows | `~/.agents/skills/nn-workflow-orchestrator/SKILL.md` |
+| NN-design-presets | Visual design tokens reference | `~/.agents/skills/NN-design-presets/SKILL.md` |
+| NN-dev-opencode-model-router | Route tasks to OpenCode model | `~/.agents/skills/NN-dev-opencode-model-router/SKILL.md` |
+| NN-innfo | Create/edit/validate iNNfo models | `~/.agents/skills/NN-innfo/SKILL.md` |
+| NN-router | Entry point for iNNv0 skills | `~/.agents/skills/NN-router/SKILL.md` |
+| NN-site-generator | Create/edit websites | `~/.agents/skills/NN-site-generator/SKILL.md` |
+| NN-skills-lifecycle | Install, create, audit skills | `~/.agents/skills/NN-skills-lifecycle/SKILL.md` |
+| NN-trannsform | Document ingestion/transformation | `~/.agents/skills/NN-trannsform/SKILL.md` |
+| NN-workflow-orchestrator | Multi-skill workflows | `~/.agents/skills/NN-workflow-orchestrator/SKILL.md` |
 | issue-creation | Create GitHub issues | `~/.config/opencode/skills/issue-creation/SKILL.md` |
 | judgment-day | Dual review | `~/.config/opencode/skills/judgment-day/SKILL.md` |
 | loop-me | Grill about workflow specs | `~/.agents/skills/loop-me/SKILL.md` |

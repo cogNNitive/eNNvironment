@@ -1,110 +1,110 @@
----
+﻿---
 agent-bootstrap:
   version: "1.0"
   skills:
-    - name: nn-innfo
+    - name: NN-innfo
       repo: https://github.com/cogNNitive/actioNN
-      path: skills/nn-innfo
+      path: skills/NN-innfo
       description: Crear, editar y validar modelos iNNfo
       mcp:
         - name: innfo-mcp
           url: https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
-    - name: nn-trannsform
+    - name: NN-trannsform
       repo: https://github.com/cogNNitive/actioNN
-      path: skills/nn-trannsform
-      description: Pipeline de transformación de documentos
-    - name: nn-workflow-orchestrator
+      path: skills/NN-trannsform
+      description: Pipeline de transformaciÃ³n de documentos
+    - name: NN-workflow-orchestrator
       repo: https://github.com/cogNNitive/actioNN
-      path: skills/nn-workflow-orchestrator
+      path: skills/NN-workflow-orchestrator
       description: Ejecutar flujos multi-skill con stages secuenciales
   workflows:
     - id: cognnitive
-      label: "CogNNitive — Crear un modelo iNNfo desde cero"
+      label: "CogNNitive â€” Crear un modelo iNNfo desde cero"
       description: Elegir template, nombrar modelo, configurar workspace
-      skill: nn-innfo
+      skill: NN-innfo
     - id: transform
-      label: "traNNsform — Pipeline de transformación de documentos"
+      label: "traNNsform â€” Pipeline de transformaciÃ³n de documentos"
       description: Importar/exportar documentos, procesar archivos
-      skill: nn-trannsform
+      skill: NN-trannsform
 ---
 
 # eNNvironment
 
-Synopsis, manifest, y punto de entrada del ecosistema iNNv0. Este repo documenta cómo se relacionan los proyectos del ecosistema y sirve como bootstrap para que un AI Agent instale los skills necesarios.
+Synopsis, manifest, y punto de entrada del ecosistema iNNv0. Este repo documenta cÃ³mo se relacionan los proyectos del ecosistema y sirve como bootstrap para que un AI Agent instale los skills necesarios.
 
-→ Para empezar, decile a tu agente: _"Quiero usar eNNvironment https://innv0.github.io/eNNvironment"_
+â†’ Para empezar, decile a tu agente: _"Quiero usar eNNvironment https://cognitive.com"_
 
 ---
 
-## ¿Qué es eNNvironment?
+## Â¿QuÃ© es eNNvironment?
 
-eNNvironment es la puerta de entrada al ecosistema iNNv0. Le dice al agente qué skills instalar, de dónde descargarlos, y qué flujos de trabajo están disponibles.
+eNNvironment es la puerta de entrada al ecosistema iNNv0. Le dice al agente quÃ© skills instalar, de dÃ³nde descargarlos, y quÃ© flujos de trabajo estÃ¡n disponibles.
 
 ### Skills que instala
 
-| Skill | Descripción |
+| Skill | DescripciÃ³n |
 |-------|-------------|
-| `nn-innfo` | Crear, editar y validar modelos iNNfo (delega al MCP de cogNNitive) |
-| `nn-trannsform` | Pipeline de importación/exportación de documentos |
-| `nn-workflow-orchestrator` | Orquestación multi-skill |
+| `NN-innfo` | Crear, editar y validar modelos iNNfo (delega al MCP de cogNNitive) |
+| `NN-trannsform` | Pipeline de importaciÃ³n/exportaciÃ³n de documentos |
+| `NN-workflow-orchestrator` | OrquestaciÃ³n multi-skill |
 
 ### Flujos disponibles
 
-| Opción | Descripción |
+| OpciÃ³n | DescripciÃ³n |
 |--------|-------------|
 | **CogNNitive** | Crear un modelo iNNfo desde cero: elegir template, nombrar, configurar workspace |
-| **traNNsform** | Pipeline de transformación de documentos: importar/exportar, procesar archivos |
+| **traNNsform** | Pipeline de transformaciÃ³n de documentos: importar/exportar, procesar archivos |
 
 ---
 
-## ¿Cómo funciona?
+## Â¿CÃ³mo funciona?
 
 ```
 Usuario: "Quiero usar eNNvironment <URL>"
-         │
-         ▼
+         â”‚
+         â–¼
 Agent Web Bootstrap Skill
-  ├─ Fetch URL → parsea YAML frontmatter
-  ├─ Descarga skills desde GitHub
-  ├─ Si el skill declara MCP: descarga bundle + registra en opencode.json
-  ├─ Valida con skill-origin-guard
-  └─ Presenta menú de workflows
+  â”œâ”€ Fetch URL â†’ parsea YAML frontmatter
+  â”œâ”€ Descarga skills desde GitHub
+  â”œâ”€ Si el skill declara MCP: descarga bundle + registra en opencode.json
+  â”œâ”€ Valida con skill-origin-guard
+  â””â”€ Presenta menÃº de workflows
 ```
 
-El bootstrap se encarga de todo: descarga, instalación, validación y registro de MCP. Solo se ejecuta una vez; la próxima vez los skills ya están disponibles.
+El bootstrap se encarga de todo: descarga, instalaciÃ³n, validaciÃ³n y registro de MCP. Solo se ejecuta una vez; la prÃ³xima vez los skills ya estÃ¡n disponibles.
 
 ---
 
-## cogNNitive — Motor de iNNfo
+## cogNNitive â€” Motor de iNNfo
 
-**Propósito**: Hub de especificaciones, tooling y motor del ecosistema [iNNfo](https://github.com/cogNNitive/cogNNitive).
+**PropÃ³sito**: Hub de especificaciones, tooling y motor del ecosistema [iNNfo](https://github.com/cogNNitive/cogNNitive).
 
 - Define las especificaciones iNNfo (niveles 0-2: defiNNe, iNNfo, templates)
-- Implementa `@innv0/innfo-core` — parser, validador, resolvedor de cadenas de specs
-- Provee `@innv0/innfo-mcp` — servidor MCP que expone tools determinísticas para AI agents
-- Incluye **iNNfo Modeler** — editor Vue 3 SPA para modelos iNNfo
-- Pipeline de validación CI (`pipeline-gates`)
+- Implementa `@cognnitive/innfo-core` â€” parser, validador, resolvedor de cadenas de specs
+- Provee `@cognnitive/innfo-mcp` â€” servidor MCP que expone tools determinÃ­sticas para AI agents
+- Incluye **iNNfo Modeler** â€” editor Vue 3 SPA para modelos iNNfo
+- Pipeline de validaciÃ³n CI (`pipeline-gates`)
 
-## actioNN — Skills de Agente
+## actioNN â€” Skills de Agente
 
-**Propósito**: Colección modular de skills para OpenCode (y agentes compatibles) que enseñan al AI agent a trabajar con el ecosistema iNNfo.
+**PropÃ³sito**: ColecciÃ³n modular de skills para OpenCode (y agentes compatibles) que enseÃ±an al AI agent a trabajar con el ecosistema iNNfo.
 
 Skills disponibles en https://github.com/cogNNitive/actioNN
 
 ---
 
-## Cómo se Integran
+## CÃ³mo se Integran
 
 ```
-AI Agent → actioNN (instrucciones) → innfo-mcp (MCP server) → @innv0/innfo-core
-                                                                       ↓
+AI Agent â†’ actioNN (instrucciones) â†’ innfo-mcp (MCP server) â†’ @cognnitive/innfo-core
+                                                                       â†“
                                                            Specs en GitHub RAW
                                                            (cogNNitive/specs/latest/)
 ```
 
-### Punto de integración principal: innfo-mcp
+### Punto de integraciÃ³n principal: innfo-mcp
 
-El MCP server es el puente. Vive en cogNNitive (`packages/innfo-mcp/`) y se distribuye como bundle compilado desde GitHub RAW. El Agent Web Bootstrap lo descarga y registra automáticamente.
+El MCP server es el puente. Vive en cogNNitive (`packages/innfo-mcp/`) y se distribuye como bundle compilado desde GitHub RAW. El Agent Web Bootstrap lo descarga y registra automÃ¡ticamente.
 
 ### URLs de especificaciones
 
@@ -116,7 +116,7 @@ https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level2
 
 ---
 
-## División de Responsabilidades
+## DivisiÃ³n de Responsabilidades
 
 | Capa | cogNNitive | actioNN |
 |------|-----------|--------------|
@@ -126,10 +126,10 @@ https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level2
 | **Output** | Editor web, MCP bundle, docs site | Skills instalables en `~/.agents/skills/` |
 | **Versiona** | Specs iNNfo + paquetes npm | Skills individualmente (V_x-y-z) |
 
-La separación es limpia: **cogNNitive define y ejecuta**, actioNN **instruye al agente** para usar lo que cogNNitive expone. El MCP server es la interfaz estable entre ambos.
+La separaciÃ³n es limpia: **cogNNitive define y ejecuta**, actioNN **instruye al agente** para usar lo que cogNNitive expone. El MCP server es la interfaz estable entre ambos.
 
 ---
 
-## Documentación Relacionada
+## DocumentaciÃ³n Relacionada
 
-- [`ecosystem-analysis_cogNNitive-vs-actioNN.md`](ecosystem-analysis_cogNNitive-vs-iNNv0_skills.md) — Análisis detallado de integración con propuestas de mejora
+- [`ecosystem-analysis_iNNfo-vs-actioNN.md`](ecosystem-analysis_iNNfo-vs-actioNN.md) â€” AnÃ¡lisis detallado de integraciÃ³n con propuestas de mejora

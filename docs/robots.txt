@@ -1,0 +1,7 @@
+# eNNvironment — cogNNitive Ecosystem Gateway
+# Allow all crawlers, full access
+
+User-agent: *
+Allow: /
+
+Sitemap: https://cognitive.com/sitemap.xml

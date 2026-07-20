@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eNNvironment — cogNNitive Ecosystem Gateway</title>
+  <meta name="description" content="Bootstrap entry point for the cogNNitive ecosystem. Install skills, discover workflows, and navigate the cogNNitive universe.">
+  <meta name="generator" content="https://github.com/cogNNitive/actioNN/tree/main/skills/nn-design-presets">
+  <link rel="alternate" type="text/markdown" href="index.md" title="eNNvironment — Markdown source">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234D0E4E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23fff'%3EeN%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEft1rENwjAQBdD/V2SABRgBCTFGYgRGyAg0jMAIbMAMNClSpDiO48uJf0ql7+59ti0AvHkAb94K2O/3pJTkdrvJcRySMSYAHo/HZ8H7fCYAp9NpGcA5J8YYYIxZFnDOgTEGnHPLAuH3b4FVAQAv2wIEnucZY4BSiiyAEFoW2O/3oJSS/X4PjDGZbYGqquRyuYAQAq7XS2ZbYK5pmhtjj5xz5baAUkrm+37LJhB/mX+B8Rde+wUlMgAAAABJRU5ErkJggg==">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "eNNvironment",
+    "url": "https://cognitive.com",
+    "description": "Bootstrap entry point for the cogNNitive ecosystem. Install AI agent skills, discover workflows, and navigate the cogNNitive universe.",
+    "author": {
+      "@type": "Organization",
+      "name": "cogNNitive"
+    },
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "keywords": ["opencode", "ai-agent", "skills", "cogNNitive", "cognnitive", "bootstrap"]
+  }
+  </script>
+  <style>
+    :root {
+      --canvas: #FFFFFF;
+      --canvas-inert: #FAFAFC;
+      --brand: #4D0E4E;
+      --brand-light: #6A1B6B;
+      --brand-subtle: #F6EEF6;
+      --border: #F2F2F7;
+      --ink: #111112;
+      --ink-muted: #636366;
+      --sans: 'Plus Jakarta Sans', 'Geist Sans', system-ui, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+      --mono: 'JetBrains Mono', 'Geist Mono', monospace;
+      --max-w: 1280px;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 48px;
+      --space-xxl: 80px;
+      --radius: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--canvas);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+
+    nav {
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--canvas);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--brand);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--brand); }
+
+    .nav-cta {
+      background: var(--brand);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--brand-light) !important; }
+
+    .hero {
+      padding: 120px 0 var(--space-xxl);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin: 0 auto var(--space-md);
+    }
+
+    .hero h1 .accent {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--brand);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--ink-muted);
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-sub {
+      margin-top: var(--space-lg);
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    .hero-sub code {
+      background: var(--brand-subtle);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--brand);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--brand-light); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: transparent;
+      color: var(--brand);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid var(--brand);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--brand-subtle); }
+
+    section { padding: var(--space-xxl) 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-title {
+      font-size: 32px;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-md);
+    }
+
+    .section-title .accent {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--brand);
+    }
+
+    .section-desc {
+      color: var(--ink-muted);
+      max-width: 640px;
+      font-size: 16px;
+    }
+
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .repo-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .repo-card:hover {
+      border-color: var(--brand);
+      transform: translateY(-2px);
+    }
+
+    .repo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius);
+      background: var(--brand-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: var(--space-md);
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .repo-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .repo-card .repo-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .repo-card p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+    }
+
+    .repo-card a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    .repo-card a:hover { text-decoration: underline; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+
+    .steps { counter-reset: step; }
+
+    .step {
+      counter-increment: step;
+      position: relative;
+      padding-top: 40px;
+    }
+
+    .step::before {
+      content: counter(step);
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .code-block {
+      background: var(--canvas-inert);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      margin-top: var(--space-xl);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre;
+      color: var(--ink);
+    }
+
+    .code-block .comment { color: #8E8E93; }
+    .code-block .cmd { color: var(--brand); }
+
+    .architecture-flow {
+      margin-top: var(--space-xl);
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 2;
+      color: var(--ink-muted);
+      background: var(--canvas-inert);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-xl);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .architecture-flow .highlight {
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: var(--space-xl) 0 var(--space-lg);
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    footer p { font-size: 13px; color: var(--ink-muted); }
+    footer a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
+    footer a:hover { color: var(--brand); }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 34px; }
+      .section-title { font-size: 26px; }
+      .ecosystem-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: var(--space-lg); }
+      .hero { padding: 80px 0 var(--space-xl); }
+      section { padding: var(--space-xl) 0; }
+      .nav-links li:not(.nav-cta-li) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="." class="logo">eNNvironment</a>
+    <ul class="nav-links">
+      <li><a href="#ecosystem">Ecosystem</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#bootstrap">Bootstrap</a></li>
+      <li><a href="https://github.com/cogNNitive" target="_blank">GitHub</a></li>
+      <li class="nav-cta-li"><a href="#bootstrap" class="nav-cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Your <span class="accent">Gateway</span> to the cogNNitive Ecosystem</h1>
+      <p>eNNvironment bootstraps AI agents with the right skills, connects you to every cogNNitive repo, and gets you productive in seconds — not hours.</p>
+      <div class="hero-actions">
+        <a href="#bootstrap" class="btn-primary">Bootstrap Your Agent &rarr;</a>
+        <a href="#ecosystem" class="btn-secondary">Explore Repos</a>
+      </div>
+      <p class="hero-sub">Tell your agent: <code>I want to use eNNvironment https://cognitive.com</code></p>
+    </div>
+  </section>
+
+  <section id="ecosystem">
+    <div class="container">
+      <span class="section-label">Ecosystem</span>
+      <h2 class="section-title">Repositories that <span class="accent">power</span> cogNNitive</h2>
+      <p class="section-desc">Every repo has a clear role. Together they form a modular, composable system for AI agent tooling and document intelligence.</p>
+
+      <div class="ecosystem-grid">
+        <div class="repo-card">
+          <div class="repo-icon">E</div>
+          <span class="repo-tag">Gateway</span>
+          <h3>eNNvironment</h3>
+          <p>Bootstrap entry point. Installs agent skills from actioNN, registers MCP servers, and presents available workflows — all from a single URL.</p>
+          <a href="https://github.com/cogNNitive/eNNvironment" target="_blank">View on GitHub &rarr;</a>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">C</div>
+          <span class="repo-tag">Engine</span>
+          <h3>cogNNitive</h3>
+          <p>iNNfo specification engine. Parser, validator, MCP server, and Vue 3 modeler. Defines the spec chain (defiNNe &rarr; iNNfo &rarr; templates &rarr; models).</p>
+          <a href="https://github.com/cogNNitive/cogNNitive" target="_blank">View on GitHub &rarr;</a>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">A</div>
+          <span class="repo-tag">Skills</span>
+          <h3>actioNN</h3>
+          <p>Modular OpenCode agent skills. Model Router, Skills Manager, traNNsform pipeline, Web Design Guide — each skill is self-contained and versioned independently.</p>
+          <a href="https://github.com/cogNNitive/actioNN" target="_blank">View on GitHub &rarr;</a>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">i</div>
+          <span class="repo-tag">Invoicing</span>
+          <h3>accountiNNg</h3>
+          <p>Invoice and accounting workflows powered by the iNNfo model system. Generate, validate, and process financial documents using structured templates.</p>
+          <a href="https://github.com/cogNNitive/accountiNNg" target="_blank">View on GitHub &rarr;</a>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">E</div>
+          <span class="repo-tag">Events</span>
+          <h3>eventovery</h3>
+          <p>Event management and orchestration. Schedule, track, and automate event-driven workflows across the cogNNitive ecosystem.</p>
+          <a href="https://github.com/cogNNitive/eventovery" target="_blank">View on GitHub &rarr;</a>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-icon">E</div>
+          <span class="repo-tag">Learning</span>
+          <h3>educacióNN</h3>
+          <p>Educational content and training materials. Courses, exercises, and guided paths for learning iNNfo modeling and the cogNNitive ecosystem.</p>
+          <a href="https://github.com/cogNNitive/educacióNN" target="_blank">View on GitHub &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="container">
+      <span class="section-label">Architecture</span>
+      <h2 class="section-title">How the <span class="accent">integration</span> works</h2>
+      <p class="section-desc">The agent reads eNNvironment's manifest, installs what it needs, and delegates to the right engine.</p>
+
+      <div class="steps">
+        <div class="step">
+          <h4>Agent bootstraps</h4>
+          <p>The agent fetches eNNvironment, parses the YAML frontmatter in README.md, and discovers available skills, workflows, and MCP servers.</p>
+        </div>
+        <div class="step">
+          <h4>Skills installed</h4>
+          <p>Each skill is downloaded from actioNN, validated, and registered. MCP bundles are fetched from cogNNitive and wired into opencode.json.</p>
+        </div>
+        <div class="step">
+          <h4>Workflows ready</h4>
+          <p>The agent presents a menu of workflows. Choose one — the agent already has the domain knowledge and tools to execute it.</p>
+        </div>
+      </div>
+
+      <div class="architecture-flow">AI Agent
+  &rarr; <span class="highlight">eNNvironment</span> (manifest + bootstrap)
+    &rarr; <span class="highlight">actioNN</span> (agent skill instructions)
+      &rarr; <span class="highlight">cogNNitive</span> (innfo-mcp + specs)
+        &rarr; Models, documents, workflows</div>
+    </div>
+  </section>
+
+  <section id="bootstrap">
+    <div class="container">
+      <span class="section-label">Getting started</span>
+      <h2 class="section-title">Bootstrap in <span class="accent">one command</span></h2>
+      <p class="section-desc">Tell your AI agent to load eNNvironment. It handles the rest — skill installation, MCP registration, and workflow discovery.</p>
+
+      <div class="code-block"><span class="comment"># Tell your OpenCode agent:</span>
+<span class="cmd">"I want to use eNNvironment https://cognitive.com"</span>
+
+<span class="comment"># The agent will:</span>
+<span class="comment"># 1. Fetch README.md → parse YAML frontmatter</span>
+<span class="comment"># 2. Download skills from actioNN</span>
+<span class="comment"># 3. Register innfo-mcp from cogNNitive</span>
+<span class="comment"># 4. Present workflow menu</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 cogNNitive. Open source under MIT license.</p>
+    <a href="https://github.com/cogNNitive">cogNNitive Organization</a>
+  </div>
+</footer>
+
+<!--
+  Generator: cogNNitive Site Generator
+  Markdown source: index.md
+  AI index: ai-index.yaml
+  LLM entry: llms.txt
+-->
+</body>
+</html>

@@ -1,0 +1,32 @@
+# AI index for eNNvironment — cogNNitive Ecosystem Gateway
+# LLMs and AI agents use this file to discover the site's purpose and structure.
+version: "1.0"
+site:
+  title: "eNNvironment — cogNNitive Ecosystem Gateway"
+  description: "Bootstrap entry point for the cogNNitive ecosystem. Install AI agent skills, discover workflows, and navigate the cogNNitive universe."
+  url: "https://cognitive.com"
+  type: gateway
+ecosystem:
+  - name: cogNNitive
+    role: engine
+    url: "https://github.com/cogNNitive/cogNNitive"
+    description: "iNNfo specification engine — parser, validator, MCP server, Vue modeler"
+  - name: actioNN
+    role: skills
+    url: "https://github.com/cogNNitive/actioNN"
+    description: "Modular OpenCode agent skills"
+  - name: accountiNNg
+    role: invoicing
+    url: "https://github.com/cogNNitive/accountiNNg"
+    description: "Invoice and accounting workflows"
+  - name: eventovery
+    role: events
+    url: "https://github.com/cogNNitive/eventovery"
+    description: "Event management and orchestration"
+  - name: educacióNN
+    role: learning
+    url: "https://github.com/cogNNitive/educacióNN"
+    description: "Educational content and training materials"
+pages:
+  - url: "https://cognitive.com/"
+    content: "Landing page — gateway, ecosystem overview, bootstrap instructions"

@@ -1,0 +1,38 @@
+{
+  "@context": "https://www.w3.org/ns/ai-catalog",
+  "name": "eNNvironment — cogNNitive Ecosystem Gateway",
+  "description": "Bootstrap entry point for the cogNNitive ecosystem. Installs AI agent skills, registers MCP servers, and discovers workflows.",
+  "url": "https://cognitive.com",
+  "type": "GatewayPage",
+  "ecosystem": [
+    {
+      "name": "cogNNitive",
+      "role": "engine",
+      "url": "https://github.com/cogNNitive/cogNNitive"
+    },
+    {
+      "name": "actioNN",
+      "role": "skills",
+      "url": "https://github.com/cogNNitive/actioNN"
+    },
+    {
+      "name": "accountiNNg",
+      "role": "invoicing",
+      "url": "https://github.com/cogNNitive/accountiNNg"
+    },
+    {
+      "name": "eventovery",
+      "role": "events",
+      "url": "https://github.com/cogNNitive/eventovery"
+    },
+    {
+      "name": "educacióNN",
+      "role": "learning",
+      "url": "https://github.com/cogNNitive/educacióNN"
+    }
+  ],
+  "bootstrap": {
+    "command": "I want to use eNNvironment https://cognitive.com",
+    "manifest": "README.md"
+  }
+}
