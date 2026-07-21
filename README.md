@@ -32,7 +32,7 @@ agent-bootstrap:
 
 Synopsis, manifest, y punto de entrada del ecosistema iNNv0. Este repo documenta cÃ³mo se relacionan los proyectos del ecosistema y sirve como bootstrap para que un AI Agent instale los skills necesarios.
 
-â†’ Para empezar, decile a tu agente: _"Quiero usar eNNvironment https://cognitive.com"_
+â†’ Para empezar, decile a tu agente: _"Quiero usar eNNvironment https://cognnitive.com"_
 
 ---
 

@@ -4,7 +4,7 @@ version: "1.0"
 site:
   title: "eNNvironment — cogNNitive Ecosystem Gateway"
   description: "Bootstrap entry point for the cogNNitive ecosystem. Install AI agent skills, discover workflows, and navigate the cogNNitive universe."
-  url: "https://cognitive.com"
+  url: "https://cognnitive.com"
   type: gateway
 ecosystem:
   - name: cogNNitive
@@ -28,5 +28,5 @@ ecosystem:
     url: "https://github.com/cogNNitive/educacióNN"
     description: "Educational content and training materials"
 pages:
-  - url: "https://cognitive.com/"
+  - url: "https://cognnitive.com/"
     content: "Landing page — gateway, ecosystem overview, bootstrap instructions"

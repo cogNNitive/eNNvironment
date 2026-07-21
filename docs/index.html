@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>eNNvironment — cogNNitive Ecosystem Gateway</title>
-  <meta name="description" content="Bootstrap entry point for the cogNNitive ecosystem. Install skills, discover workflows, and navigate the cogNNitive universe.">
+  <title>cogNNitive Ecosystem Gateway</title>
+  <meta name="description" content="Gateway to the cogNNitive ecosystem. Discover AI agent skills, workflows, and document intelligence tools.">
   <meta name="generator" content="https://github.com/cogNNitive/actioNN/tree/main/skills/nn-design-presets">
-  <link rel="alternate" type="text/markdown" href="index.md" title="eNNvironment — Markdown source">
+  <link rel="alternate" type="text/markdown" href="index.md" title="cogNNitive — Markdown source">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234D0E4E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23fff'%3EeN%3C/text%3E%3C/svg%3E">
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEft1rENwjAQBdD/V2SABRgBCTFGYgRGyAg0jMAIbMAMNClSpDiO48uJf0ql7+59ti0AvHkAb94K2O/3pJTkdrvJcRySMSYAHo/HZ8H7fCYAp9NpGcA5J8YYYIxZFnDOgTEGnHPLAuH3b4FVAQAv2wIEnucZY4BSiiyAEFoW2O/3oJSS/X4PjDGZbYGqquRyuYAQAq7XS2ZbYK5pmhtjj5xz5baAUkrm+37LJhB/mX+B8Rde+wUlMgAAAABJRU5ErkJggg==">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +16,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "eNNvironment",
-    "url": "https://cognitive.com",
+    "name": "cogNNitive",
+    "url": "https://cognnitive.com",
     "description": "Bootstrap entry point for the cogNNitive ecosystem. Install AI agent skills, discover workflows, and navigate the cogNNitive universe.",
     "author": {
       "@type": "Organization",
@@ -298,14 +298,14 @@
       margin-bottom: var(--space-md);
     }
 
-    .repo-card a {
+    .repo-link-primary {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--brand);
       text-decoration: none;
     }
 
-    .repo-card a:hover { text-decoration: underline; }
+    .repo-link-primary:hover { text-decoration: underline; }
 
     .steps {
       display: grid;
@@ -406,6 +406,76 @@
     footer a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
     footer a:hover { color: var(--brand); }
 
+    .bhero-steps {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      margin-top: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .bhero-step {
+      flex: 1;
+      min-width: 200px;
+      max-width: 280px;
+      background: var(--canvas-inert);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-md) var(--space-lg);
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+
+    .bhero-step .num {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .bhero-step .content {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .bhero-step .content strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .bhero-step .content .cmd-box {
+      display: block;
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--brand);
+      margin-top: 4px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .bhero-step .content a {
+      color: var(--brand);
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
     @media (max-width: 768px) {
       .hero h1 { font-size: 34px; }
       .section-title { font-size: 26px; }
@@ -421,7 +491,7 @@
 
 <nav>
   <div class="container">
-    <a href="." class="logo">eNNvironment</a>
+    <a href="." class="logo">cogNNitive</a>
     <ul class="nav-links">
       <li><a href="#ecosystem">Ecosystem</a></li>
       <li><a href="#how-it-works">How it works</a></li>
@@ -436,12 +506,34 @@
   <section class="hero">
     <div class="container">
       <h1>Your <span class="accent">Gateway</span> to the cogNNitive Ecosystem</h1>
-      <p>eNNvironment bootstraps AI agents with the right skills, connects you to every cogNNitive repo, and gets you productive in seconds — not hours.</p>
+      <p>cogNNitive bootstraps AI agents with the right skills, connects you to every cogNNitive repo, and gets you productive in seconds — not hours.</p>
       <div class="hero-actions">
         <a href="#bootstrap" class="btn-primary">Bootstrap Your Agent &rarr;</a>
         <a href="#ecosystem" class="btn-secondary">Explore Repos</a>
       </div>
-      <p class="hero-sub">Tell your agent: <code>I want to use eNNvironment https://cognitive.com</code></p>
+      <div class="bhero-steps">
+        <div class="bhero-step">
+          <span class="num">1</span>
+          <div class="content">
+            <strong>Install OpenCode</strong>
+            <a href="https://opencode.ai/download" target="_blank">Download from opencode.ai</a>
+          </div>
+        </div>
+        <div class="bhero-step">
+          <span class="num">2</span>
+          <div class="content">
+            <strong>Tell your agent</strong>
+            <span class="cmd-box">I want to use https://cognnitive.com</span>
+          </div>
+        </div>
+        <div class="bhero-step">
+          <span class="num">3</span>
+          <div class="content">
+            <strong>Choose &amp; follow</strong>
+            Pick what you want to do and follow&nbsp;the&nbsp;instructions.
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -453,51 +545,19 @@
 
       <div class="ecosystem-grid">
         <div class="repo-card">
-          <div class="repo-icon">E</div>
-          <span class="repo-tag">Gateway</span>
-          <h3>eNNvironment</h3>
-          <p>Bootstrap entry point. Installs agent skills from actioNN, registers MCP servers, and presents available workflows — all from a single URL.</p>
-          <a href="https://github.com/cogNNitive/eNNvironment" target="_blank">View on GitHub &rarr;</a>
-        </div>
-
-        <div class="repo-card">
-          <div class="repo-icon">C</div>
+          <div class="repo-icon">i</div>
           <span class="repo-tag">Engine</span>
-          <h3>cogNNitive</h3>
+          <h3>iNNfo</h3>
           <p>iNNfo specification engine. Parser, validator, MCP server, and Vue 3 modeler. Defines the spec chain (defiNNe &rarr; iNNfo &rarr; templates &rarr; models).</p>
-          <a href="https://github.com/cogNNitive/cogNNitive" target="_blank">View on GitHub &rarr;</a>
+          <a href="https://innfo.cognnitive.com" target="_blank" class="repo-link-primary">Visit site &rarr;</a>
         </div>
 
         <div class="repo-card">
           <div class="repo-icon">A</div>
           <span class="repo-tag">Skills</span>
           <h3>actioNN</h3>
-          <p>Modular OpenCode agent skills. Model Router, Skills Manager, traNNsform pipeline, Web Design Guide — each skill is self-contained and versioned independently.</p>
-          <a href="https://github.com/cogNNitive/actioNN" target="_blank">View on GitHub &rarr;</a>
-        </div>
-
-        <div class="repo-card">
-          <div class="repo-icon">i</div>
-          <span class="repo-tag">Invoicing</span>
-          <h3>accountiNNg</h3>
-          <p>Invoice and accounting workflows powered by the iNNfo model system. Generate, validate, and process financial documents using structured templates.</p>
-          <a href="https://github.com/cogNNitive/accountiNNg" target="_blank">View on GitHub &rarr;</a>
-        </div>
-
-        <div class="repo-card">
-          <div class="repo-icon">E</div>
-          <span class="repo-tag">Events</span>
-          <h3>eventovery</h3>
-          <p>Event management and orchestration. Schedule, track, and automate event-driven workflows across the cogNNitive ecosystem.</p>
-          <a href="https://github.com/cogNNitive/eventovery" target="_blank">View on GitHub &rarr;</a>
-        </div>
-
-        <div class="repo-card">
-          <div class="repo-icon">E</div>
-          <span class="repo-tag">Learning</span>
-          <h3>educacióNN</h3>
-          <p>Educational content and training materials. Courses, exercises, and guided paths for learning iNNfo modeling and the cogNNitive ecosystem.</p>
-          <a href="https://github.com/cogNNitive/educacióNN" target="_blank">View on GitHub &rarr;</a>
+          <p>Modular OpenCode agent skills. Model Router, Skills Manager, traNNsform pipeline, Web Design Guide - each skill is self-contained and versioned independently.</p>
+          <a href="https://actionn.cognnitive.com" target="_blank" class="repo-link-primary">Visit site &rarr;</a>
         </div>
       </div>
     </div>
@@ -507,16 +567,16 @@
     <div class="container">
       <span class="section-label">Architecture</span>
       <h2 class="section-title">How the <span class="accent">integration</span> works</h2>
-      <p class="section-desc">The agent reads eNNvironment's manifest, installs what it needs, and delegates to the right engine.</p>
+      <p class="section-desc">The agent reads cogNNitive's manifest, installs what it needs, and delegates to the right engine.</p>
 
       <div class="steps">
         <div class="step">
           <h4>Agent bootstraps</h4>
-          <p>The agent fetches eNNvironment, parses the YAML frontmatter in README.md, and discovers available skills, workflows, and MCP servers.</p>
+          <p>The agent fetches cogNNitive, parses the YAML frontmatter in README.md, and discovers available skills, workflows, and MCP servers.</p>
         </div>
         <div class="step">
           <h4>Skills installed</h4>
-          <p>Each skill is downloaded from actioNN, validated, and registered. MCP bundles are fetched from cogNNitive and wired into opencode.json.</p>
+          <p>Each skill is downloaded from actioNN, validated, and registered. MCP bundles are fetched from iNNfo and wired into opencode.json.</p>
         </div>
         <div class="step">
           <h4>Workflows ready</h4>
@@ -525,9 +585,9 @@
       </div>
 
       <div class="architecture-flow">AI Agent
-  &rarr; <span class="highlight">eNNvironment</span> (manifest + bootstrap)
+        &rarr; <span class="highlight">eNNvironment</span> (manifest + bootstrap)
     &rarr; <span class="highlight">actioNN</span> (agent skill instructions)
-      &rarr; <span class="highlight">cogNNitive</span> (innfo-mcp + specs)
+      &rarr; <span class="highlight">iNNfo</span> (innfo-mcp + specs)
         &rarr; Models, documents, workflows</div>
     </div>
   </section>
@@ -536,16 +596,23 @@
     <div class="container">
       <span class="section-label">Getting started</span>
       <h2 class="section-title">Bootstrap in <span class="accent">one command</span></h2>
-      <p class="section-desc">Tell your AI agent to load eNNvironment. It handles the rest — skill installation, MCP registration, and workflow discovery.</p>
+      <p class="section-desc">Tell your AI agent to load cogNNitive. It handles the rest — skill installation, MCP registration, and workflow discovery.</p>
 
-      <div class="code-block"><span class="comment"># Tell your OpenCode agent:</span>
-<span class="cmd">"I want to use eNNvironment https://cognitive.com"</span>
-
-<span class="comment"># The agent will:</span>
-<span class="comment"># 1. Fetch README.md → parse YAML frontmatter</span>
-<span class="comment"># 2. Download skills from actioNN</span>
-<span class="comment"># 3. Register innfo-mcp from cogNNitive</span>
-<span class="comment"># 4. Present workflow menu</span></div>
+      <div class="steps">
+        <div class="step">
+          <h4>Install OpenCode</h4>
+          <p>Download and install OpenCode for your platform from <a href="https://opencode.ai/download" target="_blank">opencode.ai/download</a>.</p>
+        </div>
+        <div class="step">
+          <h4>Tell your agent</h4>
+          <p>Copy this command and tell your OpenCode agent:</p>
+          <div class="code-block" style="margin-top:var(--space-sm);padding:var(--space-md)"><span class="cmd">I want to use https://cognnitive.com</span></div>
+        </div>
+        <div class="step">
+          <h4>Choose &amp; follow</h4>
+          <p>Pick what you want to do from the workflow menu and follow the instructions your agent provides.</p>
+        </div>
+      </div>
     </div>
   </section>
 </main>

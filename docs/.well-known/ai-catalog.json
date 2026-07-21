@@ -2,7 +2,7 @@
   "@context": "https://www.w3.org/ns/ai-catalog",
   "name": "eNNvironment — cogNNitive Ecosystem Gateway",
   "description": "Bootstrap entry point for the cogNNitive ecosystem. Installs AI agent skills, registers MCP servers, and discovers workflows.",
-  "url": "https://cognitive.com",
+  "url": "https://cognnitive.com",
   "type": "GatewayPage",
   "ecosystem": [
     {
@@ -32,7 +32,12 @@
     }
   ],
   "bootstrap": {
-    "command": "I want to use eNNvironment https://cognitive.com",
-    "manifest": "README.md"
+    "command": "I want to use https://cognnitive.com",
+    "manifest": "README.md",
+    "steps": [
+      "Install OpenCode from https://opencode.ai/download",
+      "Tell your agent: I want to use https://cognnitive.com",
+      "Choose what you want to do and follow the instructions"
+    ]
   }
 }

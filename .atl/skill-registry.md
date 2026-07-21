@@ -19,7 +19,7 @@ None installed in this project.
 | claude-handoff | Hand off to a fresh background agent | `~/.agents/skills/claude-handoff/SKILL.md` |
 | code-review | Review changes since a fixed point | `~/.agents/skills/code-review/SKILL.md` |
 | codebase-design | Designing deep modules | `~/.agents/skills/codebase-design/SKILL.md` |
-| cognitive-doc-design | Writing guides, READMEs, RFCs | `~/.config/opencode/skills/cognitive-doc-design/SKILL.md` |
+| cogNNitive-doc-design | Writing guides, READMEs, RFCs | `~/.config/opencode/skills/cogNNitive-doc-design/SKILL.md` |
 | comment-writer | PR feedback, issue replies, reviews | `~/.config/opencode/skills/comment-writer/SKILL.md` |
 | customize-opencode | OpenCode configuration | `<built-in>` |
 | design-an-interface | Generate multiple interface designs | `~/.agents/skills/design-an-interface/SKILL.md` |

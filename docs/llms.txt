@@ -11,8 +11,10 @@ eNNvironment is the bootstrap entry point for the cogNNitive ecosystem. It tells
 - eventovery: https://github.com/cogNNitive/eventovery — Event management
 - educacióNN: https://github.com/cogNNitive/educacióNN — Learning materials
 
-## Bootstrap command
-Tell your agent: "I want to use eNNvironment https://cognitive.com"
+## Bootstrap
+1. Install OpenCode from https://opencode.ai/download
+2. Tell your agent: "I want to use https://cognnitive.com"
+3. Choose what you want to do and follow the instructions
 
 ## Manifest file
 README.md (YAML frontmatter contains agent-bootstrap block with skills, repos, and workflows)
