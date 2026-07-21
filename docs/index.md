@@ -1,43 +1,122 @@
 ---
 layout: default
-title: eNNvironment — cogNNitive Ecosystem Gateway
-description: Bootstrap entry point for the cogNNitive ecosystem. Install skills, discover workflows, and navigate the cogNNitive universe.
+title: cogNNitive — Bridge Your Organizational Knowledge to AI Agents
+description: cogNNitive is the decentralized knowledge modeling ecosystem. Build structured, valid, and executable knowledge models in Markdown that humans and AI agents can collaboratively read, edit, and run.
+agent-bootstrap:
+  version: "1.0"
+  skills:
+    - name: NN-innfo
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/NN-innfo
+      description: Create, edit, and validate iNNfo models
+      mcp:
+        - name: innfo-mcp
+          url: https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
+    - name: NN-trannsform
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/NN-trannsform
+      description: Document transformation pipeline
+    - name: NN-workflow-orchestrator
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/NN-workflow-orchestrator
+      description: Execute multi-skill workflows with sequential stages
+    - name: NN-design-presets
+      repo: https://github.com/cogNNitive/actioNN
+      path: skills/NN-design-presets
+      description: Visual design system with Morado Nazareno palette
+  workflows:
+    - id: cognnitive
+      label: "CogNNitive — Create an iNNfo model from scratch"
+      description: Choose template, name model, configure workspace
+      skill: NN-innfo
+    - id: transform
+      label: "traNNsform — Document transformation pipeline"
+      description: Import/export documents, process files
+      skill: NN-trannsform
+    - id: design
+      label: "Design Presets — Generate a website"
+      description: Create a branded static site from design tokens
+      skill: NN-design-presets
 ---
 
-# eNNvironment — cogNNitive Ecosystem Gateway
+# cogNNitive — Bridge Your Organizational Knowledge to AI Agents
 
-Your **gateway** to the cogNNitive ecosystem. eNNvironment bootstraps AI agents with the right skills, connects you to every cogNNitive repo, and gets you productive in seconds — not hours.
+Build structured, valid, and executable knowledge models. cogNNitive is a decentralized, file-based modeling framework that turns plain Markdown documentation into a machine-readable, validated knowledge base.
 
-1. **Install OpenCode** — Download from [opencode.ai/download](https://opencode.ai/download)
-2. **Tell your agent** — Say: `I want to use https://cognnitive.com`
-3. **Choose & follow** — Pick what you want and follow the instructions
+## Co-operating in the Ecosystem: actioNN & iNNfo
+
+The ecosystem separates what the agent **knows** (iNNfo) from how the agent **acts** (actioNN).
+
+```mermaid
+graph TD
+    classDef default fill:#fff,stroke:#f2f2f7,stroke-width:2px,rx:8px,ry:8px;
+    classDef brand fill:#4d0e4e,stroke:#4d0e4e,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    
+    Human["Human / Team<br/>(Directs & Collaborates)"]
+    
+    subgraph actioNN ["actioNN (AI Skills)"]
+        Workflows["Agent Workflows<br/>(SKILL.md & triggers)"]
+    end
+    
+    subgraph iNNfo ["iNNfo (Core Engine)"]
+        Engine["Modeler & Core Engine<br/>(Validates & Resolves Specs)"]
+    end
+    
+    Human -->|1. Prompts agent with task| Workflows
+    Human -->|1. Visualizes & edits UI| Engine
+    Workflows -->|2. Queries & mutates via MCP| Engine
+    
+    class actioNN,iNNfo brand;
+```
 
 ---
 
-## Ecosystem
+## Why cogNNitive? The Business Value
+
+Current documentation is either **static** (buried in Notion/Confluence where it goes out of date) or **unstructured** (unreadable by AI agents without hallucinations). cogNNitive solves this by creating a **validated, executable knowledge base**:
+
+*   **A Single Source of Truth for Humans and AI:** Write requirements, business models, and operations in plain Markdown. Both human team members and AI coding assistants read and update the same Git-tracked files.
+*   **Zero Hallucinations:** AI agents interact with your models through a structured Model Context Protocol (MCP) server, validating every change against schema templates.
+*   **Continuous Compliance:** Built-in validation rules run in CI/CD pipeline gates, ensuring no invalid requirements, dead links, or broken processes reach production.
+
+---
+
+## How it Works: Creating Models with iNNfo
+
+Building a collaborative knowledge base with iNNfo takes just four simple steps:
+
+1.  **Initialize the Workspace:** Set up a standard Git directory with an `index.md` for navigation and a `_templates/` folder specifying your business schemas.
+2.  **Draft your Models (`*_NN.md`):** Write your specs, teams, or procedures in clean Markdown. Use standard YAML frontmatter at the top to declare properties like version, author, and parent template.
+3.  **Link Concepts Together:** Connect your files using standard wikilinks `[[concept-name]]` to form a unified, highly navigable knowledge graph.
+4.  **Instant Validation:** Open the folder in the **iNNfo Modeler** web app or run your AI agent. The core engine validates the model tree instantly, highlighting inconsistencies or missing fields.
+
+---
+
+## Ecosystem Repositories
 
 | Repo | Role | Description |
 |------|------|-------------|
-| **eNNvironment** | Gateway | Bootstrap entry point — you are here |
-| **iNNfo** | Engine | iNNfo specs, parser, validator, MCP server, Vue editor |
-| **actioNN** | Skills | Modular OpenCode agent skills |
+| **[eNNvironment](https://github.com/cogNNitive/eNNvironment)** | Gateway | The entry point and manifest. Tells agents what skills and workflows are available. |
+| **[iNNfo](https://github.com/cogNNitive/iNNfo)** | Engine | The core. Contains the TS parser, validator, MCP server, and browser editor. |
+| **[actioNN](https://github.com/cogNNitive/actioNN)** | Skills | Modular agent skills and instructions that teach agents how to execute workflows. |
 
 ---
 
-## How the integration works
+## Frequently Asked Questions (FAQ)
 
-1. **Agent bootstraps** — Fetches eNNvironment, parses YAML frontmatter, discovers skills + workflows + MCP servers.
-2. **Skills installed** — Each skill downloaded from actioNN, validated, registered. MCP bundles from iNNfo wired into opencode.json.
-3. **Workflows ready** — Agent presents a menu. Pick one and go.
+### How does cogNNitive compare to Obsidian?
+**Obsidian** is a personal note-taking app designed for individuals. While you can open and edit iNNfo's markdown files in Obsidian (which is great!), Obsidian itself does not enforce schema rules, validate structural consistency, or have a native protocol for AI agents to write back changes programmatically. **cogNNitive** is designed for teams collaborating with AI, adding validation, templates, and agent connectivity to standard markdown files.
 
-```
-AI Agent → eNNvironment (manifest) → actioNN (skills) → iNNfo (MCP + specs)
-```
+### How does cogNNitive compare to Notion or Confluence?
+**Notion** and Confluence are centralized, proprietary wikis. Your data is locked in a vendor's database, and integrating custom AI agents requires complex API setups and expensive fees. **cogNNitive** is decentralized and file-based. Your knowledge catalog lives in your Git repository under absolute ownership. AI agents can access it locally via MCP, and changes are committed directly to version control.
+
+### Do I need to use the iNNfo Modeler?
+No. Since it's plain Markdown, you can write and edit models in VS Code, Obsidian, Vim, or any editor you prefer. The **iNNfo Modeler** (inside the `iNNfo` repo) is a browser utility that parses your workspace folder locally to give you instant validation feedback, graph visualizations, and tabular matrix views.
 
 ---
 
-## Getting started
+## Getting Started
 
-1. **Install OpenCode** — Download from [opencode.ai/download](https://opencode.ai/download)
-2. **Tell your agent** — Copy and paste: `I want to use https://cognnitive.com`
-3. **Choose & follow** — Pick what you want and follow the instructions
+1.  **Install OpenCode Desktop** — Download the desktop application from [opencode.ai/download](https://opencode.ai/download)
+2.  **Tell your agent** — Say: `I want to use https://cognnitive.com`
+3.  **Choose & follow** — Pick what you want and follow the instructions
