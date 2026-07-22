@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use cogNNitive — Bootstrap your agent</title>
+  <meta name="description" content="Canonical entry point for the cogNNitive ecosystem. Paste one line into OpenCode Desktop to install skills, register MCP, and start a workflow.">
+  <meta name="generator" content="https://github.com/cogNNitive/actioNN/tree/main/skills/nn-design-presets">
+  <!-- Markdown twin served RAW from GitHub so the agent-bootstrap frontmatter is fetchable past Jekyll -->
+  <link rel="alternate" type="text/markdown" href="https://raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest.md" title="cogNNitive — bootstrap manifest">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234D0E4E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23fff'%3EeN%3C/text%3E%3C/svg%3E">
+  <style>
+    :root { --brand:#4D0E4E; --ink:#1c1c1e; --muted:#6b6b70; --canvas:#faf7fb; --card:#fff; --line:#ece6ee; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'Plus Jakarta Sans',system-ui,sans-serif; background:var(--canvas); color:var(--ink); line-height:1.55; }
+    main { max-width:720px; margin:0 auto; padding:64px 24px; }
+    .kicker { font-size:13px; font-weight:600; color:var(--brand); text-transform:uppercase; letter-spacing:.06em; }
+    h1 { font-size:34px; line-height:1.15; margin:.3em 0 .4em; }
+    h2 { font-size:20px; margin:2em 0 .6em; }
+    p { color:#2c2c30; }
+    .muted { color:var(--muted); font-size:14px; }
+    .cmd { display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:var(--card); border:2px solid var(--brand); border-radius:12px; padding:18px 20px; font-weight:700; color:var(--brand); font-size:17px; margin:12px 0; }
+    .cmd code { font-family:'JetBrains Mono',ui-monospace,monospace; font-weight:700; }
+    .copy-cmd-btn { font-size:13px; font-weight:600; color:#fff; background:var(--brand); border:none; border-radius:8px; padding:8px 14px; cursor:pointer; }
+    ol { padding-left:20px; } li { margin:.4em 0; }
+    a { color:var(--brand); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="kicker">Use cogNNitive</span>
+    <h1>One line. Every time.</h1>
+    <p>This is the canonical entry point for the whole ecosystem — first-time setup or returning use. Paste this into the OpenCode Desktop chat:</p>
+
+    <div class="cmd">
+      <code id="bootstrap-cmd">I want to use https://cognnitive.com/use</code>
+      <button type="button" class="copy-cmd-btn" data-copy="I want to use https://cognnitive.com/use">Copy command</button>
+    </div>
+    <p class="muted">No Git, no terminal. Don't have the app yet? <a href="https://opencode.ai/download" target="_blank" rel="noopener noreferrer">Download OpenCode Desktop</a>, then paste the line above.</p>
+
+    <div class="card">
+      <h2 style="margin-top:0;">What happens next</h2>
+      <ol>
+        <li>The agent reads this page's <strong>bootstrap manifest</strong> (the markdown twin linked in the head).</li>
+        <li>It downloads each skill over HTTPS — <strong>no git required</strong> — skipping anything already installed.</li>
+        <li>It registers the iNNfo MCP server and verifies it responds.</li>
+        <li>It shows a workflow menu (create a model, transform a document, PDF → dashboard) and hands over.</li>
+      </ol>
+    </div>
+
+    <h2>Are you an AI agent reading this?</h2>
+    <p>Fetch the machine-readable manifest — it carries the <code>agent-bootstrap:</code> block plus plain-language self-bootstrap steps, so you can install everything even without any cogNNitive skill yet:</p>
+    <p><a href="https://raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest.md">raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest.md</a></p>
+
+    <p class="muted" style="margin-top:40px;"><a href="/">← Back to cognnitive.com</a></p>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-cmd-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(btn.dataset.copy).then(function () {
+          var original = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = original; }, 1500);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -2,41 +2,8 @@
 layout: default
 title: cogNNitive — Bridge Your Organizational Knowledge to AI Agents
 description: cogNNitive is the decentralized knowledge modeling ecosystem. Build structured, valid, and executable knowledge models in Markdown that humans and AI agents can collaboratively read, edit, and run.
-agent-bootstrap:
-  version: "1.0"
-  skills:
-    - name: NN-innfo
-      repo: https://github.com/cogNNitive/actioNN
-      path: skills/NN-innfo
-      description: Create, edit, and validate iNNfo models
-      mcp:
-        - name: innfo-mcp
-          url: https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
-    - name: NN-trannsform
-      repo: https://github.com/cogNNitive/actioNN
-      path: skills/NN-trannsform
-      description: Document transformation pipeline
-    - name: NN-workflow-orchestrator
-      repo: https://github.com/cogNNitive/actioNN
-      path: skills/NN-workflow-orchestrator
-      description: Execute multi-skill workflows with sequential stages
-    - name: NN-design-presets
-      repo: https://github.com/cogNNitive/actioNN
-      path: skills/NN-design-presets
-      description: Visual design system with Morado Nazareno palette
-  workflows:
-    - id: cognnitive
-      label: "CogNNitive — Create an iNNfo model from scratch"
-      description: Choose template, name model, configure workspace
-      skill: NN-innfo
-    - id: transform
-      label: "traNNsform — Document transformation pipeline"
-      description: Import/export documents, process files
-      skill: NN-trannsform
-    - id: design
-      label: "Design Presets — Generate a website"
-      description: Create a branded static site from design tokens
-      skill: NN-design-presets
+# Bootstrap manifest moved to the canonical entry point: /use/manifest.md
+# (served raw so the agent-bootstrap frontmatter stays fetchable past Jekyll).
 ---
 
 # cogNNitive — Bridge Your Organizational Knowledge to AI Agents
@@ -118,5 +85,5 @@ No. Since it's plain Markdown, you can write and edit models in VS Code, Obsidia
 ## Getting Started
 
 1.  **Install OpenCode Desktop** — Download the desktop application from [opencode.ai/download](https://opencode.ai/download)
-2.  **Tell your agent** — Say: `I want to use https://cognnitive.com`
+2.  **Tell your agent** — Say: `I want to use https://cognnitive.com/use`
 3.  **Choose & follow** — Pick what you want and follow the instructions
