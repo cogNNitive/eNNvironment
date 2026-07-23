@@ -20,11 +20,20 @@ agent-bootstrap:
   workflows:
     - id: cognnitive
       label: "CogNNitive â€” Crear un modelo iNNfo desde cero"
-      description: Elegir template, nombrar modelo, configurar workspace
+      description: >
+        Elegí un template (Business, Procedures, Catalog).
+        Revisá y aprobá los conceptos y campos del template.
+        Poblá los elementos de cada concepto.
+        Validá el modelo contra la cadena de especificaciones.
+        Previsualizalo en iNNfo Modeler.
       skill: NN-innfo
     - id: transform
       label: "traNNsform â€” Pipeline de transformaciÃ³n de documentos"
-      description: Importar/exportar documentos, procesar archivos
+      description: >
+        Colocá documentos fuente en traNNsform/input/.
+        Elegí el pipeline: importar a modelo iNNfo o exportar a visualizador HTML.
+        Revisá y aprobá la transformación.
+        El resultado queda en traNNsform/output/ listo para usar.
       skill: NN-trannsform
 ---
 
@@ -50,10 +59,10 @@ eNNvironment es la puerta de entrada al ecosistema iNNv0. Le dice al agente quÃ
 
 ### Flujos disponibles
 
-| OpciÃ³n | DescripciÃ³n |
-|--------|-------------|
-| **CogNNitive** | Crear un modelo iNNfo desde cero: elegir template, nombrar, configurar workspace |
-| **traNNsform** | Pipeline de transformaciÃ³n de documentos: importar/exportar, procesar archivos |
+| OpciÃ³n | DescripciÃ³n | Pasos |
+|--------|-------------|-------|
+| **CogNNitive** | Crear un modelo iNNfo desde cero | Elegir template, aprobar conceptos y campos, poblar elementos, validar, previsualizar |
+| **traNNsform** | Pipeline de transformaciÃ³n de documentos | Colocar fuentes en input/, elegir pipeline, revisar transformaciÃ³n, resultado en output/ |
 
 ---
 
