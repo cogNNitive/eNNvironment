@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>cogNNitive — Bridge Your Organizational Knowledge to AI Agents</title>
-  <meta name="description" content="cogNNitive is the decentralized knowledge modeling ecosystem. Build structured, valid, and executable knowledge models in Markdown that humans and AI agents can collaboratively read, edit, and run.">
+  <title>cogNNitive — Knowledge That AI Can Read AND Write</title>
+  <meta name="description" content="cogNNitive transforms documentation from static archives into living, validated knowledge bases that AI agents can read, query, validate, and modify — all within your existing Git workflow.">
   <meta name="generator" content="https://github.com/cogNNitive/actioNN/tree/main/skills/nn-design-presets">
   <link rel="alternate" type="text/markdown" href="index.md" title="cogNNitive — Markdown source">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234D0E4E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23fff'%3EeN%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234D0E4E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23fff'%3EcN%3C/text%3E%3C/svg%3E">
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAK5JREFUWEft1rENwjAQBdD/V2SABRgBCTFGYgRGyAg0jMAIbMAMNClSpDiO48uJf0ql7+59ti0AvHkAb94K2O/3pJTkdrvJcRySMSYAHo/HZ8H7fCYAp9NpGcA5J8YYYIxZFnDOgTEGnHPLAuH3b4FVAQAv2wIEnucZY4BSiiyAEFoW2O/3oJSS/X4PjDGZbYGqquRyuYAQAq7XS2ZbYK5pmhtjj5xz5baAUkrm+37LJhB/mX+B8Rde+wUlMgAAAABJRU5ErkJggg==">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,14 +18,14 @@
     "@type": "WebSite",
     "name": "cogNNitive",
     "url": "https://cognnitive.com",
-    "description": "Bridge Your Organizational Knowledge to AI Agents. Install AI agent skills, discover workflows, and navigate the cogNNitive universe.",
+    "description": "Knowledge That AI Can Read AND Write. Transform documentation from static archives into living, validated knowledge bases.",
     "author": {
       "@type": "Organization",
       "name": "cogNNitive"
     },
     "inLanguage": "en",
     "isAccessibleForFree": true,
-    "keywords": ["opencode", "ai-agent", "skills", "cogNNitive", "cognnitive", "bootstrap"]
+    "keywords": ["knowledge modeling", "ai-agents", "structured-knowledge", "cogNNitive", "innfo", "actionn"]
   }
   </script>
   <style>
@@ -49,6 +49,7 @@
       --space-xl: 48px;
       --space-xxl: 80px;
       --radius: 10px;
+      --radius-sm: 6px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -122,7 +123,7 @@
     .nav-cta:hover { background: var(--brand-light) !important; }
 
     .hero {
-      padding: 120px 0 var(--space-xxl);
+      padding: 100px 0 var(--space-xxl);
       text-align: center;
     }
 
@@ -145,7 +146,7 @@
     .hero p {
       font-size: 18px;
       color: var(--ink-muted);
-      max-width: 600px;
+      max-width: 680px;
       margin: 0 auto var(--space-xl);
     }
 
@@ -218,7 +219,7 @@
     }
 
     .section-title {
-      font-size: 32px;
+      font-size: 34px;
       line-height: 1.25;
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -236,6 +237,402 @@
       color: var(--ink-muted);
       max-width: 640px;
       font-size: 16px;
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-desc-wide {
+      max-width: 800px;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .problem-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      position: relative;
+    }
+
+    .problem-card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--brand-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+      color: var(--brand);
+      font-size: 18px;
+    }
+
+    .problem-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      line-height: 1.3;
+    }
+
+    .problem-card p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .problem-card .solved {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--brand);
+    }
+
+    .problem-card .solved strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .audience-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      transition: border-color 0.2s;
+    }
+
+    .audience-card:hover {
+      border-color: var(--brand);
+    }
+
+    .audience-card .role-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .audience-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .audience-card .pain-label,
+    .audience-card .help-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-xs);
+      color: var(--ink-muted);
+    }
+
+    .audience-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .audience-card ul li {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .audience-card ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.4;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .feature-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--brand);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius);
+      background: var(--brand-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: var(--space-md);
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .feature-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-sm);
+    }
+
+    .feature-card .benefit {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--border);
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .value-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+    }
+
+    .value-card .audience-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .value-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .value-card p {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+    }
+
+    .value-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .value-card ul li {
+      font-size: 13px;
+      color: var(--ink-muted);
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+
+    .value-card ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .usecase-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+    }
+
+    .usecase-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .usecase-card .scenario {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-bottom: var(--space-sm);
+    }
+
+    .usecase-card .example {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-sm);
+      padding-left: var(--space-md);
+      border-left: 2px solid var(--brand-subtle);
+    }
+
+    .usecase-card .value-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+    }
+
+    .comparison-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comparison-card .alt-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .comparison-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .comparison-card .limitation {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: #FFF5F5;
+      border-radius: var(--radius-sm);
+      flex: 1;
+    }
+
+    .comparison-card .advantage {
+      font-size: 14px;
+      color: var(--brand);
+      line-height: 1.6;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--brand-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    .cta-section {
+      text-align: center;
+    }
+
+    .cta-grid {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+
+    .cta-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg) var(--space-xl);
+      text-align: center;
+      min-width: 200px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .cta-card:hover {
+      border-color: var(--brand);
+      transform: translateY(-2px);
+    }
+
+    .cta-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cta-card p {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .tech-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      background: var(--canvas-inert);
+      border: 1px solid var(--border);
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-top: var(--space-xl);
     }
 
     .ecosystem-grid {
@@ -407,9 +804,48 @@
     footer a { color: var(--ink-muted); text-decoration: none; font-size: 13px; }
     footer a:hover { color: var(--brand); }
 
+    .divider-text {
+      text-align: center;
+      padding: var(--space-xxl) 0 var(--space-lg);
+      color: var(--ink-muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .divider-text span {
+      background: var(--canvas);
+      padding: 0 var(--space-lg);
+      position: relative;
+    }
+
+    .divider-text::before {
+      content: "";
+      display: block;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+      top: 9px;
+    }
+
+    @media (max-width: 900px) {
+      .problem-grid,
+      .feature-grid,
+      .value-grid,
+      .usecase-grid,
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 768px) {
       .hero h1 { font-size: 34px; }
       .section-title { font-size: 26px; }
+      .problem-grid,
+      .feature-grid,
+      .value-grid,
+      .usecase-grid,
+      .audience-grid,
       .ecosystem-grid { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; gap: var(--space-lg); }
       .hero { padding: 80px 0 var(--space-xl); }
@@ -424,36 +860,394 @@
   <div class="container">
     <a href="." class="logo">cogNNitive</a>
     <ul class="nav-links">
-      <li><a href="#how-it-works">Cooperation</a></li>
-      <li><a href="#business-value">Why cogNNitive</a></li>
-      <li><a href="#creating-models">Model Creation</a></li>
-      <li><a href="#ecosystem">Ecosystem</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#problems">Why cogNNitive</a></li>
+      <li><a href="#audience">Who It's For</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#use-cases">Use Cases</a></li>
+      <li><a href="#comparison">Compare</a></li>
+      <li><a href="#technical">Developers</a></li>
       <li><a href="https://github.com/cogNNitive" target="_blank">GitHub</a></li>
-      <li class="nav-cta-li"><a href="#bootstrap" class="nav-cta">Get Started</a></li>
+      <li class="nav-cta-li"><a href="#get-started" class="nav-cta">Get Started</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
+
+  <!-- ========== HERO ========== -->
   <section class="hero">
     <div class="container">
-      <h1>Bridge your organizational <span class="accent">knowledge</span> to AI agents</h1>
-      <p>cogNNitive is a decentralized, file-based modeling framework. Build a validated, structured knowledge base in Markdown that humans edit, AI agents execute, and Git tracks.</p>
+      <h1>Knowledge That AI Can <span class="accent">Read AND Write</span></h1>
+      <p>cogNNitive transforms your documentation from static archives into living, validated knowledge bases that AI agents can read, query, validate, and modify — all within your existing Git workflow.</p>
       <div class="hero-actions">
-        <a href="#bootstrap" class="btn-primary">Bootstrap Your Agent &rarr;</a>
-        <a href="#business-value" class="btn-secondary">Explore Value</a>
+        <a href="#get-started" class="btn-primary">Start Modeling &rarr;</a>
+        <a href="#features" class="btn-secondary">Explore Features</a>
       </div>
     </div>
   </section>
 
-  <section id="how-it-works">
+  <!-- ========== PROBLEMS ========== -->
+  <section id="problems">
     <div class="container">
-      <span class="section-label">Cooperation</span>
-      <h2 class="section-title">How the <span class="accent">ecosystem</span> co-operates</h2>
-      <p class="section-desc">The ecosystem separates what the agent knows (iNNfo) from how the agent acts (actioNN).</p>
+      <span class="section-label">The Problem</span>
+      <h2 class="section-title">Documentation is a black box <span class="accent">for AI</span></h2>
+      <p class="section-desc section-desc-wide">Traditional tools were built for human eyes only. AI agents cannot reliably extract structured knowledge — they hallucinate structure, miss cross-references, and cannot validate correctness.</p>
 
-      <div class="diagram-container" style="background: var(--canvas-inert); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-lg); margin-top: var(--space-xl); text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.02);">
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          </div>
+          <h4>Documents Are a Black Box for AI</h4>
+          <p>Notion, Confluence, wikis, and plain Markdown are designed for human eyes. AI agents cannot reliably extract structured knowledge.</p>
+          <div class="solved"><strong>Our solution:</strong> iNNfo documents are semantically structured with deterministic MCP tools — no hallucination, no guesswork.</div>
+        </div>
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Vendor Lock-In &amp; Proprietary Formats</h4>
+          <p>Most tools use proprietary databases, APIs, and rate limits. Your knowledge is trapped behind a vendor's wall.</p>
+          <div class="solved"><strong>Our solution:</strong> Plain Markdown files with YAML frontmatter — no proprietary database, no vendor lock-in, Git-tracked and portable.</div>
+        </div>
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4>Documentation Rots</h4>
+          <p>Maintaining docs is manual, tedious, and unrewarding. Without validation, outdated documents look identical to current ones. Teams stop trusting them.</p>
+          <div class="solved"><strong>Our solution:</strong> AI agents proactively validate docs against templates, flag inconsistencies, and enforce structural integrity.</div>
+        </div>
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <h4>AI Workflows Are Ad-Hoc</h4>
+          <p>Teams cobble together prompts and scripts for each task. Every session starts from scratch. Knowledge about how to instruct the agent is lost.</p>
+          <div class="solved"><strong>Our solution:</strong> actioNN provides versioned, reusable skills (SKILL.md files) that teach agents specific tasks — install once, use anywhere.</div>
+        </div>
+        <div class="problem-card">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M21 21H3a2 2 0 0 1-2-2V8"/></svg>
+          </div>
+          <h4>Knowledge Tools Don't Talk to Each Other</h4>
+          <p>Documentation tools, project management, AI agents, and CI/CD pipelines operate in separate silos. No shared format or protocol.</p>
+          <div class="solved"><strong>Our solution:</strong> OKF-compatible documents work with any OKF-compliant tool. MCP provides a standard interface for AI agents.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== AUDIENCE ========== -->
+  <section id="audience">
+    <div class="container">
+      <span class="section-label">Who It's For</span>
+      <h2 class="section-title">Built for the people who <span class="accent">manage knowledge</span></h2>
+      <p class="section-desc section-desc-wide">cogNNitive serves five distinct roles — each with unique pain points and a clear path to value.</p>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="role-tag">Knowledge Modeler</span>
+          <h4>Business analysts &amp; consultants</h4>
+          <div class="pain-label">Pain Points</div>
+          <ul>
+            <li>Current tools are silos with no AI-native access</li>
+            <li>Spreadsheets and unstructured docs go out of date</li>
+            <li>No validation or schema enforcement</li>
+          </ul>
+          <div class="help-label">How We Help</div>
+          <ul>
+            <li>Structured templates with validation enforce consistency</li>
+            <li>Git-based versioning tracks every change</li>
+            <li>AI agents can read, query, and suggest edits</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <span class="role-tag">AI Agent Developer</span>
+          <h4>Builders of custom AI workflows</h4>
+          <div class="pain-label">Pain Points</div>
+          <ul>
+            <li>LLMs hallucinate when reading unstructured docs</li>
+            <li>Building custom tools for every domain is unsustainable</li>
+            <li>No standard protocol for agent-knowledge interaction</li>
+          </ul>
+          <div class="help-label">How We Help</div>
+          <ul>
+            <li>7 deterministic MCP tools — engine-backed, not LLM-guessed</li>
+            <li>The spec chain ensures predictable structure</li>
+            <li>actioNN skills are drop-in modules for any agent</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <span class="role-tag">Team Lead</span>
+          <h4>Engineering &amp; program managers</h4>
+          <div class="pain-label">Pain Points</div>
+          <ul>
+            <li>Knowledge scattered across wikis, docs, and people's heads</li>
+            <li>Onboarding is manual knowledge transfer</li>
+            <li>Documentation rots because no one has time</li>
+          </ul>
+          <div class="help-label">How We Help</div>
+          <ul>
+            <li>AI agents assist in maintaining documentation</li>
+            <li>Structured models make knowledge queryable by AI</li>
+            <li>Git-based workflows integrate with existing practices</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <span class="role-tag">OpenCode User</span>
+          <h4>Daily AI coding assistant users</h4>
+          <div class="pain-label">Pain Points</div>
+          <ul>
+            <li>AI coding tools are great at code but poor at structured knowledge</li>
+            <li>No easy way to teach an agent new domain workflows</li>
+            <li>Each task requires reinventing the prompt</li>
+          </ul>
+          <div class="help-label">How We Help</div>
+          <ul>
+            <li>Pre-built, domain-specific actioNN instruction modules</li>
+            <li>Install a skill once, use it across any project</li>
+            <li>nn-router handles skill discovery and chaining</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <span class="role-tag">Technical Writer</span>
+          <h4>Documentalists &amp; process writers</h4>
+          <div class="pain-label">Pain Points</div>
+          <ul>
+            <li>Markdown has no schema enforcement</li>
+            <li>Review cycles are manual and error-prone</li>
+            <li>No easy cross-reference validation</li>
+          </ul>
+          <div class="help-label">How We Help</div>
+          <ul>
+            <li>Templates enforce consistent structure</li>
+            <li>Validation catches structural errors before review</li>
+            <li>Wikilinks and resolver protocol ensure referential integrity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features">
+    <div class="container">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">The cogNNitive <span class="accent">ecosystem</span></h2>
+      <p class="section-desc section-desc-wide">A modular stack of tools and specifications that make knowledge AI-native — from schema to agent interaction.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">S</div>
+          <h4>The iNNfo Specification Stack</h4>
+          <p>A four-level specification hierarchy that structures knowledge from meta-specification (Level 0) through concrete data instances (Level 3). Each level pins an immutable URL for reproducible validation.</p>
+          <div class="benefit">Any document is structurally guaranteed valid — engine-backed, never LLM-dependent.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">M</div>
+          <h4>The innfo-mcp Server</h4>
+          <p>A deterministic Model Context Protocol server exposing 7 tools for AI agents. Wraps the core parser and validator. AI agents call these tools instead of trying to parse iNNfo files themselves.</p>
+          <div class="benefit">AI agents do NOT need to understand iNNfo syntax — they call deterministic tools with guaranteed correct results.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">A</div>
+          <h4>The actioNN Skill Collection</h4>
+          <p>A curated collection of 11+ modular, versioned skills that teach AI agents how to perform specific tasks. Each is a SKILL.md file with YAML frontmatter defining its trigger and instructions.</p>
+          <div class="benefit">Skills are reusable across projects, versioned for reproducibility, and self-documenting. No more prompt crafting.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">E</div>
+          <h4>The iNNfo Modeler</h4>
+          <p>A browser-based workspace editor for iNNfo models built with Vue 3. Opens folders via the File System Access API, parses into a normalized node graph, and provides multiple editing views: Tree, Block Feed, Table, and Graph.</p>
+          <div class="benefit">What validates in the editor validates everywhere — instant feedback without a server.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">T</div>
+          <h4>The traNNsform Pipeline</h4>
+          <p>An agent-driven document import/export pipeline. Ingests PDF, DOCX, XLSX, TXT, CSV, JSON, and Markdown — normalizes, aligns to iNNfo templates, and generates validated model drafts with source traceability.</p>
+          <div class="benefit">Convert years of accumulated documentation into validated, AI-readable knowledge models.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VALUE PROPS ========== -->
+  <section id="value-props">
+    <div class="container">
+      <span class="section-label">Value Propositions</span>
+      <h2 class="section-title">Why organizations choose <span class="accent">cogNNitive</span></h2>
+      <p class="section-desc section-desc-wide">Clear, measurable outcomes for every stakeholder in the knowledge lifecycle.</p>
+
+      <div class="value-grid">
+        <div class="value-card">
+          <span class="audience-label">For Organizations</span>
+          <h4>Unlock knowledge without migration risk</h4>
+          <p>No vendor lock-in, no API costs, no migration. Just Git-tracked Markdown that AI can read and write.</p>
+          <ul>
+            <li>Zero vendor lock-in — all files are plain Markdown in Git</li>
+            <li>Deterministic validation — AI never hallucinates structure</li>
+            <li>Reusable agent skills — install once, use across projects</li>
+            <li>OKF v0.1 compatible — works with the broader knowledge ecosystem</li>
+          </ul>
+        </div>
+        <div class="value-card">
+          <span class="audience-label">For AI Agent Developers</span>
+          <h4>A stable bridge between agents and knowledge</h4>
+          <p>Building custom knowledge tools for every domain is unsustainable. Standard protocol + standard schemas = works everywhere.</p>
+          <ul>
+            <li>7 deterministic MCP tools — no LLM guesswork</li>
+            <li>4-level spec chain for reproducible validation</li>
+            <li>Engine-backed validation — the parser decides, not the prompt</li>
+            <li>Plug-and-play skills via actioNN</li>
+          </ul>
+        </div>
+        <div class="value-card">
+          <span class="audience-label">For Documentation Authors</span>
+          <h4>Structure without sacrificing simplicity</h4>
+          <p>Schema-enforced formats are hostile to humans. iNNfo uses plain Markdown — human-first, machine-second.</p>
+          <ul>
+            <li>Plain Markdown — no new syntax beyond YAML</li>
+            <li>Templates guide rather than restrict</li>
+            <li>Validation catches structural drift automatically</li>
+            <li>Git-tracked — every change is reviewable</li>
+          </ul>
+        </div>
+        <div class="value-card">
+          <span class="audience-label">For the AI Ecosystem</span>
+          <h4>An open standard for agent-knowledge collaboration</h4>
+          <p>The industry needs open standards, not proprietary solutions controlled by single vendors.</p>
+          <ul>
+            <li>100% open source (MIT license)</li>
+            <li>OKF v0.1 compatible — works with Google's knowledge ecosystem</li>
+            <li>MCP-native — works with any MCP-compatible agent</li>
+            <li>No API keys, no rate limits, no vendor dependency</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== USE CASES ========== -->
+  <section id="use-cases">
+    <div class="container">
+      <span class="section-label">Use Cases</span>
+      <h2 class="section-title">What you can build with <span class="accent">cogNNitive</span></h2>
+      <p class="section-desc section-desc-wide">Real scenarios showing how teams use the ecosystem to solve knowledge challenges.</p>
+
+      <div class="usecase-grid">
+        <div class="usecase-card">
+          <h4>Knowledge Documentation &amp; Modeling</h4>
+          <div class="scenario">Documenting business strategy, processes, and org structure</div>
+          <div class="example">A consulting firm models a client's business model across multiple dimensions — value proposition, customer segments, revenue streams — keeping it versioned, validated, and accessible to both humans and AI assistants.</div>
+          <div class="value-tag">iNNfo templates + spec chain validation + Git tracking</div>
+        </div>
+        <div class="usecase-card">
+          <h4>AI-Assisted Document Transformation</h4>
+          <div class="scenario">Converting unstructured sources into structured knowledge models</div>
+          <div class="example">A product team consolidates meeting transcripts, PDF specs, Excel spreadsheets, and Slack threads into a single coherent specification model — with full source traceability.</div>
+          <div class="value-tag">traNNsform pipeline ingests 7+ formats</div>
+        </div>
+        <div class="usecase-card">
+          <h4>AI Agent Workflow Automation</h4>
+          <div class="scenario">Running multi-step agent workflows across domains</div>
+          <div class="example">Transform a design document into an iNNfo model, generate an interactive HTML dashboard, and publish it — all through a single orchestrated pipeline.</div>
+          <div class="value-tag">nn-workflow-orchestrator chains skills sequentially</div>
+        </div>
+        <div class="usecase-card">
+          <h4>AI-Native Knowledge Base Management</h4>
+          <div class="scenario">A living knowledge base that humans AND AI edit together</div>
+          <div class="example">An engineering team maintains a process handbook. When a process changes, an AI agent validates the update against the template and suggests a patch version bump.</div>
+          <div class="value-tag">No databases, no lock-in. Just Git-tracked _NN.md files.</div>
+        </div>
+        <div class="usecase-card">
+          <h4>Interactive Visual Dashboards</h4>
+          <div class="scenario">Exporting iNNfo models as self-contained HTML visualizations</div>
+          <div class="example">A program manager shares a business model dashboard with stakeholders who don't use iNNfo tools — a single HTML file with live charts, no server required.</div>
+          <div class="value-tag">traNNsform export → Chart.js HTML — no build step</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMPARISON ========== -->
+  <section id="comparison">
+    <div class="container">
+      <span class="section-label">Comparison</span>
+      <h2 class="section-title">How cogNNitive <span class="accent">stacks up</span></h2>
+      <p class="section-desc section-desc-wide">Honest comparisons with the tools you already know.</p>
+
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <div class="alt-label">Alternative</div>
+          <h4>vs Obsidian</h4>
+          <div class="limitation">Obsidian has no schema enforcement, no validation engine, and no native AI-agent protocol. Plugins add capabilities but there is no standardized way for AI agents to read, validate, and write structured knowledge.</div>
+          <div class="advantage">iNNfo provides deterministic validation, a 4-level spec chain, template enforcement, and an MCP-native protocol — engine-backed tools, not prompt-dependent plugins.</div>
+        </div>
+        <div class="comparison-card">
+          <div class="alt-label">Alternative</div>
+          <h4>vs Notion / Confluence</h4>
+          <div class="limitation">Proprietary databases with vendor lock-in, API rate limits, no offline access, no Git integration, and costly per-seat pricing.</div>
+          <div class="advantage">File-based Markdown in Git — no lock-in, no API fees, no rate limits. Any AI agent with filesystem access can read and write. Free and open source.</div>
+        </div>
+        <div class="comparison-card">
+          <div class="alt-label">Alternative</div>
+          <h4>vs Plain Markdown</h4>
+          <div class="limitation">No schema enforcement, no validation, no structural markers, no standardized AI interaction protocol. Every team invents its own conventions, which AI agents cannot reliably parse.</div>
+          <div class="advantage">Structured YAML frontmatter, typed concepts and fields, template enforcement, spec chain validation, and MCP tools for AI agents.</div>
+        </div>
+        <div class="comparison-card">
+          <div class="alt-label">Alternative</div>
+          <h4>vs Google OKF (vanilla)</h4>
+          <div class="limitation">OKF defines a file-based knowledge format but provides no validation engine, no template system, no marker syntax, no matrix support, and no MCP server for AI interaction.</div>
+          <div class="advantage">Every iNNfo document is valid OKF. But iNNfo adds templates, markers, matrices, spec chain, deterministic validation, and MCP tools.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section id="cta" class="cta-section">
+    <div class="container">
+      <span class="section-label">Get Started</span>
+      <h2 class="section-title">Ready to make your knowledge <span class="accent">AI-native</span>?</h2>
+      <p class="section-desc" style="margin: 0 auto var(--space-xl);">Choose your entry point into the cogNNitive ecosystem.</p>
+
+      <div class="cta-grid">
+        <a href="#get-started" class="cta-card" style="text-decoration: none; color: inherit; display: block;">
+          <div class="feature-icon" style="margin: 0 auto var(--space-md);">S</div>
+          <h4>Start Modeling</h4>
+          <p>Create your first iNNfo model from a template in minutes.</p>
+          <span class="btn-primary" style="display: inline-flex;">Get Started &rarr;</span>
+        </a>
+        <a href="https://innfo.cognnitive.com/app" target="_blank" class="cta-card" style="text-decoration: none; color: inherit; display: block;">
+          <div class="feature-icon" style="margin: 0 auto var(--space-md);">E</div>
+          <h4>Open iNNfo Modeler</h4>
+          <p>Launch the browser-based editor and start working visually.</p>
+          <span class="btn-secondary" style="display: inline-flex;">Open App &rarr;</span>
+        </a>
+        <a href="https://github.com/cogNNitive" target="_blank" class="cta-card" style="text-decoration: none; color: inherit; display: block;">
+          <div class="feature-icon" style="margin: 0 auto var(--space-md);">G</div>
+          <h4>View on GitHub</h4>
+          <p>Explore the source code, open issues, and contribute.</p>
+          <span class="btn-secondary" style="display: inline-flex;">GitHub &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIMARY / COMMERCIAL CONTENT ENDS HERE -->
+
+  <div class="divider-text"><span>For Developers — Platform &amp; Architecture</span></div>
+
+  <!-- ========== TECHNICAL OVERVIEW ========== -->
+  <section id="technical">
+    <div class="container">
+      <span class="section-label">Platform</span>
+      <h2 class="section-title">How the ecosystem <span class="accent">co-operates</span></h2>
+      <p class="section-desc section-desc-wide">The ecosystem separates what the agent <em>knows</em> (iNNfo core engine) from how the agent <em>acts</em> (actioNN skills). This division keeps concerns clean and composable.</p>
+
+      <div style="background: var(--canvas-inert); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-lg); margin-top: var(--space-xl); text-align: center; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.02);">
         <svg viewBox="0 0 800 340" width="100%" height="auto" style="max-width: 800px; display: block; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg">
           <style>
             .node-box { fill: #ffffff; stroke: #f2f2f7; stroke-width: 2; rx: 8; ry: 8; }
@@ -508,10 +1302,16 @@
         </svg>
       </div>
 
-      <div class="steps">
+      <div class="architecture-flow">AI Agent
+        &rarr; <span class="highlight">eNNvironment</span> (manifest + bootstrap)
+    &rarr; <span class="highlight">actioNN</span> (agent skill instructions)
+      &rarr; <span class="highlight">iNNfo</span> (innfo-mcp + specs)
+        &rarr; Models, documents, workflows</div>
+
+      <div class="steps" style="margin-top: var(--space-xl);">
         <div class="step">
           <h4>Agent bootstraps</h4>
-          <p>The agent fetches eNNvironment, parses the YAML frontmatter in index.html/README.md, and discovers available skills and workflows.</p>
+          <p>The agent fetches eNNvironment, parses the YAML frontmatter, and discovers available skills and workflows.</p>
         </div>
         <div class="step">
           <h4>Skills installed</h4>
@@ -522,91 +1322,15 @@
           <p>The agent presents a menu of workflows. Choose one — the agent already has the domain knowledge and tools to execute it.</p>
         </div>
       </div>
-
-      <div class="architecture-flow">AI Agent
-        &rarr; <span class="highlight">eNNvironment</span> (manifest + bootstrap)
-    &rarr; <span class="highlight">actioNN</span> (agent skill instructions)
-      &rarr; <span class="highlight">iNNfo</span> (innfo-mcp + specs)
-        &rarr; Models, documents, workflows</div>
     </div>
   </section>
 
-  <section id="business-value">
-    <div class="container">
-      <span class="section-label">Value Proposition</span>
-      <h2 class="section-title">Why <span class="accent">cogNNitive</span>? The Business Value</h2>
-      <p class="section-desc">Tame documentation chaos and align your team with AI.</p>
-      
-      <div class="ecosystem-grid">
-        <div class="repo-card">
-          <div class="repo-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top: 10px;">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-            </svg>
-          </div>
-          <h3>Single Source of Truth</h3>
-          <p>Write requirements, business models, and operations in plain Markdown. Both human team members and AI coding assistants read and update the same Git-tracked files.</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top: 10px;">
-              <polygon points="12 2 2 22 22 22" />
-              <line x1="12" y1="9" x2="12" y2="13" />
-            </svg>
-          </div>
-          <h3>Zero Hallucinations</h3>
-          <p>Agents interact with your models through a structured Model Context Protocol (MCP) server, validating every change against schemas and preventing incorrect specs.</p>
-        </div>
-        <div class="repo-card">
-          <div class="repo-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top: 10px;">
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
-          </div>
-          <h3>Continuous Compliance</h3>
-          <p>Integrate validation rules directly into your CI/CD pipelines. Ensure your rules and specs are always compliant before code merges.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="creating-models">
-    <div class="container">
-      <span class="section-label">Workflow</span>
-      <h2 class="section-title">Creating Models with <span class="accent">iNNfo</span></h2>
-      <p class="section-desc">Four simple steps to build your collaborative knowledge base.</p>
-      
-      <div class="ecosystem-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-        <div class="repo-card" style="text-align: center;">
-          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto var(--space-md);">1</div>
-          <h3>Initialize</h3>
-          <p>Set up a standard Git directory with an <code>index.md</code> and a <code>_templates/</code> folder specifying your business schemas.</p>
-        </div>
-        <div class="repo-card" style="text-align: center;">
-          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto var(--space-md);">2</div>
-          <h3>Draft Specs</h3>
-          <p>Write specs or processes in Markdown files ending in <code>_NN.md</code>. Define structure and metadata in standard YAML frontmatter.</p>
-        </div>
-        <div class="repo-card" style="text-align: center;">
-          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto var(--space-md);">3</div>
-          <h3>Link Concepts</h3>
-          <p>Connect files using standard wikilinks <code>[[concept-name]]</code> to form a unified, highly navigable knowledge graph.</p>
-        </div>
-        <div class="repo-card" style="text-align: center;">
-          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto var(--space-md);">4</div>
-          <h3>Validate</h3>
-          <p>Open the folder in the Modeler app or run an AI agent. The core engine parses and validates all templates instantly.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ========== ECOSYSTEM REPOS ========== -->
   <section id="ecosystem">
     <div class="container">
-      <span class="section-label">Ecosystem</span>
-      <h2 class="section-title">Repositories that <span class="accent">power</span> cogNNitive</h2>
-      <p class="section-desc">Every repo has a clear role. Together they form a modular, composable system for AI agent tooling and document intelligence.</p>
+      <span class="section-label">Repositories</span>
+      <h2 class="section-title">The repos that <span class="accent">power</span> cogNNitive</h2>
+      <p class="section-desc section-desc-wide">Every repo has a clear role. Together they form a modular, composable system for AI agent tooling and document intelligence.</p>
 
       <div class="ecosystem-grid">
         <div class="repo-card">
@@ -629,41 +1353,15 @@
           <div class="repo-icon">A</div>
           <span class="repo-tag">Skills</span>
           <h3>actioNN</h3>
-          <p>Modular OpenCode agent skills. Model Router, Skills Manager, traNNsform pipeline, Web Design Guide - each skill is self-contained and versioned independently.</p>
+          <p>Modular OpenCode agent skills. Model Router, Skills Manager, traNNsform pipeline — each skill is self-contained and versioned independently.</p>
           <a href="https://actionn.cognnitive.com" target="_blank" class="repo-link-primary">Visit site &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="faq">
-    <div class="container">
-      <span class="section-label">FAQ</span>
-      <h2 class="section-title">Frequently Asked <span class="accent">Questions</span></h2>
-      <p class="section-desc">Everything you need to know about cogNNitive and how it compares to other tools.</p>
-      
-      <div class="ecosystem-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: var(--space-xl);">
-        <div class="repo-card">
-          <h3 style="color: var(--brand);">How does cogNNitive compare to Obsidian?</h3>
-          <p><strong>Obsidian</strong> is a personal note-taking tool designed for individuals. While you can open and edit iNNfo's Markdown files in Obsidian, Obsidian itself does not enforce rules, validate structural consistency, or have a native protocol for AI agents to write back changes programmatically. <strong>cogNNitive</strong> is designed for collaborative human-AI teams, adding validation, templates, and agent connectivity to standard Markdown folders.</p>
-        </div>
-        <div class="repo-card">
-          <h3 style="color: var(--brand);">How does cogNNitive compare to Notion?</h3>
-          <p><strong>Notion</strong> is a centralized, proprietary database wiki. Your data is locked in a vendor's database, and integrating custom AI agents requires complex API setups and expensive fees. <strong>cogNNitive</strong> is decentralized and file-based. Your knowledge catalog lives in your Git repository under absolute ownership. AI agents can access it locally via MCP, and changes are committed directly to version control.</p>
-        </div>
-        <div class="repo-card">
-          <h3 style="color: var(--brand);">Do I need to use the iNNfo Modeler?</h3>
-          <p>No. Since it is plain Markdown, you can write and edit models in VS Code, Obsidian, Vim, or any editor you prefer. The <strong>iNNfo Modeler</strong> is a browser-based utility that parses your workspace folder locally to give you instant validation feedback, graph visualizations, and tabular matrix views.</p>
-        </div>
-        <div class="repo-card">
-          <h3 style="color: var(--brand);">What is the benefit of the Spec Chain?</h3>
-          <p>The spec chain ensures that your documents follow formal business rules. If a team member or AI agent writes a model that doesn't fit the template (e.g., missing a required field or referencing a non-existent role), the validator catches it immediately. This ensures your knowledge base never becomes corrupted or outdated.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="bootstrap">
+  <!-- ========== BOOTSTRAP (keeping original) ========== -->
+  <section id="get-started">
     <div class="container">
       <span class="section-label">Getting started</span>
       <h2 class="section-title">Bootstrap in <span class="accent">one command</span></h2>
