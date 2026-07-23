@@ -32,11 +32,11 @@
     }
   ],
   "bootstrap": {
-    "command": "I want to use https://cognnitive.com",
+    "command": "I want to use https://cognnitive.com/use",
     "manifest": "README.md",
     "steps": [
       "Install OpenCode from https://opencode.ai/download",
-      "Tell your agent: I want to use https://cognnitive.com",
+      "Tell your agent: I want to use https://cognnitive.com/use",
       "Choose what you want to do and follow the instructions"
     ]
   }

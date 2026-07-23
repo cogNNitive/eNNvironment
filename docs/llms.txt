@@ -13,7 +13,7 @@ eNNvironment is the bootstrap entry point for the cogNNitive ecosystem. It tells
 
 ## Bootstrap
 1. Install OpenCode from https://opencode.ai/download
-2. Tell your agent: "I want to use https://cognnitive.com"
+2. Tell your agent: "I want to use https://cognnitive.com/use"
 3. Choose what you want to do and follow the instructions
 
 ## Manifest file
