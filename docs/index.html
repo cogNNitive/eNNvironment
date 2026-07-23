@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cogNNitive — Living Knowledge for Teams and AI</title>
-  <meta name="description" content="cogNNitive turns scattered documentation into living knowledge that your AI agents and teams can actually use together.">
+  <meta name="description" content="Turn scattered documentation into living knowledge that your human team and AI agents understand.">
   <meta name="generator" content="https://github.com/cogNNitive/actioNN/tree/main/skills/nn-design-presets">
   <link rel="alternate" type="text/markdown" href="index.md" title="cogNNitive — Markdown source">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234D0E4E'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='18' fill='%23fff'%3EcN%3C/text%3E%3C/svg%3E">
@@ -242,6 +242,22 @@
 
     .section-desc-wide {
       max-width: 800px;
+    }
+
+    .video-section {
+      padding: var(--space-xxl) 0;
+      text-align: center;
+    }
+    .video-wrapper {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+    }
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius);
     }
 
     .problem-grid {
@@ -877,10 +893,19 @@
   <!-- ========== HERO ========== -->
   <section class="hero">
     <div class="container">
-      <h1>cogNNitive turns scattered documentation into <span class="accent">living knowledge</span> that your AI agents and teams can actually use together.</h1>
+      <h1>Turn scattered documentation into <span class="accent">living knowledge</span> that your human team and AI agents understand.</h1>
       <div class="hero-actions">
         <a href="#get-started" class="btn-primary">Start Modeling &rarr;</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VIDEO ========== -->
+  <section class="video-section">
+    <div class="container">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/oJYBKuyyaZc" title="cogNNitive Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </section>

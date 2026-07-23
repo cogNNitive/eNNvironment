@@ -1,10 +1,10 @@
 ---
 layout: default
 title: cogNNitive — Living Knowledge for Teams and AI
-description: cogNNitive turns scattered documentation into living knowledge that your AI agents and teams can actually use together.
+description: Turn scattered documentation into living knowledge that your human team and AI agents understand.
 ---
 
-# cogNNitive turns scattered documentation into living knowledge that your AI agents and teams can actually use together.
+# Turn scattered documentation into living knowledge that your human team and AI agents understand.
 
 → [Start Modeling](#get-started) · [Explore Features](#features)
 
