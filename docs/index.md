@@ -1,12 +1,10 @@
 ---
 layout: default
-title: cogNNitive — Knowledge That AI Can Read AND Write
-description: cogNNitive transforms documentation from static archives into living, validated knowledge bases that AI agents can read, query, validate, and modify — all within your existing Git workflow.
+title: cogNNitive — Living Knowledge for Teams and AI
+description: cogNNitive turns scattered documentation into living knowledge that your AI agents and teams can actually use together.
 ---
 
-# cogNNitive — Knowledge That AI Can Read AND Write
-
-cogNNitive transforms your documentation from static archives into living, validated knowledge bases that AI agents can read, query, validate, and modify — all within your existing Git workflow.
+# cogNNitive turns scattered documentation into living knowledge that your AI agents and teams can actually use together.
 
 → [Start Modeling](#get-started) · [Explore Features](#features)
 
