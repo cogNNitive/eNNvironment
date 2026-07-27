@@ -22,7 +22,7 @@ agent-bootstrap:
       description: Author and validate iNNfo models and specializations.
       mcp:
         - name: innfo-mcp
-          url: https://raw.githubusercontent.com/cogNNitive/actioNN/main/scripts/bin/innfo-mcp.bundle.js
+          url: https://raw.githubusercontent.com/cogNNitive/iNNfo/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
     - name: nn-onboarding-wizard
       repo: cogNNitive/actioNN
       path: skills/nn-onboarding-wizard
