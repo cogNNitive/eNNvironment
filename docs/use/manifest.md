@@ -15,7 +15,7 @@ agent-bootstrap:
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
-      description: Ingest and normalize documents (PDF, DOCX, XLSX) to Markdown; HTML export.
+      description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-2-0_NN.md).
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
@@ -30,7 +30,7 @@ agent-bootstrap:
     - name: nn-workflow-orchestrator
       repo: cogNNitive/actioNN
       path: skills/nn-workflow-orchestrator
-      description: Run, create, or discover multi-skill workflows.
+      description: (Integrated into nn-trannsform) Multi-step procedure orchestrator using procedures_V_0-2-0_NN.md.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
@@ -62,8 +62,8 @@ agent-bootstrap:
       skill: nn-trannsform
     - id: pdf-to-innfo-dashboard
       label: PDF to iNNfo dashboard
-      description: Normalize a PDF, model it with iNNfo, and export an interactive dashboard.
-      skill: nn-workflow-orchestrator
+      description: Normalize a PDF, model it with iNNfo, and export an interactive deliverable.
+      skill: nn-trannsform
 ---
 
 # cogNNitive — bootstrap manifest

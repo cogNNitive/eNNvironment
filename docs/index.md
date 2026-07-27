@@ -94,7 +94,7 @@ Agent-driven document pipeline ingesting PDF, DOCX, XLSX, TXT, CSV, JSON, and Ma
 
 - **Knowledge Documentation & Modeling** — Model business strategy, processes, and org structure with validated iNNfo templates.
 - **AI-Assisted Document Transformation** — Convert PDFs, DOCX, spreadsheets, and Slack threads into structured models.
-- **AI Agent Workflow Automation** — Chain multi-step pipelines: design → model → dashboard → publish.
+- **AI Agent Procedure Orchestration** — Chain multi-step transformation procedures (`procedures_V_0-2-0_NN.md`) in `nn-trannsform`: raw documents → models → deliverables.
 - **AI-Native Knowledge Base Management** — A living handbook that humans AND AI agents maintain together.
 - **Interactive Visual Dashboards** — Export models as self-contained HTML with Chart.js, no server needed.
 
