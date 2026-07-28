@@ -4,14 +4,10 @@ description: "Canonical agent-bootstrap manifest served raw (Jekyll-safe) for ht
 agent-bootstrap:
   version: "1.1"
   skills:
-    - name: agent-web-bootstrap
-      repo: cogNNitive/actioNN
-      path: skills/agent-web-bootstrap
-      description: One-shot ecosystem bootstrap from this manifest.
     - name: nn-router
       repo: cogNNitive/actioNN
       path: skills/nn-router
-      description: Entry point — tells you which skill to use for what.
+      description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
@@ -19,14 +15,10 @@ agent-bootstrap:
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
-      description: Author and validate iNNfo models and specializations.
+      description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
       mcp:
         - name: innfo-mcp
           url: https://raw.githubusercontent.com/cogNNitive/iNNfo/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
-    - name: nn-onboarding-wizard
-      repo: cogNNitive/actioNN
-      path: skills/nn-onboarding-wizard
-      description: Conversational wizard to create an iNNfo model from scratch.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
@@ -38,11 +30,7 @@ agent-bootstrap:
     - name: nn-skills-lifecycle
       repo: cogNNitive/actioNN
       path: skills/nn-skills-lifecycle
-      description: Install, create, audit, and maintain cogNNitive skills.
-    - name: nn-preflight
-      repo: cogNNitive/actioNN
-      path: skills/nn-preflight
-      description: Preflight checks (Node.js, deps, MCP health) before running skills.
+      description: Audit, update, and maintain cogNNitive skills.
   workflows:
     - id: model
       label: Create an iNNfo model
