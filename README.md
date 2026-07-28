@@ -1,4 +1,4 @@
-﻿---
+---
 agent-bootstrap:
   version: "1.0"
   skills:
@@ -137,8 +137,4 @@ https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level2
 
 La separaciÃ³n es limpia: **cogNNitive define y ejecuta**, actioNN **instruye al agente** para usar lo que cogNNitive expone. El MCP server es la interfaz estable entre ambos.
 
----
 
-## DocumentaciÃ³n Relacionada
-
-- [`ecosystem-analysis_iNNfo-vs-actioNN.md`](ecosystem-analysis_iNNfo-vs-actioNN.md) â€” AnÃ¡lisis detallado de integraciÃ³n con propuestas de mejora
