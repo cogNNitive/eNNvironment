@@ -27,10 +27,6 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-onboarding-wizard
       description: Conversational wizard to create an iNNfo model from scratch.
-    - name: nn-workflow-orchestrator
-      repo: cogNNitive/actioNN
-      path: skills/nn-workflow-orchestrator
-      description: (Integrated into nn-trannsform) Multi-step procedure orchestrator using procedures_V_0-2-0_NN.md.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
@@ -47,10 +43,6 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-preflight
       description: Preflight checks (Node.js, deps, MCP health) before running skills.
-    - name: nn-dev-opencode-model-router
-      repo: cogNNitive/actioNN
-      path: skills/nn-dev-opencode-model-router
-      description: Route a task to the right OpenCode model.
   workflows:
     - id: model
       label: Create an iNNfo model
