@@ -71,3 +71,23 @@ Invoke it with the canonical URL — it performs all of the above and hands over
 ```
 I want to use https://cognnitive.com/use
 ```
+
+## For opencode CLI / agents without `agent-web-bootstrap`
+
+If your agent does not have `agent-web-bootstrap` built in (e.g. opencode CLI, opencode TUI):
+
+1. Your `AGENTS.md` or `opencode.json` `instructions` field should include a rule like this:
+
+   ```
+   ## Bootstrap Rule
+   When user says "I want to use https://cognnitive.com/use":
+   1. Fetch this manifest
+   2. Parse agent-bootstrap block for skills to install
+   3. Download/extract each skill tarball to ~/.agents/skills/{name}/
+   4. For skills with mcp[]: download bundle to ~/.agents/mcp/ and register in opencode.jsonc
+   5. Show workflow menu
+   ```
+
+2. The canonical reference implementation lives in `cogNNitive/actioNN`'s `AGENTS.md` and `.opencode/opencode.json`.
+
+3. Without the rule above, the agent will not recognize the phrase — paste it into your `AGENTS.md` or global `~/.config/opencode/AGENTS.md`.
