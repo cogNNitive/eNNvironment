@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" width="100%" height="100%" aria-label="eNNvironment Logo Card">
+  <!-- Clean Light Canvas Backdrop for Nazarene Purple Contrast -->
+  <rect width="800" height="650" rx="32" fill="#F6EEF6" />
+
+  <!-- Official Brand Logo - Variation 75 (82px Heavy Stroke) -->
+  <path d="M 160 470 L 160 275 Q 160 250 180 265 L 330 455 Q 350 470 350 450 L 350 215 Q 350 190 370 205 L 530 395 Q 550 410 550 390 L 550 70 L 495 125 L 550 70 L 605 125"
+        fill="none"
+        stroke="#4D0E4E"
+        stroke-width="82"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+
+  <!-- Brand Typography in Nazarene Purple -->
+  <text x="400" y="575" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="38" letter-spacing="4" fill="#4D0E4E">eNNvironment</text>
+</svg>
