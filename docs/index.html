@@ -186,6 +186,21 @@
     .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
     .card p { font-size: 15px; color: var(--ink-muted); line-height: 1.5; }
 
+    /* Diagram Card Container */
+    .diagram-card {
+      background: var(--canvas-inert);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 960px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
     /* Benefits Grid (6 Key Benefits) */
     .benefits-grid {
       display: grid;
@@ -255,48 +270,18 @@
       display: inline-block;
     }
 
-    /* Misc Section (Temporary Technical Review) */
-    .misc-section {
-      background: #FAF8FA;
-      border-top: 2px dashed var(--brand);
-      padding: 48px 0;
-    }
-    .misc-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .misc-tag {
-      background: #E5D5E5;
-      color: var(--brand);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    details {
-      background: var(--canvas);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 24px;
-      margin-bottom: 16px;
-    }
-    summary {
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--brand);
-      font-size: 16px;
-    }
-    .misc-content { margin-top: 16px; font-size: 14px; color: var(--ink-muted); }
-
     /* Footer */
     footer { padding: 48px 0; background: var(--canvas-inert); text-align: center; }
     footer p { font-size: 14px; color: var(--ink-muted); }
     footer a { color: var(--brand); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+    });
+  </script>
 </head>
 <body>
 
@@ -355,6 +340,66 @@
             <h3>iNNfo Modeler — Visual App</h3>
             <p>A browser-based workspace editor to view, edit, and validate knowledge graphs without installing servers.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagram 1: How Tools Work Together -->
+    <section style="background: var(--canvas-inert);">
+      <div class="container">
+        <div class="section-title">
+          <h2>How Tools Work Together</h2>
+          <p>Seamless cooperation between OpenCode Desktop, actioNN skills, innfo-mcp, and the iNNfo Modeler App.</p>
+        </div>
+        <div class="diagram-card">
+          <pre class="mermaid">
+flowchart LR
+    subgraph UserSpace["User Workspace"]
+        A["👤 User"] <-->|Prompts & Commands| B["💻 OpenCode Desktop"]
+    end
+
+    subgraph cogNNitiveEcosystem["cogNNitive Ecosystem"]
+        B <-->|Loads Skills| C["⚡ actioNN Skills"]
+        C <-->|Invokes MCP Tools| D["⚙️ innfo-mcp Server"]
+        D <-->|Parses & Validates| E["📘 iNNfo Core Engine"]
+    end
+
+    subgraph VisualApps["Visual Interfaces"]
+        E <-->|Renders & Edits| F["🛠️ iNNfo Modeler App"]
+    end
+
+    classDef user fill:#F6EEF6,stroke:#4D0E4E,stroke-width:2px,color:#4D0E4E;
+    classDef eco fill:#FAFAFC,stroke:#6A1B6B,stroke-width:2px,color:#111112;
+    classDef app fill:#4D0E4E,stroke:#4D0E4E,stroke-width:2px,color:#FFFFFF;
+
+    class A,B user;
+    class C,D,E eco;
+    class F app;
+          </pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagram 2: 4-Step Information Lifecycle -->
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Information Lifecycle</h2>
+          <p>From raw files to structured knowledge models and AI-generated deliverables.</p>
+        </div>
+        <div class="diagram-card">
+          <pre class="mermaid">
+flowchart LR
+    S1["1. Ingestion\n(PDF, DOCX, Raw Notes)"] --> S2["2. Validation & Modeling\n(Structured _NN.md Models)"]
+    S2 --> S3["3. Delivery & Access\n(Web Modeler & AI Queries)"]
+    S3 --> S4["4. Artifact Generation\n(Reports, Scripts, Dashboards)"]
+
+    classDef step fill:#FAFAFC,stroke:#4D0E4E,stroke-width:2px,color:#111112;
+    classDef finalStep fill:#4D0E4E,stroke:#4D0E4E,stroke-width:2px,color:#FFFFFF;
+
+    class S1,S2,S3 step;
+    class S4 finalStep;
+          </pre>
         </div>
       </div>
     </section>

@@ -23,6 +23,38 @@ An open, unified ecosystem designed to make documentation readable and editable 
 
 ---
 
+## How Tools Work Together
+
+```mermaid
+flowchart LR
+    subgraph UserSpace["User Workspace"]
+        A["👤 User"] <-->|Prompts & Commands| B["💻 OpenCode Desktop"]
+    end
+
+    subgraph cogNNitiveEcosystem["cogNNitive Ecosystem"]
+        B <-->|Loads Skills| C["⚡ actioNN Skills"]
+        C <-->|Invokes MCP Tools| D["⚙️ innfo-mcp Server"]
+        D <-->|Parses & Validates| E["📘 iNNfo Core Engine"]
+    end
+
+    subgraph VisualApps["Visual Interfaces"]
+        E <-->|Renders & Edits| F["🛠️ iNNfo Modeler App"]
+    end
+```
+
+---
+
+## Information Lifecycle (4 Steps)
+
+```mermaid
+flowchart LR
+    S1["1. Ingestion\n(PDF, DOCX, Raw Notes)"] --> S2["2. Validation & Modeling\n(Structured _NN.md Models)"]
+    S2 --> S3["3. Delivery & Access\n(Web Modeler & AI Queries)"]
+    S3 --> S4["4. Artifact Generation\n(Reports, Scripts, Dashboards)"]
+```
+
+---
+
 ## 6 Key Benefits
 
 1. **Zero Vendor Lock-in**: Plain text Markdown files stored in your own Git repository. You own your knowledge forever.
@@ -39,4 +71,3 @@ An open, unified ecosystem designed to make documentation readable and editable 
 1. **Open OpenCode Desktop**: Open OpenCode Desktop on your computer and open your project workspace folder.
 2. **Prompt Your Agent**: Tell your AI agent: `I want to use https://cognnitive.com/use`
 3. **Enjoy Living Knowledge**: OpenCode automatically installs the skills, configures tools, and presents your interactive workflow menu.
-
