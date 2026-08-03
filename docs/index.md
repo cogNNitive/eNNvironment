@@ -40,8 +40,3 @@ An open, unified ecosystem designed to make documentation readable and editable 
 2. **Prompt Your Agent**: Tell your AI agent: `I want to use https://cognnitive.com/use`
 3. **Enjoy Living Knowledge**: OpenCode automatically installs the skills, configures tools, and presents your interactive workflow menu.
 
----
-
-## Misc Review (Removed Technical Details)
-
-The technical architecture details, monorepo breakdown, and comparative matrix have been moved to [Documentation](https://cognnitive.com/documentation/).
