@@ -138,28 +138,12 @@
 
     /* Sections General */
     section { padding: 64px 0; border-bottom: 1px solid var(--border); }
-    .section-title {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-    .section-title p {
-      font-size: 16px;
-      color: var(--ink-muted);
-      margin-top: 8px;
-    }
+    .section-title { text-align: center; margin-bottom: 48px; }
+    .section-title h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+    .section-title p { font-size: 16px; color: var(--ink-muted); margin-top: 8px; }
 
     /* Pillars Grid */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .card {
       background: var(--canvas);
       border: 1px solid var(--border);
@@ -167,10 +151,7 @@
       padding: 32px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(77, 14, 78, 0.06);
-    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(77, 14, 78, 0.06); }
     .card-icon {
       width: 48px;
       height: 48px;
@@ -192,29 +173,15 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 32px;
-      max-width: 960px;
+      max-width: 900px;
       margin: 0 auto;
       overflow-x: auto;
     }
-    .mermaid {
-      display: flex;
-      justify-content: center;
-    }
+    .mermaid { display: flex; justify-content: center; }
 
     /* Benefits Grid (6 Key Benefits) */
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
-    .benefit-item {
-      display: flex;
-      gap: 16px;
-      padding: 24px;
-      background: var(--canvas-inert);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .benefit-item { display: flex; gap: 16px; padding: 24px; background: var(--canvas-inert); border: 1px solid var(--border); border-radius: var(--radius); }
     .benefit-num {
       font-size: 20px;
       font-weight: 800;
@@ -232,43 +199,12 @@
     .benefit-content p { font-size: 14px; color: var(--ink-muted); }
 
     /* How to Use It (OpenCode Exclusive) */
-    .steps-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .step-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      background: var(--canvas);
-      border: 1px solid var(--border);
-      padding: 24px;
-      border-radius: var(--radius);
-    }
-    .step-badge {
-      background: var(--brand);
-      color: #fff;
-      font-weight: 800;
-      font-size: 14px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      flex-shrink: 0;
-    }
+    .steps-wrapper { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .step-card { display: flex; align-items: flex-start; gap: 20px; background: var(--canvas); border: 1px solid var(--border); padding: 24px; border-radius: var(--radius); }
+    .step-badge { background: var(--brand); color: #fff; font-weight: 800; font-size: 14px; padding: 6px 14px; border-radius: 20px; flex-shrink: 0; }
     .step-text h4 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
     .step-text p { font-size: 15px; color: var(--ink-muted); margin-bottom: 12px; }
-    .code-box {
-      background: var(--canvas-inert);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      border-radius: 6px;
-      font-family: var(--mono);
-      font-size: 14px;
-      color: var(--brand);
-      display: inline-block;
-    }
+    .code-box { background: var(--canvas-inert); border: 1px solid var(--border); padding: 10px 16px; border-radius: 6px; font-family: var(--mono); font-size: 14px; color: var(--brand); display: inline-block; }
 
     /* Footer */
     footer { padding: 48px 0; background: var(--canvas-inert); text-align: center; }
@@ -344,68 +280,51 @@
       </div>
     </section>
 
-    <!-- Diagram 1: How Tools Work Together -->
+    <!-- Option 20 Master Diagram: Unified Ecosystem Architecture -->
     <section style="background: var(--canvas-inert);">
       <div class="container">
         <div class="section-title">
-          <h2>How Tools Work Together</h2>
-          <p>Seamless cooperation between OpenCode Desktop, actioNN skills, innfo-mcp, and the iNNfo Modeler App.</p>
+          <h2>Ecosystem & Information Flow</h2>
+          <p>Complete vertical integration: from ingestion to engine validation, web access, and artifact generation.</p>
         </div>
         <div class="diagram-card">
           <pre class="mermaid">
-flowchart LR
-    subgraph UserSpace["User Workspace"]
-        A["👤 User"] <-->|Prompts & Commands| B["💻 OpenCode Desktop"]
+flowchart TD
+    subgraph Step1["Step 1: Ingestion & Setup"]
+        U["👤 User in OpenCode"] -->|Bootstrap Prompt| Router["⚡ actioNN Skills (Router & traNNsform)"]
+        RawDocs["📄 Raw Documents (PDF, DOCX)"] --> Router
     end
 
-    subgraph cogNNitiveEcosystem["cogNNitive Ecosystem"]
-        B <-->|Loads Skills| C["⚡ actioNN Skills"]
-        C <-->|Invokes MCP Tools| D["⚙️ innfo-mcp Server"]
-        D <-->|Parses & Validates| E["📘 iNNfo Core Engine"]
+    subgraph Step2["Step 2: Validation & Engine"]
+        Router --> Models["📘 Structured Models (_NN.md)"]
+        Models <--> MCP["⚙️ innfo-mcp Server + Core Engine"]
     end
 
-    subgraph VisualApps["Visual Interfaces"]
-        E <-->|Renders & Edits| F["🛠️ iNNfo Modeler App"]
+    subgraph Step3["Step 3: Delivery & Access"]
+        MCP <--> Modeler["🛠️ iNNfo Modeler App (Web Editor)"]
+        MCP <--> AgentChat["💬 OpenCode Conversational Queries"]
     end
 
-    classDef user fill:#F6EEF6,stroke:#4D0E4E,stroke-width:2px,color:#4D0E4E;
-    classDef eco fill:#FAFAFC,stroke:#6A1B6B,stroke-width:2px,color:#111112;
-    classDef app fill:#4D0E4E,stroke:#4D0E4E,stroke-width:2px,color:#FFFFFF;
+    subgraph Step4["Step 4: Artifact Generation"]
+        Modeler & AgentChat --> Artifacts["📊 Final Deliverables\n(Visual Dashboards, Exec Summaries, Scripts)"]
+    end
 
-    class A,B user;
-    class C,D,E eco;
-    class F app;
-          </pre>
-        </div>
-      </div>
-    </section>
+    classDef s1 fill:#FAFAFC,stroke:#636366,color:#111112;
+    classDef s2 fill:#F6EEF6,stroke:#4D0E4E,color:#4D0E4E;
+    classDef s3 fill:#FAFAFC,stroke:#6A1B6B,color:#111112;
+    classDef s4 fill:#4D0E4E,stroke:#4D0E4E,color:#FFFFFF;
 
-    <!-- Diagram 2: 4-Step Information Lifecycle -->
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h2>Information Lifecycle</h2>
-          <p>From raw files to structured knowledge models and AI-generated deliverables.</p>
-        </div>
-        <div class="diagram-card">
-          <pre class="mermaid">
-flowchart LR
-    S1["1. Ingestion\n(PDF, DOCX, Raw Notes)"] --> S2["2. Validation & Modeling\n(Structured _NN.md Models)"]
-    S2 --> S3["3. Delivery & Access\n(Web Modeler & AI Queries)"]
-    S3 --> S4["4. Artifact Generation\n(Reports, Scripts, Dashboards)"]
-
-    classDef step fill:#FAFAFC,stroke:#4D0E4E,stroke-width:2px,color:#111112;
-    classDef finalStep fill:#4D0E4E,stroke:#4D0E4E,stroke-width:2px,color:#FFFFFF;
-
-    class S1,S2,S3 step;
-    class S4 finalStep;
+    class U,Router,RawDocs s1;
+    class Models,MCP s2;
+    class Modeler,AgentChat s3;
+    class Artifacts s4;
           </pre>
         </div>
       </div>
     </section>
 
     <!-- 6 Key Benefits -->
-    <section style="background: var(--canvas-inert);">
+    <section>
       <div class="container">
         <div class="section-title">
           <h2>6 Key Benefits</h2>
@@ -459,7 +378,7 @@ flowchart LR
     </section>
 
     <!-- How to Use It (OpenCode Exclusive) -->
-    <section>
+    <section style="background: var(--canvas-inert);">
       <div class="container">
         <div class="section-title">
           <h2>How to Use It</h2>
