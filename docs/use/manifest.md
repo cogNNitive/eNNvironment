@@ -2,34 +2,54 @@
 title: "cogNNitive — Bootstrap manifest"
 description: "Canonical agent-bootstrap manifest served raw (Jekyll-safe) for https://cognnitive.com/use."
 agent-bootstrap:
-  version: "1.1"
+  version: "2.0"
   skills:
     - name: nn-router
       repo: cogNNitive/actioNN
       path: skills/nn-router
+      version: "3.2"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
       description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
+      version: "2.0"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      requires: [nn-innfo, nn-preflight]
       description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-2-0_NN.md).
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
+      version: "V_0-3-0"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
       description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
       mcp:
         - name: innfo-mcp
           url: https://raw.githubusercontent.com/cogNNitive/iNNfo/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
+    - name: nn-preflight
+      repo: cogNNitive/actioNN
+      path: skills/nn-preflight
+      version: "V_0-1-0"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      description: Environment readiness gate (Tier 1/Tier 2) and canonical skill-location reference.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
+      version: "V_0-1-0"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
       description: Create or edit websites, add analytics, add contact forms.
     - name: nn-design-presets
       repo: cogNNitive/actioNN
       path: skills/nn-design-presets
+      version: "V_1-1-0"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
       description: cogNNitive visual design presets — palettes, typography, spacing.
     - name: nn-skills-lifecycle
       repo: cogNNitive/actioNN
       path: skills/nn-skills-lifecycle
+      version: "1.1"
+      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      requires: [nn-preflight]
       description: Audit, update, and maintain cogNNitive skills.
   workflows:
     - id: model
@@ -54,15 +74,24 @@ the site is built with Jekyll. The human page at `https://cognnitive.com/use` li
 
 ## For a fresh agent with no cogNNitive skills yet (self-bootstrap)
 
-1. Read the `agent-bootstrap:` block in the frontmatter above.
-2. For each skill, download the repo tarball over HTTPS — **no git needed**:
-   `https://codeload.github.com/{repo}/tar.gz/refs/heads/main` (retry `master` on 404),
-   extract it, and copy `{path}` into `~/.agents/skills/{name}/`.
-3. For each skill that declares `mcp[]`, download the bundle `url` into
-   `~/.agents/mcp/{name}.bundle.js` and register it in your workspace MCP config.
-4. Present the `workflows[]` as a menu and hand over to the chosen skill.
+The manifest frontmatter above is the source of truth for **desired pins**: every skill
+carries a pinned `commit` (full 40-char sha — the integrity anchor) and a `version`
+(display string that must match the SKILL.md frontmatter). What is actually installed
+on a machine is recorded per-machine in `~/.agents/skills-state.json` (like lazy.nvim's
+`lazy-lock.json`).
 
-Installs are idempotent: skip anything already present, then continue.
+1. Fetch the manifest — each skill carries a pinned `commit` and `version`.
+2. Run the check: `node scripts/skills-manager.js status` from a cogNNitive checkout
+   (or ask the agent to run it) to compare installed commits (recorded in
+   `~/.agents/skills-state.json`) against the pins.
+3. Install missing skills with explicit consent:
+   `node scripts/skills-manager.js install`.
+4. If any skill is outdated, show the diff preview and ask before updating:
+   `node scripts/skills-manager.js update`. Never silently update, and never report
+   "installed and up to date" without having run the check.
+5. For each skill that declares `mcp[]`, download the bundle `url` into
+   `~/.agents/mcp/{name}.bundle.js` and register it in your workspace MCP config.
+6. Present the `workflows[]` as a menu and hand over to the chosen skill.
 
 ## For an agent that already has `agent-web-bootstrap`
 

@@ -1,0 +1,25 @@
+name: Manifest validation
+
+# Validates the bootstrap manifest against the cogNNitive/actioNN repo:
+#   1. every skill is structurally complete (name/repo/path/version/commit, 40-char sha)
+#   2. the pinned commit exists in the source repo
+#   3. the skill path contains a SKILL.md at that commit
+#   4. the SKILL.md frontmatter version matches the manifest version
+#   5. every `requires` entry resolves to another validated skill (kills phantom deps)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate bootstrap manifest against actioNN
+        run: node scripts/validate-manifest.js
