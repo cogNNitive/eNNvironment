@@ -14,14 +14,14 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
       version: "2.0"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "bed2bd075027d8a2bc4fc141867fdffd69690f9f"
       requires: [nn-innfo, nn-preflight]
-      description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-2-0_NN.md).
+      description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-3-0_NN.md).
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
       version: "V_0-3-0"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "bed2bd075027d8a2bc4fc141867fdffd69690f9f"
       description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
       mcp:
         - name: innfo-mcp
