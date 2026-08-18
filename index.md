@@ -5,7 +5,7 @@ title: eNNvironment
 
 # eNNvironment
 
-Bootstrap entry point for the iNNv0 ecosystem.
+Bootstrap entry point for the CogNNitive ecosystem.
 
 → See [README](README.md) for full documentation.
 

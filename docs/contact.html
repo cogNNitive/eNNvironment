@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>cogNNitive — Knowledge Management Made Ridiculously Simple</title>
-  <meta name="description" content="Knowledge Management made ridiculously simple for humans and AI. Turn scattered documentation into living knowledge.">
+  <title>Contact — cogNNitive</title>
+  <meta name="description" content="Get in touch with cogNNitive. Questions, ideas, or partnerships — send us a message and we'll get back to you.">
   <meta name="generator" content="https://actionn.cognnitive.com/nn-design-presets">
-  <link rel="alternate" type="text/markdown" href="index.md" title="cogNNitive — Markdown source">
   <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +15,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "cogNNitive",
-    "url": "https://cognnitive.com",
+    "url": "https://cognnitive.com/contact",
     "description": "Knowledge Management made ridiculously simple for humans and AI.",
     "author": { "@type": "Organization", "name": "cogNNitive" },
     "inLanguage": "en",
@@ -212,12 +211,6 @@
     footer a { color: var(--brand); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      mermaid.initialize({ startOnLoad: true, theme: "neutral" });
-    });
-  </script>
 </head>
 <body>
 
@@ -244,168 +237,46 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-        <h1>Knowledge Management <br><span class="accent">made ridiculously simple</span> for humans and AI.</h1>
-        <p>Turn scattered documentation into living, structured knowledge that your team and your OpenCode AI agent understand.</p>
-        <div class="hero-actions">
-          <a href="https://innfo.cognnitive.com/app/" class="btn-primary">Open iNNfo Modeler App &rarr;</a>
-          <a href="https://actionn.cognnitive.com" class="btn-secondary">Explore Agent Skills</a>
+        <h1>Let's Start Your <br><span class="accent">Innovation Journey</span></h1>
+        <p>Ready to take the first steps? Fill out the form below and we'll get back to you.</p>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p>Tell us about your project and we'll get back to you within 24 business hours.</p>
+        </div>
+        <div class="diagram-card" style="max-width: 720px; background: var(--canvas);">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd3iO1V-pyaGNBC_ByddFuMJ1rkUAI2jT78--iqkG-rqXOrTA/viewform?embedded=true" title="Contact form" height="760" loading="lazy" style="display: block; width: 100%; border: 0;">Loading.</iframe>
         </div>
       </div>
     </section>
 
-    <!-- What is cogNNitive? -->
-    <section>
+    <!-- Contact Cards -->
+    <section style="background: var(--canvas-inert);">
       <div class="container">
         <div class="section-title">
-          <h2>What is cogNNitive?</h2>
-          <p>An open, unified ecosystem designed to make documentation readable and editable by humans and AI.</p>
+          <h2>Other Ways to Reach Us</h2>
+          <p>Prefer email or a strategy call? Here are your options.</p>
         </div>
         <div class="grid-3">
           <div class="card">
-            <div class="card-icon">📘</div>
-            <h3>iNNfo — Knowledge Modeling</h3>
-            <p>A simple specification chain for structuring Markdown documents. Clear, validated, and engine-backed.</p>
+            <div class="card-icon">📧</div>
+            <h3>Email Us</h3>
+            <p>Official communication channel — <a href="mailto:lucas@lucascervera.com" style="color: var(--brand); text-decoration: none;">lucas@lucascervera.com</a></p>
           </div>
           <div class="card">
-            <div class="card-icon">⚡</div>
-            <h3>actioNN — AI Agent Skills</h3>
-            <p>Modular capabilities that teach your OpenCode AI agent specialized domain workflows automatically.</p>
+            <div class="card-icon">⏱️</div>
+            <h3>Response Time</h3>
+            <p>We typically reply within 24 business hours.</p>
           </div>
           <div class="card">
-            <div class="card-icon">🛠️</div>
-            <h3>iNNfo Modeler — Visual App</h3>
-            <p>A browser-based workspace editor to view, edit, and validate knowledge graphs without installing servers.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Option 20 Master Diagram: Unified Ecosystem Architecture -->
-    <section style="background: var(--canvas-inert);">
-      <div class="container">
-        <div class="section-title">
-          <h2>Ecosystem & Information Flow</h2>
-          <p>Complete vertical integration: from ingestion to engine validation, web access, and artifact generation.</p>
-        </div>
-        <div class="diagram-card">
-          <pre class="mermaid">
-flowchart TD
-    subgraph Step1["Step 1: Ingestion & Setup"]
-        U["👤 User in OpenCode"] -->|Bootstrap Prompt| Router["⚡ actioNN Skills (Router & traNNsform)"]
-        RawDocs["📄 Raw Documents (PDF, DOCX)"] --> Router
-    end
-
-    subgraph Step2["Step 2: Validation & Engine"]
-        Router --> Models["📘 Structured Models (_NN.md)"]
-        Models <--> MCP["⚙️ innfo-mcp Server + Core Engine"]
-    end
-
-    subgraph Step3["Step 3: Delivery & Access"]
-        MCP <--> Modeler["🛠️ iNNfo Modeler App (Web Editor)"]
-        MCP <--> AgentChat["💬 OpenCode Conversational Queries"]
-    end
-
-    subgraph Step4["Step 4: Artifact Generation"]
-        Modeler & AgentChat --> Artifacts["📊 Final Deliverables\n(Visual Dashboards, Exec Summaries, Scripts)"]
-    end
-
-    classDef s1 fill:#FAFAFC,stroke:#636366,color:#111112;
-    classDef s2 fill:#F6EEF6,stroke:#4D0E4E,color:#4D0E4E;
-    classDef s3 fill:#FAFAFC,stroke:#6A1B6B,color:#111112;
-    classDef s4 fill:#4D0E4E,stroke:#4D0E4E,color:#FFFFFF;
-
-    class U,Router,RawDocs s1;
-    class Models,MCP s2;
-    class Modeler,AgentChat s3;
-    class Artifacts s4;
-          </pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 Key Benefits -->
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h2>6 Key Benefits</h2>
-          <p>Why modern teams and AI developers choose cogNNitive for their documentation.</p>
-        </div>
-        <div class="benefits-grid">
-          <div class="benefit-item">
-            <div class="benefit-num">1</div>
-            <div class="benefit-content">
-              <h4>Zero Vendor Lock-in</h4>
-              <p>Plain text Markdown files stored in your own Git repository. You own your knowledge forever.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-num">2</div>
-            <div class="benefit-content">
-              <h4>AI That Never Guesses</h4>
-              <p>Deterministic validation guarantees your OpenCode agent always works with reliable data.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-num">3</div>
-            <div class="benefit-content">
-              <h4>No Setup Friction</h4>
-              <p>Works directly inside OpenCode Desktop with a single prompt. No complex setup required.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-num">4</div>
-            <div class="benefit-content">
-              <h4>Always Up to Date</h4>
-              <p>Detects structural drift and outdated information automatically before it causes mistakes.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-num">5</div>
-            <div class="benefit-content">
-              <h4>Visual & Flexible</h4>
-              <p>Edit visually in your browser app or textually through conversational AI instructions.</p>
-            </div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-num">6</div>
-            <div class="benefit-content">
-              <h4>100% Free & Open Source</h4>
-              <p>Built for the open community under the MIT license. No hidden subscriptions or API costs.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How to Use It (OpenCode Exclusive) -->
-    <section style="background: var(--canvas-inert);">
-      <div class="container">
-        <div class="section-title">
-          <h2>How to Use It</h2>
-          <p>Get started with cogNNitive in 3 simple steps inside OpenCode Desktop.</p>
-        </div>
-        <div class="steps-wrapper">
-          <div class="step-card">
-            <span class="step-badge">Step 1</span>
-            <div class="step-text">
-              <h4>Open OpenCode Desktop</h4>
-              <p>Launch OpenCode Desktop on your computer and open your project workspace folder.</p>
-            </div>
-          </div>
-          <div class="step-card">
-            <span class="step-badge">Step 2</span>
-            <div class="step-text">
-              <h4>Prompt Your Agent</h4>
-              <p>Tell your AI agent the single bootstrap phrase in the chat:</p>
-              <div class="code-box">I want to use https://cognnitive.com/use</div>
-            </div>
-          </div>
-          <div class="step-card">
-            <span class="step-badge">Step 3</span>
-            <div class="step-text">
-              <h4>Enjoy Living Knowledge</h4>
-              <p>OpenCode automatically installs the skills, configures tools, and presents your interactive workflow menu.</p>
-            </div>
+            <div class="card-icon">💬</div>
+            <h3>Consultation</h3>
+            <p>Schedule a free initial 30-minute strategy call</p>
           </div>
         </div>
       </div>
