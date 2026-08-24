@@ -8,20 +8,20 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-router
       version: "3.2"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
-      version: "2.0"
-      commit: "bed2bd075027d8a2bc4fc141867fdffd69690f9f"
+      version: "1.1"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       requires: [nn-innfo, nn-preflight]
-      description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-3-0_NN.md).
+      description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-1-0_NN.md).
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
-      version: "V_0-3-0"
-      commit: "bed2bd075027d8a2bc4fc141867fdffd69690f9f"
+      version: "V_0-1-0"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
       mcp:
         - name: innfo-mcp
@@ -30,25 +30,25 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-preflight
       version: "V_0-1-0"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       description: Environment readiness gate (Tier 1/Tier 2) and canonical skill-location reference.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
       version: "V_0-1-0"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       description: Create or edit websites, add analytics, add contact forms.
     - name: nn-design-presets
       repo: cogNNitive/actioNN
       path: skills/nn-design-presets
       version: "V_1-1-0"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       description: cogNNitive visual design presets — palettes, typography, spacing.
     - name: nn-skills-lifecycle
       repo: cogNNitive/actioNN
       path: skills/nn-skills-lifecycle
       version: "1.1"
-      commit: "51b8762a6b173831ca8f2fd2137031c8a9626d29"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
       requires: [nn-preflight]
       description: Audit, update, and maintain cogNNitive skills.
   workflows:
