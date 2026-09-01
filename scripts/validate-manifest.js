@@ -167,7 +167,15 @@ function parseManifest(text) {
   if (!Array.isArray(bootstrap.skills)) {
     throw new Error('agent-bootstrap.skills is not a list');
   }
-  return bootstrap.skills;
+  const templates = Array.isArray(bootstrap.templates) ? bootstrap.templates : [];
+  const workflows = Array.isArray(bootstrap.workflows) ? bootstrap.workflows : [];
+  return {
+    version: bootstrap.version,
+    entrypoint: bootstrap.entrypoint,
+    skills: bootstrap.skills,
+    templates,
+    workflows,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -209,24 +217,24 @@ function rateLimited(status) {
 // Validation
 // ---------------------------------------------------------------------------
 
-function structuralViolations(skill) {
+function structuralViolations(item) {
   const violations = [];
   for (const field of ['name', 'repo', 'path', 'version', 'commit']) {
-    if (!skill[field]) violations.push(`${skill.name || '(unnamed skill)'}: missing field '${field}'`);
+    if (!item[field]) violations.push(`${item.name || '(unnamed item)'}: missing field '${field}'`);
   }
-  if (skill.commit && !COMMIT_RE.test(skill.commit)) {
-    violations.push(`${skill.name}: commit '${skill.commit}' is not a 40-char hex sha`);
+  if (item.commit && !COMMIT_RE.test(item.commit)) {
+    violations.push(`${item.name}: commit '${item.commit}' is not a 40-char hex sha`);
   }
   return violations;
 }
 
-async function checkCommitExists(skill) {
-  const res = await apiRequest(`https://api.github.com/repos/${skill.repo}/commits/${skill.commit}`);
+async function checkCommitExists(item) {
+  const res = await apiRequest(`https://api.github.com/repos/${item.repo}/commits/${item.commit}`);
   if (res.status === 200) return null;
   if (rateLimited(res.status)) {
-    return `${skill.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit. Wait and retry.`;
+    return `${item.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit. Wait and retry.`;
   }
-  return `${skill.name}: commit ${skill.commit} does not exist in ${skill.repo} (HTTP ${res.status || res.error || 'network error'})`;
+  return `${item.name}: commit ${item.commit} does not exist in ${item.repo} (HTTP ${res.status || res.error || 'network error'})`;
 }
 
 async function checkPathAtCommit(skill) {
@@ -255,15 +263,16 @@ async function checkVersionParity(skill) {
   if (declared === undefined || declared === null) {
     return `${skill.name}: SKILL.md at ${skill.commit} declares no version`;
   }
-  if (String(declared) !== skill.version) {
+  if (String(declared) !== String(skill.version)) {
     return `${skill.name}: version mismatch — manifest '${skill.version}' vs SKILL.md '${declared}'`;
   }
-  return null;
+  return { bundled_templates: meta.bundled_templates || [] };
 }
 
 async function validateSkill(skill) {
   const violations = structuralViolations(skill);
-  if (violations.length > 0) return violations;
+  let bundled_templates = [];
+  if (violations.length > 0) return { violations, bundled_templates };
 
   const commitViolation = await checkCommitExists(skill);
   if (commitViolation) violations.push(commitViolation);
@@ -271,8 +280,52 @@ async function validateSkill(skill) {
   const pathViolation = await checkPathAtCommit(skill);
   if (pathViolation) violations.push(pathViolation);
 
-  const versionViolation = await checkVersionParity(skill);
-  if (versionViolation) violations.push(versionViolation);
+  const versionResult = await checkVersionParity(skill);
+  if (typeof versionResult === 'string') {
+    violations.push(versionResult);
+  } else if (versionResult && versionResult.bundled_templates) {
+    bundled_templates = versionResult.bundled_templates;
+  }
+
+  return { violations, bundled_templates };
+}
+
+async function validateTemplate(template) {
+  const violations = structuralViolations(template);
+  if (violations.length > 0) return violations;
+
+  const commitViolation = await checkCommitExists(template);
+  if (commitViolation) violations.push(commitViolation);
+
+  const url = `https://api.github.com/repos/${template.repo}/contents/${template.path}?ref=${template.commit}`;
+  const res = await apiRequest(url);
+  if (res.status !== 200) {
+    if (rateLimited(res.status)) {
+      violations.push(`${template.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path. Wait and retry.`);
+    } else {
+      violations.push(`${template.name}: path ${template.path} not found at ${template.commit} (HTTP ${res.status || res.error || 'network error'})`);
+    }
+  }
+
+  const rawUrl = `https://raw.githubusercontent.com/${template.repo}/${template.commit}/${template.path}`;
+  try {
+    const text = await fetchString(rawUrl);
+    let declared = null;
+    try {
+      const meta = parseFocusedYaml(parseFrontmatter(text));
+      declared = meta.version !== undefined ? meta.version : (meta.spec_version !== undefined ? meta.spec_version : (meta.metadata && meta.metadata.version));
+    } catch {
+      const versionMatch = text.match(/V_\d+-\d+-\d+/i) || text.match(/version:\s*["']?([^"'\r\n]+)/i);
+      if (versionMatch) declared = versionMatch[1] || versionMatch[0];
+    }
+    if (declared === undefined || declared === null) {
+      violations.push(`${template.name}: template at ${template.commit} declares no version`);
+    } else if (String(declared) !== String(template.version)) {
+      violations.push(`${template.name}: version mismatch — manifest '${template.version}' vs template '${declared}'`);
+    }
+  } catch (err) {
+    violations.push(`${template.name}: could not fetch template at ${template.commit} (${err.message})`);
+  }
 
   return violations;
 }
@@ -289,39 +342,65 @@ async function main() {
     process.exit(1);
   }
 
-  let skills;
+  let manifestData;
   try {
-    skills = parseManifest(fs.readFileSync(manifestFile, 'utf-8'));
+    manifestData = parseManifest(fs.readFileSync(manifestFile, 'utf-8'));
   } catch (err) {
     console.error(`FAIL: could not parse manifest: ${err.message}`);
     process.exit(1);
   }
 
+  const { skills, templates, workflows } = manifestData;
   const violations = [];
+  const knownSkillBundledTemplates = new Set();
+
   for (const skill of skills) {
-    violations.push(...await validateSkill(skill));
+    const { violations: skillViolations, bundled_templates } = await validateSkill(skill);
+    violations.push(...skillViolations);
+    for (const bt of bundled_templates) {
+      const name = typeof bt === 'string' ? bt : (bt && bt.name);
+      if (name) knownSkillBundledTemplates.add(name);
+    }
   }
 
-  // requires-closure: every dependency must resolve to another manifest skill
-  // (each of which is itself validated above).
-  const known = new Set(skills.map(s => s.name));
+  for (const template of templates) {
+    violations.push(...await validateTemplate(template));
+  }
+
+  const knownSkills = new Set(skills.map(s => s.name));
+  const knownTemplates = new Set([...templates.map(t => t.name), ...knownSkillBundledTemplates]);
+
+  // Skill dependency closure (requires)
   for (const skill of skills) {
     for (const req of (skill.requires || [])) {
-      if (!known.has(req)) {
+      if (!knownSkills.has(req)) {
         violations.push(`${skill.name}: requires '${req}' which is not in the manifest`);
       }
+    }
+    for (const tmpl of (skill.templates || [])) {
+      if (!knownTemplates.has(tmpl)) {
+        violations.push(`${skill.name}: references template '${tmpl}' which is not declared in top-level templates or bundled`);
+      }
+    }
+  }
+
+  // Workflow template dependency closure
+  for (const wf of workflows) {
+    if (wf.template && !knownTemplates.has(wf.template)) {
+      violations.push(`workflow '${wf.id || wf.label}': references template '${wf.template}' which is not declared in top-level templates or bundled`);
     }
   }
 
   if (violations.length > 0) {
     for (const violation of violations) console.error(`FAIL: ${violation}`);
-    console.error(`\nFAIL: ${violations.length} violation(s) in ${skills.length} skill(s)`);
+    console.error(`\nFAIL: ${violations.length} violation(s) in manifest (${skills.length} skills, ${templates.length} templates)`);
     process.exit(1);
   }
 
-  console.log(`OK: ${skills.length} skills validated`);
+  console.log(`OK: ${skills.length} skills and ${templates.length} templates validated`);
 }
 
 if (require.main === module) {
   main();
 }
+

@@ -3,6 +3,7 @@ title: "cogNNitive — Bootstrap manifest"
 description: "Canonical agent-bootstrap manifest served raw (Jekyll-safe) for https://cognnitive.com/use."
 agent-bootstrap:
   version: "2.0"
+  entrypoint: "workspace_NN.md"
   skills:
     - name: nn-router
       repo: cogNNitive/actioNN
@@ -23,6 +24,7 @@ agent-bootstrap:
       version: "V_0-1-0"
       commit: "d60a7109315820085ab127b70412992db6986c88"
       description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
+      templates: ["workspace_spec_NN"]
       mcp:
         - name: innfo-mcp
           url: https://raw.githubusercontent.com/cogNNitive/iNNfo/main/packages/innfo-mcp/bin/innfo-mcp.bundle.js
@@ -51,11 +53,23 @@ agent-bootstrap:
       commit: "d60a7109315820085ab127b70412992db6986c88"
       requires: [nn-preflight]
       description: Audit, update, and maintain cogNNitive skills.
+  templates:
+    - name: workspace_spec_NN
+      repo: cogNNitive/iNNfo
+      path: specs/templates/workspace_spec_NN.md
+      version: "V_1-0-0"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
+    - name: projects
+      repo: cogNNitive/iNNfo
+      path: specs/templates/projects/projects_V_0-1-0_NN.md
+      version: "V_0-1-0"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
   workflows:
     - id: model
       label: Create an iNNfo model
       description: Turn an idea, document, or dataset into a validated structured model.
       skill: nn-innfo
+      template: workspace_spec_NN
     - id: transform
       label: Transform a document
       description: Normalize a PDF/DOCX/XLSX into clean Markdown, or export to HTML.
