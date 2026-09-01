@@ -127,7 +127,7 @@ If your agent does not have `agent-web-bootstrap` built in (e.g. opencode CLI, o
    ```
    ## Bootstrap Rule
    When user says "I want to use https://cognnitive.com/use":
-   1. Fetch this manifest
+   1. Fetch this manifest (In Windows, use `curl.exe`, Node.js native `fetch`, or git into `$env:TEMP` / `~/.agents/tmp/` to avoid PowerShell `curl` SSL alias issues and workspace pollution).
    2. Parse agent-bootstrap block for skills to install
    3. Download/extract each skill tarball to ~/.agents/skills/{name}/
    4. For skills with mcp[]: download bundle to ~/.agents/mcp/ and register in opencode.jsonc
