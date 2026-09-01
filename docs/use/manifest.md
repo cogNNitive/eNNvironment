@@ -54,16 +54,19 @@ agent-bootstrap:
       requires: [nn-preflight]
       description: Audit, update, and maintain cogNNitive skills.
   templates:
+    # iNNfo_V_0-2-0 adoption. commit below is provisionally pinned to the tip of
+    # cogNNitive/iNNfo feat/business-template-decomposition — RE-PIN to the
+    # squash-merge sha once that branch lands on iNNfo main.
     - name: workspace_spec_NN
       repo: cogNNitive/iNNfo
       path: specs/templates/workspace_spec_NN.md
-      version: "V_1-0-0"
-      commit: "d60a7109315820085ab127b70412992db6986c88"
+      version: "V_0-2-0"
+      commit: "d7d96a22b7285baf4f057097f34cee25b1e98e1f"
     - name: projects
       repo: cogNNitive/iNNfo
-      path: specs/templates/projects/projects_V_0-1-0_NN.md
-      version: "V_0-1-0"
-      commit: "d60a7109315820085ab127b70412992db6986c88"
+      path: specs/templates/projects/projects_V_0-2-0_NN.md
+      version: "V_0-2-0"
+      commit: "d7d96a22b7285baf4f057097f34cee25b1e98e1f"
   workflows:
     - id: model
       label: Create an iNNfo model
