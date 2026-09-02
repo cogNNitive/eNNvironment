@@ -14,7 +14,7 @@ agent-bootstrap:
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
-      version: "1.1"
+      version: "2.0"
       commit: "d60a7109315820085ab127b70412992db6986c88"
       requires: [nn-innfo, nn-preflight]
       description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-1-0_NN.md).
