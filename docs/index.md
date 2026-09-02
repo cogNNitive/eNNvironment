@@ -17,7 +17,7 @@ Turn scattered documentation into living, structured knowledge that your team an
 
 An open, unified ecosystem designed to make documentation readable and editable by humans and AI.
 
-- **iNNfo — Knowledge Modeling**: A simple specification chain for structuring Markdown documents. Clear, validated, and engine-backed.
+- **iNNfo — Knowledge Modeling**: A simple specification chain for structuring Markdown documents. Clear, validated, and engine-backed. Read the [Especificaciones iNNfo y Arquitectura de Documentos](specifications.md).
 - **actioNN — AI Agent Skills**: Modular capabilities that teach your OpenCode AI agent specialized domain workflows automatically.
 - **iNNfo Modeler — Visual App**: A browser-based workspace editor to view, edit, and validate knowledge graphs without installing servers.
 
