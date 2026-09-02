@@ -226,7 +226,7 @@ const RATE_LIMIT_HINT = 'set GITHUB_TOKEN to raise the rate limit';
 
 function structuralViolations(item) {
   const violations = [];
-  for (const field of ['name', 'repo', 'path', 'version', 'commit']) {
+  for (const field of ['name', 'repo', 'path', 'version', 'ref', 'commit']) {
     if (!item[field]) violations.push(`${item.name || '(unnamed item)'}: missing field '${field}'`);
   }
   if (item.commit && !COMMIT_RE.test(item.commit)) {

@@ -56,6 +56,7 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-router
       version: "3.2"
+      ref: skills-v1.0.0
       commit: "d60a7109315820085ab127b70412992db6986c88"
 ---
 # Manifest`;
@@ -65,6 +66,31 @@ agent-bootstrap:
     const res = spawnSync('node', [validatorScript, tmpDir], { encoding: 'utf-8' });
     assert.strictEqual(res.status, 0, `Legacy manifest should pass validation. Output: ${res.stderr || res.stdout}`);
     console.log('✔ Legacy manifest backward compatibility test passed');
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
+
+// 1b. Manifest entry omitting `ref` fails structural validation (ref is now mandatory)
+{
+  const noRefContent = `---
+agent-bootstrap:
+  version: "2.0"
+  skills:
+    - name: nn-router
+      repo: cogNNitive/actioNN
+      path: skills/nn-router
+      version: "3.2"
+      commit: "d60a7109315820085ab127b70412992db6986c88"
+---
+# Manifest`;
+
+  const tmpDir = createTempManifestDir(noRefContent);
+  try {
+    const res = spawnSync('node', [validatorScript, tmpDir], { encoding: 'utf-8' });
+    assert.notStrictEqual(res.status, 0, 'Manifest entry without ref should fail validation');
+    assert.match(res.stderr, /missing field 'ref'/);
+    console.log('✔ Mandatory ref field test passed');
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
