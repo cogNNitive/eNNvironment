@@ -263,6 +263,32 @@ channels:
     console.log('✔ mcp version field is rendered test passed');
   }
 
+  // The stable channel must never pin a branch tip — that is the exact defect
+  // this change exists to remove. The generator has to reject it at generation
+  // time rather than leave it for the validator: the design's guarantee is that
+  // a bad pin is unrepresentable, not merely detectable. Kind is judged by what
+  // the ref resolves to, never by what it is named.
+  {
+    const mod = freshGeneratorModule();
+    const source = mod.parseSourceYaml(BASIC_SOURCE);
+    // 'skills-v1.0.0' is named like a tag but resolves as a branch.
+    const resolveRef = fakeResolveRef({}, { 'skills-v1.0.0': 'b'.repeat(40) });
+    const result = await mod.renderManifest(source, 'stable', BASIC_BODY, resolveRef);
+    assert.strictEqual(typeof result, 'object', 'stable must refuse a branch-kind ref');
+    assert.match(String(result.error), /branch/i, 'error must name the offending ref kind');
+    console.log('✔ stable channel rejects a branch-kind ref test passed');
+  }
+
+  // Preview is the inverse: branches are exactly what it is for.
+  {
+    const mod = freshGeneratorModule();
+    const source = mod.parseSourceYaml(BASIC_SOURCE);
+    const resolveRef = fakeResolveRef({}, { 'feat/innfo-v0-2-0-adoption': 'c'.repeat(40) });
+    const result = await mod.renderManifest(source, 'preview', BASIC_BODY, resolveRef);
+    assert.strictEqual(typeof result, 'string', 'preview must accept a branch-kind ref');
+    console.log('✔ preview channel accepts a branch-kind ref test passed');
+  }
+
   console.log('All generate-manifest unit tests passed successfully!');
 }
 
