@@ -23,6 +23,7 @@ skills:
       - name: innfo-mcp
         repo: cogNNitive/iNNfo
         path: packages/innfo-mcp/bin/innfo-mcp.bundle.js
+        version: "0.2.1"
         ref_key: innfo-mcp
   - name: nn-preflight
     repo: cogNNitive/actioNN
@@ -37,12 +38,12 @@ skills:
   - name: nn-design-presets
     repo: cogNNitive/actioNN
     path: skills/nn-design-presets
-    version: "V_1-1-0"
+    version: "V_1-2-0"
     description: cogNNitive visual design presets — palettes, typography, spacing.
   - name: nn-skills-lifecycle
     repo: cogNNitive/actioNN
     path: skills/nn-skills-lifecycle
-    version: "1.1"
+    version: "1.2"
     requires: [nn-preflight]
     description: Audit, update, and maintain cogNNitive skills.
 
