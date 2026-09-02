@@ -1,7 +1,7 @@
 ---
-title: "cogNNitive — Bootstrap manifest"
+title: "cogNNitive — Bootstrap manifest (preview)"
 description: "Canonical agent-bootstrap manifest served raw (Jekyll-safe) for https://cognnitive.com/use."
-channel: "stable"
+channel: "preview"
 agent-bootstrap:
   version: "2.0"
   entrypoint: "workspace_NN.md"
@@ -10,23 +10,23 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-router
       version: "3.2"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
       version: "2.0"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       requires: [nn-innfo, nn-preflight]
       description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-1-0_NN.md).
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
       version: "V_0-1-0"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
       templates: [workspace_spec_NN]
       mcp:
@@ -34,36 +34,36 @@ agent-bootstrap:
           repo: cogNNitive/iNNfo
           path: packages/innfo-mcp/bin/innfo-mcp.bundle.js
           version: "0.2.1"
-          ref: "innfo-mcp-v0.2.1"
-          commit: "3bd4501e75915e8f2365fd7c547d9384a3e0c837"
-          url: https://raw.githubusercontent.com/cogNNitive/iNNfo/3bd4501e75915e8f2365fd7c547d9384a3e0c837/packages/innfo-mcp/bin/innfo-mcp.bundle.js
+          ref: "feat/business-template-decomposition"
+          commit: "2f8c28aac57135c37f2757f161c752715a70e5a9"
+          url: https://raw.githubusercontent.com/cogNNitive/iNNfo/2f8c28aac57135c37f2757f161c752715a70e5a9/packages/innfo-mcp/bin/innfo-mcp.bundle.js
     - name: nn-preflight
       repo: cogNNitive/actioNN
       path: skills/nn-preflight
       version: "V_0-1-0"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       description: Environment readiness gate (Tier 1/Tier 2) and canonical skill-location reference.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
       version: "V_0-1-0"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       description: Create or edit websites, add analytics, add contact forms.
     - name: nn-design-presets
       repo: cogNNitive/actioNN
       path: skills/nn-design-presets
       version: "V_1-2-0"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       description: cogNNitive visual design presets — palettes, typography, spacing.
     - name: nn-skills-lifecycle
       repo: cogNNitive/actioNN
       path: skills/nn-skills-lifecycle
       version: "1.2"
-      ref: "skills-v1.0.0"
-      commit: "83184e70e971755d6f7b40cc92b336a78fb8a874"
+      ref: "feat/innfo-v0-2-0-adoption"
+      commit: "72ede4ae9d901619ee9c6cabb9f42a53a37f8715"
       requires: [nn-preflight]
       description: Audit, update, and maintain cogNNitive skills.
   templates:
@@ -71,14 +71,14 @@ agent-bootstrap:
       repo: cogNNitive/iNNfo
       path: specs/templates/workspace_spec_NN.md
       version: "V_0-2-0"
-      ref: "templates-v0.2.0"
-      commit: "3bd4501e75915e8f2365fd7c547d9384a3e0c837"
+      ref: "feat/business-template-decomposition"
+      commit: "2f8c28aac57135c37f2757f161c752715a70e5a9"
     - name: projects
       repo: cogNNitive/iNNfo
       path: specs/templates/projects/projects_V_0-2-0_NN.md
       version: "V_0-2-0"
-      ref: "templates-v0.2.0"
-      commit: "3bd4501e75915e8f2365fd7c547d9384a3e0c837"
+      ref: "feat/business-template-decomposition"
+      commit: "2f8c28aac57135c37f2757f161c752715a70e5a9"
   workflows:
     - id: model
       label: Create an iNNfo model
@@ -94,6 +94,12 @@ agent-bootstrap:
       description: Normalize a PDF, model it with iNNfo, and export an interactive deliverable.
       skill: nn-trannsform
 ---
+
+> **PREVIEW — not for production.** This channel renders from the current branch tips
+> in each source repo (not tags) and can change or break without notice. For the
+> canonical, tag-pinned manifest, use
+> [`docs/use/manifest.md`](https://raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest.md)
+> instead.
 
 # cogNNitive — bootstrap manifest
 
