@@ -1,0 +1,103 @@
+version: "2.0"
+entrypoint: "workspace_NN.md"
+
+skills:
+  - name: nn-router
+    repo: cogNNitive/actioNN
+    path: skills/nn-router
+    version: "3.2"
+    description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
+  - name: nn-trannsform
+    repo: cogNNitive/actioNN
+    path: skills/nn-trannsform
+    version: "2.0"
+    requires: [nn-innfo, nn-preflight]
+    description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-1-0_NN.md).
+  - name: nn-innfo
+    repo: cogNNitive/actioNN
+    path: skills/nn-innfo
+    version: "V_0-1-0"
+    description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
+    templates: [workspace_spec_NN]
+    mcp:
+      - name: innfo-mcp
+        repo: cogNNitive/iNNfo
+        path: packages/innfo-mcp/bin/innfo-mcp.bundle.js
+        ref_key: innfo-mcp
+  - name: nn-preflight
+    repo: cogNNitive/actioNN
+    path: skills/nn-preflight
+    version: "V_0-1-0"
+    description: Environment readiness gate (Tier 1/Tier 2) and canonical skill-location reference.
+  - name: nn-site-generator
+    repo: cogNNitive/actioNN
+    path: skills/nn-site-generator
+    version: "V_0-1-0"
+    description: Create or edit websites, add analytics, add contact forms.
+  - name: nn-design-presets
+    repo: cogNNitive/actioNN
+    path: skills/nn-design-presets
+    version: "V_1-1-0"
+    description: cogNNitive visual design presets — palettes, typography, spacing.
+  - name: nn-skills-lifecycle
+    repo: cogNNitive/actioNN
+    path: skills/nn-skills-lifecycle
+    version: "1.1"
+    requires: [nn-preflight]
+    description: Audit, update, and maintain cogNNitive skills.
+
+templates:
+  - name: workspace_spec_NN
+    repo: cogNNitive/iNNfo
+    path: specs/templates/workspace_spec_NN.md
+    version: "V_0-2-0"
+  - name: projects
+    repo: cogNNitive/iNNfo
+    path: specs/templates/projects/projects_V_0-2-0_NN.md
+    version: "V_0-2-0"
+
+workflows:
+  - id: model
+    label: Create an iNNfo model
+    description: Turn an idea, document, or dataset into a validated structured model.
+    skill: nn-innfo
+    template: workspace_spec_NN
+  - id: transform
+    label: Transform a document
+    description: Normalize a PDF/DOCX/XLSX into clean Markdown, or export to HTML.
+    skill: nn-trannsform
+  - id: pdf-to-innfo-dashboard
+    label: PDF to iNNfo dashboard
+    description: Normalize a PDF, model it with iNNfo, and export an interactive deliverable.
+    skill: nn-trannsform
+
+# `refs` is a list of { key, repo, ref }: the tag/branch that channel resolves
+# to a commit for a given ref_key. ref_key defaults to an entry's own `repo`;
+# entries that share a repo with a different release cadence (e.g. innfo-mcp
+# vs. templates, both in cogNNitive/iNNfo) declare an explicit `ref_key` and
+# get their own row here, with `repo` restated so the generator can catch a
+# mismatched key. (A list, not a map, because the focused YAML parser used by
+# these zero-dependency scripts does not support `/` inside a mapping key.)
+channels:
+  stable:
+    refs:
+      - key: cogNNitive/actioNN
+        repo: cogNNitive/actioNN
+        ref: skills-v1.0.0
+      - key: cogNNitive/iNNfo
+        repo: cogNNitive/iNNfo
+        ref: templates-v0.2.0
+      - key: innfo-mcp
+        repo: cogNNitive/iNNfo
+        ref: innfo-mcp-v0.2.1
+  preview:
+    refs:
+      - key: cogNNitive/actioNN
+        repo: cogNNitive/actioNN
+        ref: feat/innfo-v0-2-0-adoption
+      - key: cogNNitive/iNNfo
+        repo: cogNNitive/iNNfo
+        ref: feat/business-template-decomposition
+      - key: innfo-mcp
+        repo: cogNNitive/iNNfo
+        ref: feat/business-template-decomposition
