@@ -76,6 +76,36 @@ includes:
 
 ---
 
+## 5. Decisión de Arquitectura: Autocontención en Encabezados (`## NN <Concept>: <Element>`)
+
+A primera vista, repetir el nombre del concepto en el encabezado de nivel 2 (`## NN <Concept>: <Element>`) puede parecer una redundancia innecesaria frente a una convención más corta como `## NN <Element>` subordinada a un `# NN <Concept>`. 
+
+Sin embargo, en la arquitectura de **iNNfo** esta decisión es deliberada y responde a principios fundamentales de diseño de compiladores, grafos de conocimiento y robustez operativa:
+
+### 1. Parsing Autocontenido (Context-Free vs. Stateful)
+En la especificación CommonMark y en Markdown estándar, los encabezados **no son contenedores sintácticos cerrados**; son marcadores de línea abierta. Depender de la jerarquía implícita obliga al parser a mantener un estado mutable (`currentConcept`) mientras recorre el documento.
+Al incluir `<Concept>: <Element>` en el H2:
+* Cada Elemento es un **nodo atómico y autónomo** que puede ser procesado sin depender del recorrido del árbol completo.
+* Facilita el procesamiento de fragmentos (chunks) en pipelines de RAG, embeddings y ASTs parciales.
+* En Git, la cabecera de contexto de los diffs (`@@ ## NN Problems: High Latency @@`) preserva inmediatamente la identidad del concepto modificado.
+
+### 2. Checksum Semántico e Integridad Estructural (Fail-Fast)
+La redundancia actúa como un mecanismo de verificación de integridad (*checksum*):
+* La especificación exige formalmente que el `<Concept>` del H2 coincida con el `# NN <Concept>` de la sección contenedora.
+* Si un usuario o un agente de IA copia, pega o mueve accidentalmente un bloque de elementos debajo de un concepto equivocado, el validador (`innfo-core` / `innfo-mcp`) detecta un **Concept Mismatch** y rechaza el documento de forma inmediata.
+* Sin esta regla, el parser atribuiría silenciosamente el elemento al concepto incorrecto, corrompiendo la semántica del modelo de datos sin disparar ningún error sintáctico.
+
+### 3. Aprendizaje de la Industria (Obsidian y Dendron)
+Esta problemática ha sido validada empíricamente en el ecosistema de herramientas de notas estructuradas:
+* **Obsidian (Dataview)**: Al tratar a los encabezados Markdown como jerarquías implícitas para adjuntar metadatos (`key:: value`), las consultas complejas sufrieron limitaciones estructurales severas debido a la falta de contención de bloque nativa en Markdown.
+* **Dendron**: Descartó explícitamente el uso de jerarquías de encabezados para definir esquemas, optando por *dot-notation* explícito (`concepto.elemento`) para garantizar que las refactorizaciones y la navegación no perdieran la relación de parentesco.
+
+### 4. Ergonomía Dual: Humanos y Agentes de IA
+* **Para humanos**: En modelos extensos (cientos de líneas), el prefijo actúa como un *breadcrumb* visual inmediato al desplazarse por el archivo, evitando tener que scrollear pantallas hacia arriba para recordar el concepto activo.
+* **Para agentes de IA**: En operaciones de edición puntual (como sustitución de bloques en ventanas de contexto restringidas), los agentes a menudo no tienen en memoria el H1 superior. El prefijo explícito previene la "alucinación de scope" y garantiza inserciones precisas en el modelo.
+
+---
+
 ## Enlaces Relacionados
 
 - [Documentación del Motor iNNfo](https://github.com/cogNNitive/iNNfo/blob/main/docs/documentation/specifications.md)
