@@ -5,12 +5,12 @@ skills:
   - name: nn-router
     repo: cogNNitive/actioNN
     path: skills/nn-router
-    version: "3.2"
+    version: "V_3-2-0"
     description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
   - name: nn-trannsform
     repo: cogNNitive/actioNN
     path: skills/nn-trannsform
-    version: "2.0"
+    version: "V_2-0-0"
     requires: [nn-innfo, nn-preflight]
     description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-1-0_NN.md).
   - name: nn-innfo
@@ -43,7 +43,7 @@ skills:
   - name: nn-skills-lifecycle
     repo: cogNNitive/actioNN
     path: skills/nn-skills-lifecycle
-    version: "1.2"
+    version: "V_1-2-0"
     requires: [nn-preflight]
     description: Audit, update, and maintain cogNNitive skills.
 
@@ -84,7 +84,7 @@ channels:
     refs:
       - key: cogNNitive/actioNN
         repo: cogNNitive/actioNN
-        ref: skills-v1.1.1
+        ref: skills-v1.1.2
       - key: cogNNitive/iNNfo
         repo: cogNNitive/iNNfo
         ref: templates-v0.2.0

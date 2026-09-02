@@ -9,24 +9,24 @@ agent-bootstrap:
     - name: nn-router
       repo: cogNNitive/actioNN
       path: skills/nn-router
-      version: "3.2"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      version: "V_3-2-0"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       description: Central system governance, setup, environment readiness gate (Preflight), and skill router.
     - name: nn-trannsform
       repo: cogNNitive/actioNN
       path: skills/nn-trannsform
-      version: "2.0"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      version: "V_2-0-0"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       requires: [nn-innfo, nn-preflight]
       description: Ingest documents (PDF, DOCX, XLSX), transform using templates, and execute multi-step procedures (procedures_V_0-1-0_NN.md).
     - name: nn-innfo
       repo: cogNNitive/actioNN
       path: skills/nn-innfo
       version: "V_0-1-0"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       description: Author, edit, and validate iNNfo models with built-in step-by-step Model Creation Wizard.
       templates: [workspace_spec_NN]
       mcp:
@@ -41,29 +41,29 @@ agent-bootstrap:
       repo: cogNNitive/actioNN
       path: skills/nn-preflight
       version: "V_0-1-0"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       description: Environment readiness gate (Tier 1/Tier 2) and canonical skill-location reference.
     - name: nn-site-generator
       repo: cogNNitive/actioNN
       path: skills/nn-site-generator
       version: "V_0-1-0"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       description: Create or edit websites, add analytics, add contact forms.
     - name: nn-design-presets
       repo: cogNNitive/actioNN
       path: skills/nn-design-presets
       version: "V_1-2-0"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       description: cogNNitive visual design presets — palettes, typography, spacing.
     - name: nn-skills-lifecycle
       repo: cogNNitive/actioNN
       path: skills/nn-skills-lifecycle
-      version: "1.2"
-      ref: "skills-v1.1.1"
-      commit: "449c3b6e4fe0360fbaac6ce642c9cdfa1c92d749"
+      version: "V_1-2-0"
+      ref: "skills-v1.1.2"
+      commit: "a55a709cfd4482979547fda2b8633e6b8541a813"
       requires: [nn-preflight]
       description: Audit, update, and maintain cogNNitive skills.
   templates:
