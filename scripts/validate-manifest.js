@@ -241,6 +241,12 @@ async function checkCommitExists(item) {
   if (rateLimited(res.status)) {
     return `${item.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit; ${RATE_LIMIT_HINT}.`;
   }
+  if (res.status === 422) {
+    // GitHub returns 422 when the SHA is well-formed but does not resolve within
+    // this repo — the signature of a commit that belongs to a different repo in
+    // the same fork network (a single-commit lookup alone can false-positive there).
+    return `${item.name}: commit ${item.commit} does not belong to declared repo ${item.repo} (HTTP 422 — wrong repo)`;
+  }
   return `${item.name}: commit ${item.commit} does not exist in ${item.repo} (HTTP ${res.status || res.error || 'network error'})`;
 }
 

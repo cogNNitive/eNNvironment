@@ -180,6 +180,40 @@ agent-bootstrap:
   console.log('✔ GITHUB_TOKEN Authorization header test passed');
 }
 
+// 5. Repo-scoped commit existence: 422 means "wrong repo", 200 means it exists
+{
+  const mod = freshValidatorModule();
+  const item = {
+    name: 'workspace_spec_NN',
+    repo: 'cogNNitive/iNNfo',
+    commit: '3f1a9c2b8e4d6f0a1b2c3d4e5f60718293a4b5c6',
+  };
+
+  {
+    const stub = stubHttpsGetOnce(422, JSON.stringify({ message: 'No commit found for SHA' }));
+    try {
+      const violation = await mod.checkCommitExists(item);
+      assert.notStrictEqual(violation, null, '422 should be reported as a violation');
+      assert.match(violation, /cogNNitive\/iNNfo/, 'violation must name the declared repo');
+      assert.match(violation, /wrong repo/i, '422 violation must be distinguishable as a wrong-repo error');
+    } finally {
+      stub.restore();
+    }
+  }
+
+  {
+    const stub = stubHttpsGetOnce(200, JSON.stringify({ sha: item.commit }));
+    try {
+      const violation = await mod.checkCommitExists(item);
+      assert.strictEqual(violation, null, '200 should pass repo-scoped existence check');
+    } finally {
+      stub.restore();
+    }
+  }
+
+  console.log('✔ Repo-scoped commit existence (422 vs 200) test passed');
+}
+
 console.log('All validate-manifest unit tests passed successfully!');
 }
 
