@@ -141,4 +141,16 @@ https://raw.githubusercontent.com/cogNNitive/cogNNitive/main/specs/latest/level2
 
 La separación es limpia: **cogNNitive define y ejecuta**, actioNN **instruye al agente** para usar lo que cogNNitive expone. El MCP server es la interfaz estable entre ambos.
 
+---
+
+## Arquitectura de Especificaciones: Front Matter vs. Cuerpo
+
+El ecosistema iNNfo organiza los documentos en **4 Niveles (L0 Meta-spec, L1 Metaplantilla, L2 Plantillas, L3 Modelos)** y sigue un principio estricto de separación entre metadatos y contenido:
+
+* **YAML Front Matter (Infraestructura / Resolver)**: Pregunta *"¿Qué es este archivo y cómo se resuelve?"*. Contiene metadatos de control (`level`, `spec_version`, `parent_spec`, `includes`). La composición de plantillas L2 (`includes:`) vive en el Front Matter porque le permite al resolver construir el DAG de dependencias de forma estática antes de parsear el cuerpo.
+* **Cuerpo Markdown (Dominio / Sintaxis `NN`)**: Pregunta *"¿Qué esquemas o datos contiene?"*. Toda la estructura de dominio vive en el cuerpo (`# NN`, `## NN`, `key:: value`). Desde V_0-2-0, las plantillas L2 expresan su esquema instanciando las 4 Primitivas Raíz (`# NN Concept Definition`, etc.) en el cuerpo, eliminando los bloques de esquema YAML del Front Matter.
+
+→ Ver detalles en la [Documentación de Especificaciones y Arquitectura](docs/specifications.md).
+
+
 

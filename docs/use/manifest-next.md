@@ -35,8 +35,8 @@ agent-bootstrap:
           path: packages/innfo-mcp/bin/innfo-mcp.bundle.js
           version: "0.2.3"
           ref: "main"
-          commit: "ed44e6b95017a77e284ff307f1959df45be2c238"
-          url: https://raw.githubusercontent.com/cogNNitive/iNNfo/ed44e6b95017a77e284ff307f1959df45be2c238/packages/innfo-mcp/bin/innfo-mcp.bundle.js
+          commit: "cd46ddb7ad85532cfd30f7b84aac5ca33d90aead"
+          url: https://raw.githubusercontent.com/cogNNitive/iNNfo/cd46ddb7ad85532cfd30f7b84aac5ca33d90aead/packages/innfo-mcp/bin/innfo-mcp.bundle.js
     - name: nn-preflight
       repo: cogNNitive/actioNN
       path: skills/nn-preflight
@@ -72,13 +72,13 @@ agent-bootstrap:
       path: specs/templates/workspace_spec_NN.md
       version: "V_0-2-0"
       ref: "main"
-      commit: "ed44e6b95017a77e284ff307f1959df45be2c238"
+      commit: "cd46ddb7ad85532cfd30f7b84aac5ca33d90aead"
     - name: projects
       repo: cogNNitive/iNNfo
       path: specs/templates/projects/projects_V_0-2-0_NN.md
       version: "V_0-2-0"
       ref: "main"
-      commit: "ed44e6b95017a77e284ff307f1959df45be2c238"
+      commit: "cd46ddb7ad85532cfd30f7b84aac5ca33d90aead"
   workflows:
     - id: model
       label: Create an iNNfo model

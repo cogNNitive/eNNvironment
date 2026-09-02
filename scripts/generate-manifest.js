@@ -52,7 +52,7 @@ function parseSourceYaml(text) {
 // stub in tests). No network in unit tests.
 // ---------------------------------------------------------------------------
 
-async function resolveEntryRef(entry, channelRefs, resolveRef) {
+async function resolveEntryRef(entry, channelRefs, resolveRef, policy) {
   const key = entry.ref_key || entry.repo;
   const refInfo = channelRefs.find((r) => r.key === key);
   if (refInfo === undefined) {
@@ -64,20 +64,30 @@ async function resolveEntryRef(entry, channelRefs, resolveRef) {
   }
   const resolved = await resolveRef(repo, ref);
   if (resolved.error) return { error: resolved.error };
+  // Judge the ref by what it resolves to, never by what it is named: a branch
+  // called 'skills-v1.0.0' is still a branch. The channel policy table in
+  // validate-manifest.js is the single source of this rule, so generation and
+  // validation cannot drift.
+  if (policy && resolved.kind && resolved.kind !== policy.requiredRefKind) {
+    return {
+      error: `ref '${ref}' resolves as a ${resolved.kind}, but the ${policy.name} channel requires a ${policy.requiredRefKind}`,
+    };
+  }
   return { ref, commit: resolved.sha };
 }
 
 async function buildRenderModel(source, channel, resolveRef) {
   const channelRefs = (source.channels[channel] && source.channels[channel].refs) || [];
+  const policy = CHANNELS[channel];
 
   const skills = [];
   for (const skill of source.skills) {
-    const resolved = await resolveEntryRef(skill, channelRefs, resolveRef);
+    const resolved = await resolveEntryRef(skill, channelRefs, resolveRef, policy);
     if (resolved.error) return { error: `${skill.name}: ${resolved.error}` };
 
     const mcp = [];
     for (const m of (skill.mcp || [])) {
-      const mResolved = await resolveEntryRef(m, channelRefs, resolveRef);
+      const mResolved = await resolveEntryRef(m, channelRefs, resolveRef, policy);
       if (mResolved.error) return { error: `${m.name}: ${mResolved.error}` };
       mcp.push({
         ...m,
@@ -92,7 +102,7 @@ async function buildRenderModel(source, channel, resolveRef) {
 
   const templates = [];
   for (const template of source.templates) {
-    const resolved = await resolveEntryRef(template, channelRefs, resolveRef);
+    const resolved = await resolveEntryRef(template, channelRefs, resolveRef, policy);
     if (resolved.error) return { error: `${template.name}: ${resolved.error}` };
     templates.push({ ...template, ref: resolved.ref, commit: resolved.commit });
   }
