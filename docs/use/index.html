@@ -53,6 +53,11 @@
     <p>Fetch the machine-readable manifest — it carries the <code>agent-bootstrap:</code> block plus plain-language self-bootstrap steps, so you can install everything even without any cogNNitive skill yet:</p>
     <p><a href="https://raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest.md">raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest.md</a></p>
 
+    <h2>Trying an unreleased change?</h2>
+    <p class="muted">This page and the link above always resolve to the <strong>stable</strong> manifest — every pin is a tag-based release, and that is what <code>rel=alternate</code> above points to. There is also a <strong>preview</strong> manifest, generated from each source repo's current branch tip instead of a tag, for testers who explicitly want unreleased skills or templates. It is never linked from here or discovered automatically — you have to ask for it by URL:</p>
+    <p><a href="https://raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest-next.md">raw.githubusercontent.com/cogNNitive/eNNvironment/main/docs/use/manifest-next.md</a></p>
+    <p class="muted">Point an agent at it explicitly, e.g. <code>SM_MANIFEST_URL=&lt;preview URL&gt; node scripts/skills-manager.js status</code>. Preview pins can change or break without notice; use stable unless you know you need preview.</p>
+
     <p class="muted" style="margin-top:40px;"><a href="/">← Back to cognnitive.com</a></p>
   </main>
 

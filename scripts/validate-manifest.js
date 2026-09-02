@@ -169,12 +169,14 @@ function parseManifest(text) {
   }
   const templates = Array.isArray(bootstrap.templates) ? bootstrap.templates : [];
   const workflows = Array.isArray(bootstrap.workflows) ? bootstrap.workflows : [];
+  const mcp = Array.isArray(bootstrap.mcp) ? bootstrap.mcp : [];
   return {
     version: bootstrap.version,
     entrypoint: bootstrap.entrypoint,
     skills: bootstrap.skills,
     templates,
     workflows,
+    mcp,
   };
 }
 
@@ -182,9 +184,14 @@ function parseManifest(text) {
 // GitHub API helpers
 // ---------------------------------------------------------------------------
 
+function authHeaders() {
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 function apiRequest(url) {
   return new Promise((resolve) => {
-    https.get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': USER_AGENT, ...authHeaders() } }, (res) => {
       let body = '';
       res.on('data', chunk => body += chunk);
       res.on('end', () => {
@@ -198,7 +205,7 @@ function apiRequest(url) {
 
 function fetchString(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': USER_AGENT, ...authHeaders() } }, (res) => {
       if (res.statusCode !== 200) {
         return reject(new Error(`Failed to fetch ${url}, status: ${res.statusCode}`));
       }
@@ -213,13 +220,111 @@ function rateLimited(status) {
   return status === 403 || status === 429;
 }
 
+const RATE_LIMIT_HINT = 'set GITHUB_TOKEN to raise the rate limit';
+
+// ---------------------------------------------------------------------------
+// Channel policy — data, not branching. Adding a channel is adding a table row.
+// ---------------------------------------------------------------------------
+
+const CHANNELS = {
+  stable: {
+    name: 'stable',
+    file: 'docs/use/manifest.md',
+    requiredRefKind: 'tag',
+    requireTagShape: true,
+    requireProvenance: true,
+  },
+  preview: {
+    name: 'preview',
+    file: 'docs/use/manifest-next.md',
+    requiredRefKind: 'branch',
+    requireTagShape: false,
+    requireProvenance: false,
+  },
+};
+
+const TAG_SHAPE_RE = /^[a-z][a-z0-9-]*-v\d+\.\d+\.\d+$/;
+
+// ---------------------------------------------------------------------------
+// Ref resolution and provenance
+// ---------------------------------------------------------------------------
+
+async function resolveRef(repo, ref) {
+  const tagRes = await apiRequest(`https://api.github.com/repos/${repo}/git/ref/tags/${ref}`);
+  if (tagRes.status === 200 && tagRes.data && tagRes.data.object) {
+    let sha = tagRes.data.object.sha;
+    if (tagRes.data.object.type === 'tag') {
+      const peelRes = await apiRequest(`https://api.github.com/repos/${repo}/git/tags/${sha}`);
+      if (rateLimited(peelRes.status)) {
+        return { error: `rate limit hit peeling annotated tag '${ref}' in ${repo} (HTTP ${peelRes.status}); ${RATE_LIMIT_HINT}` };
+      }
+      if (peelRes.status !== 200 || !peelRes.data || !peelRes.data.object || !peelRes.data.object.sha) {
+        return { error: `could not peel annotated tag '${ref}' in ${repo} (HTTP ${peelRes.status || peelRes.error || 'network error'})` };
+      }
+      sha = peelRes.data.object.sha;
+    }
+    return { sha, kind: 'tag' };
+  }
+  if (rateLimited(tagRes.status)) {
+    return { error: `rate limit hit resolving ref '${ref}' in ${repo} (HTTP ${tagRes.status}); ${RATE_LIMIT_HINT}` };
+  }
+
+  const branchRes = await apiRequest(`https://api.github.com/repos/${repo}/git/ref/heads/${ref}`);
+  if (branchRes.status === 200 && branchRes.data && branchRes.data.object) {
+    return { sha: branchRes.data.object.sha, kind: 'branch' };
+  }
+  if (rateLimited(branchRes.status)) {
+    return { error: `rate limit hit resolving ref '${ref}' in ${repo} (HTTP ${branchRes.status}); ${RATE_LIMIT_HINT}` };
+  }
+
+  return { error: `ref '${ref}' not found as a tag or branch in ${repo}` };
+}
+
+async function checkRefResolvesInDeclaredRepo(item) {
+  const resolved = await resolveRef(item.repo, item.ref);
+  if (resolved.error) return { violation: `${item.name}: ${resolved.error}`, kind: null };
+  if (resolved.sha !== item.commit) {
+    return {
+      violation: `${item.name}: ref '${item.ref}' resolves to ${resolved.sha} in ${item.repo}, but manifest pins commit ${item.commit} (mismatch)`,
+      kind: resolved.kind,
+    };
+  }
+  return { violation: null, kind: resolved.kind };
+}
+
+function tagShapeViolation(entry) {
+  if (!TAG_SHAPE_RE.test(entry.ref || '')) {
+    return `${entry.name}: ref '${entry.ref}' does not match the repo-snapshot tag shape (expected e.g. 'skills-v1.0.0')`;
+  }
+  return null;
+}
+
+function refKindViolation(entry, resolvedKind, policy) {
+  if (resolvedKind && resolvedKind !== policy.requiredRefKind) {
+    return `${entry.name}: ref '${entry.ref}' resolves as a ${resolvedKind}, but the ${policy.name} channel requires a ${policy.requiredRefKind}`;
+  }
+  return null;
+}
+
+async function checkReleaseProvenance(repo, commit) {
+  const res = await apiRequest(`https://api.github.com/repos/${repo}/compare/main...${commit}`);
+  if (res.status === 200 && res.data && res.data.status) {
+    if (res.data.status === 'identical' || res.data.status === 'behind') return null;
+    return `commit ${commit} in ${repo} is not reachable from main (compare status: '${res.data.status}') — orphan or unmerged tip cannot ship on the stable channel`;
+  }
+  if (rateLimited(res.status)) {
+    return `rate limit hit checking release provenance for ${commit} in ${repo} (HTTP ${res.status}); ${RATE_LIMIT_HINT}`;
+  }
+  return `could not verify release provenance for ${commit} in ${repo} (HTTP ${res.status || res.error || 'network error'})`;
+}
+
 // ---------------------------------------------------------------------------
 // Validation
 // ---------------------------------------------------------------------------
 
 function structuralViolations(item) {
   const violations = [];
-  for (const field of ['name', 'repo', 'path', 'version', 'commit']) {
+  for (const field of ['name', 'repo', 'path', 'version', 'ref', 'commit']) {
     if (!item[field]) violations.push(`${item.name || '(unnamed item)'}: missing field '${field}'`);
   }
   if (item.commit && !COMMIT_RE.test(item.commit)) {
@@ -232,7 +337,13 @@ async function checkCommitExists(item) {
   const res = await apiRequest(`https://api.github.com/repos/${item.repo}/commits/${item.commit}`);
   if (res.status === 200) return null;
   if (rateLimited(res.status)) {
-    return `${item.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit. Wait and retry.`;
+    return `${item.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit; ${RATE_LIMIT_HINT}.`;
+  }
+  if (res.status === 422) {
+    // GitHub returns 422 when the SHA is well-formed but does not resolve within
+    // this repo — the signature of a commit that belongs to a different repo in
+    // the same fork network (a single-commit lookup alone can false-positive there).
+    return `${item.name}: commit ${item.commit} does not belong to declared repo ${item.repo} (HTTP 422 — wrong repo)`;
   }
   return `${item.name}: commit ${item.commit} does not exist in ${item.repo} (HTTP ${res.status || res.error || 'network error'})`;
 }
@@ -245,7 +356,7 @@ async function checkPathAtCommit(skill) {
     return `${skill.name}: ${skill.path} at ${skill.commit} has no SKILL.md entry`;
   }
   if (rateLimited(res.status)) {
-    return `${skill.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path. Wait and retry.`;
+    return `${skill.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path; ${RATE_LIMIT_HINT}.`;
   }
   return `${skill.name}: path ${skill.path} not found at ${skill.commit} (HTTP ${res.status || res.error || 'network error'})`;
 }
@@ -269,13 +380,63 @@ async function checkVersionParity(skill) {
   return { bundled_templates: meta.bundled_templates || [] };
 }
 
-async function validateSkill(skill) {
+async function checkReleaseAndRefPolicy(item, policy) {
+  const violations = [];
+
+  const { violation: refViolation, kind: resolvedKind } = await checkRefResolvesInDeclaredRepo(item);
+  if (refViolation) violations.push(refViolation);
+
+  const kindViolation = refKindViolation(item, resolvedKind, policy);
+  if (kindViolation) violations.push(kindViolation);
+
+  if (policy.requireTagShape) {
+    const shapeViolation = tagShapeViolation(item);
+    if (shapeViolation) violations.push(shapeViolation);
+  }
+
+  if (policy.requireProvenance) {
+    const provenanceViolation = await checkReleaseProvenance(item.repo, item.commit);
+    if (provenanceViolation) violations.push(`${item.name}: ${provenanceViolation}`);
+  }
+
+  return violations;
+}
+
+async function checkMcpUrlPinned(entry) {
+  if (!entry.commit || !COMMIT_RE.test(entry.commit)) return null; // structural check already caught this
+  if (/\/main\//.test(entry.url || '')) {
+    return `${entry.name}: mcp url references a branch ('/main/') instead of a pinned commit`;
+  }
+  if (!entry.url || !entry.url.includes(`/${entry.commit}/`)) {
+    return `${entry.name}: mcp url is not pinned to its resolved commit (expected to contain '/${entry.commit}/')`;
+  }
+  return null;
+}
+
+async function validateMcp(entry, policy) {
+  const violations = structuralViolations(entry);
+  if (violations.length > 0) return violations;
+
+  const commitViolation = await checkCommitExists(entry);
+  if (commitViolation) violations.push(commitViolation);
+
+  violations.push(...await checkReleaseAndRefPolicy(entry, policy));
+
+  const urlViolation = await checkMcpUrlPinned(entry);
+  if (urlViolation) violations.push(urlViolation);
+
+  return violations;
+}
+
+async function validateSkill(skill, policy) {
   const violations = structuralViolations(skill);
   let bundled_templates = [];
   if (violations.length > 0) return { violations, bundled_templates };
 
   const commitViolation = await checkCommitExists(skill);
   if (commitViolation) violations.push(commitViolation);
+
+  violations.push(...await checkReleaseAndRefPolicy(skill, policy));
 
   const pathViolation = await checkPathAtCommit(skill);
   if (pathViolation) violations.push(pathViolation);
@@ -287,21 +448,27 @@ async function validateSkill(skill) {
     bundled_templates = versionResult.bundled_templates;
   }
 
+  for (const mcp of (skill.mcp || [])) {
+    violations.push(...await validateMcp(mcp, policy));
+  }
+
   return { violations, bundled_templates };
 }
 
-async function validateTemplate(template) {
+async function validateTemplate(template, policy) {
   const violations = structuralViolations(template);
   if (violations.length > 0) return violations;
 
   const commitViolation = await checkCommitExists(template);
   if (commitViolation) violations.push(commitViolation);
 
+  violations.push(...await checkReleaseAndRefPolicy(template, policy));
+
   const url = `https://api.github.com/repos/${template.repo}/contents/${template.path}?ref=${template.commit}`;
   const res = await apiRequest(url);
   if (res.status !== 200) {
     if (rateLimited(res.status)) {
-      violations.push(`${template.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path. Wait and retry.`);
+      violations.push(`${template.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path; ${RATE_LIMIT_HINT}.`);
     } else {
       violations.push(`${template.name}: path ${template.path} not found at ${template.commit} (HTTP ${res.status || res.error || 'network error'})`);
     }
@@ -334,28 +501,49 @@ async function validateTemplate(template) {
 // Entry
 // ---------------------------------------------------------------------------
 
-async function main() {
-  const repoRoot = process.argv[2] ? path.resolve(process.argv[2]) : process.cwd();
-  const manifestFile = path.join(repoRoot, 'docs', 'use', 'manifest.md');
+function parseArgs(argv) {
+  let repoRoot = null;
+  let channel = null;
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+    if (arg === '--channel') {
+      channel = argv[++i];
+    } else if (arg.startsWith('--channel=')) {
+      channel = arg.slice('--channel='.length);
+    } else if (!arg.startsWith('--') && repoRoot === null) {
+      repoRoot = arg;
+    }
+  }
+  return { repoRoot, channel };
+}
+
+async function validateChannel(repoRoot, channelName) {
+  const policy = CHANNELS[channelName];
+  const manifestFile = path.join(repoRoot, ...policy.file.split('/'));
+  const prefix = `[${channelName}]`;
   if (!fs.existsSync(manifestFile)) {
-    console.error(`FAIL: manifest not found at ${manifestFile}`);
-    process.exit(1);
+    console.error(`FAIL: ${prefix} manifest not found at ${manifestFile}`);
+    return false;
   }
 
   let manifestData;
   try {
     manifestData = parseManifest(fs.readFileSync(manifestFile, 'utf-8'));
   } catch (err) {
-    console.error(`FAIL: could not parse manifest: ${err.message}`);
-    process.exit(1);
+    console.error(`FAIL: ${prefix} could not parse manifest: ${err.message}`);
+    return false;
   }
 
-  const { skills, templates, workflows } = manifestData;
+  const { skills, templates, workflows, mcp } = manifestData;
+  // Bundles are validated wherever they appear: `mcp[]` nested under a skill
+  // (how the manifest actually declares them) as well as a top-level `mcp[]`.
+  // Count both, so the summary line reports what was really checked.
+  const mcpCount = mcp.length + skills.reduce((n, s) => n + ((s.mcp || []).length), 0);
   const violations = [];
   const knownSkillBundledTemplates = new Set();
 
   for (const skill of skills) {
-    const { violations: skillViolations, bundled_templates } = await validateSkill(skill);
+    const { violations: skillViolations, bundled_templates } = await validateSkill(skill, policy);
     violations.push(...skillViolations);
     for (const bt of bundled_templates) {
       const name = typeof bt === 'string' ? bt : (bt && bt.name);
@@ -364,7 +552,11 @@ async function main() {
   }
 
   for (const template of templates) {
-    violations.push(...await validateTemplate(template));
+    violations.push(...await validateTemplate(template, policy));
+  }
+
+  for (const mcpEntry of mcp) {
+    violations.push(...await validateMcp(mcpEntry, policy));
   }
 
   const knownSkills = new Set(skills.map(s => s.name));
@@ -392,13 +584,69 @@ async function main() {
   }
 
   if (violations.length > 0) {
-    for (const violation of violations) console.error(`FAIL: ${violation}`);
-    console.error(`\nFAIL: ${violations.length} violation(s) in manifest (${skills.length} skills, ${templates.length} templates)`);
+    for (const violation of violations) console.error(`FAIL: ${prefix} ${violation}`);
+    console.error(`\nFAIL: ${prefix} ${violations.length} violation(s) in manifest (${skills.length} skills, ${templates.length} templates, ${mcpCount} mcp bundles)`);
+    return false;
+  }
+
+  console.log(`OK: ${prefix} ${skills.length} skills, ${templates.length} templates, and ${mcpCount} mcp bundles validated`);
+  return true;
+}
+
+async function main() {
+  const { repoRoot: repoRootArg, channel: channelArg } = parseArgs(process.argv.slice(2));
+  const repoRoot = repoRootArg ? path.resolve(repoRootArg) : process.cwd();
+
+  if (channelArg && !CHANNELS[channelArg]) {
+    console.error(`FAIL: unknown channel '${channelArg}' (expected 'stable' or 'preview')`);
     process.exit(1);
   }
 
-  console.log(`OK: ${skills.length} skills and ${templates.length} templates validated`);
+  const channelsToRun = channelArg
+    ? [channelArg]
+    : Object.keys(CHANNELS).filter((name) => fs.existsSync(path.join(repoRoot, ...CHANNELS[name].file.split('/'))));
+
+  if (channelsToRun.length === 0) {
+    const expected = Object.values(CHANNELS).map((c) => c.file).join(', ');
+    console.error(`FAIL: no channel manifest found under ${repoRoot} (looked for ${expected})`);
+    process.exit(1);
+  }
+
+  let allOk = true;
+  for (const channelName of channelsToRun) {
+    const ok = await validateChannel(repoRoot, channelName);
+    allOk = allOk && ok;
+  }
+
+  if (!allOk) process.exit(1);
 }
+
+module.exports = {
+  apiRequest,
+  fetchString,
+  authHeaders,
+  rateLimited,
+  parseFocusedYaml,
+  parseFrontmatter,
+  parseManifest,
+  structuralViolations,
+  checkCommitExists,
+  checkPathAtCommit,
+  checkVersionParity,
+  validateSkill,
+  validateTemplate,
+  validateMcp,
+  checkMcpUrlPinned,
+  checkReleaseAndRefPolicy,
+  CHANNELS,
+  TAG_SHAPE_RE,
+  resolveRef,
+  checkRefResolvesInDeclaredRepo,
+  tagShapeViolation,
+  refKindViolation,
+  checkReleaseProvenance,
+  parseArgs,
+};
 
 if (require.main === module) {
   main();
