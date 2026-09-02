@@ -144,6 +144,10 @@ function renderSkillEntry(skill) {
       out += `${indent}    - name: ${m.name}\n`;
       out += `${indent}      repo: ${m.repo}\n`;
       out += `${indent}      path: ${m.path}\n`;
+      if (m.version !== undefined) {
+        out += `${indent}      version: ${q(m.version)}
+`;
+      }
       out += `${indent}      ref: ${q(m.ref)}\n`;
       out += `${indent}      commit: ${q(m.commit)}\n`;
       out += `${indent}      url: ${m.url}\n`;

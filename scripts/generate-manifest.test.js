@@ -47,6 +47,41 @@ channels:
         ref: feat/innfo-v0-2-0-adoption
 `;
 
+const MCP_SOURCE = `version: "2.0"
+entrypoint: "workspace_NN.md"
+skills:
+  - name: nn-innfo
+    repo: cogNNitive/actioNN
+    path: skills/nn-innfo
+    version: "V_0-1-0"
+    description: Author and validate iNNfo models.
+    mcp:
+      - name: innfo-mcp
+        repo: cogNNitive/iNNfo
+        path: packages/innfo-mcp/bin/innfo-mcp.bundle.js
+        version: "0.2.1"
+        ref_key: innfo-mcp
+templates: []
+workflows: []
+channels:
+  stable:
+    refs:
+      - key: cogNNitive/actioNN
+        repo: cogNNitive/actioNN
+        ref: skills-v1.0.0
+      - key: innfo-mcp
+        repo: cogNNitive/iNNfo
+        ref: innfo-mcp-v0.2.1
+  preview:
+    refs:
+      - key: cogNNitive/actioNN
+        repo: cogNNitive/actioNN
+        ref: feat/innfo-v0-2-0-adoption
+      - key: innfo-mcp
+        repo: cogNNitive/iNNfo
+        ref: feat/business-template-decomposition
+`;
+
 const BASIC_BODY = `# cogNNitive — bootstrap manifest
 
 Body prose goes here.
@@ -211,6 +246,21 @@ channels:
     } finally {
       fs.rmSync(tmpDir, { recursive: true, force: true });
     }
+  }
+
+  // An mcp entry carries its own display version. The validator requires the
+  // field on mcp bundles, so the renderer must emit it, or generate and validate
+  // disagree about a manifest the generator itself produced.
+  {
+    const mod = freshGeneratorModule();
+    const source = mod.parseSourceYaml(MCP_SOURCE);
+    const resolveRef = fakeResolveRef({
+      'skills-v1.0.0': 'd60a7109315820085ab127b70412992db6986c88',
+      'innfo-mcp-v0.2.1': '3bd4501e75915e8f2365fd7c547d9384a3e0c837',
+    }, {});
+    const rendered = await mod.renderManifest(source, 'stable', BASIC_BODY, resolveRef);
+    assert.match(rendered, /version: "0\.2\.1"/, 'mcp entry must render its version field');
+    console.log('✔ mcp version field is rendered test passed');
   }
 
   console.log('All generate-manifest unit tests passed successfully!');

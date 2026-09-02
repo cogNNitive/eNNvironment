@@ -535,6 +535,10 @@ async function validateChannel(repoRoot, channelName) {
   }
 
   const { skills, templates, workflows, mcp } = manifestData;
+  // Bundles are validated wherever they appear: `mcp[]` nested under a skill
+  // (how the manifest actually declares them) as well as a top-level `mcp[]`.
+  // Count both, so the summary line reports what was really checked.
+  const mcpCount = mcp.length + skills.reduce((n, s) => n + ((s.mcp || []).length), 0);
   const violations = [];
   const knownSkillBundledTemplates = new Set();
 
@@ -581,11 +585,11 @@ async function validateChannel(repoRoot, channelName) {
 
   if (violations.length > 0) {
     for (const violation of violations) console.error(`FAIL: ${prefix} ${violation}`);
-    console.error(`\nFAIL: ${prefix} ${violations.length} violation(s) in manifest (${skills.length} skills, ${templates.length} templates, ${mcp.length} mcp bundles)`);
+    console.error(`\nFAIL: ${prefix} ${violations.length} violation(s) in manifest (${skills.length} skills, ${templates.length} templates, ${mcpCount} mcp bundles)`);
     return false;
   }
 
-  console.log(`OK: ${prefix} ${skills.length} skills, ${templates.length} templates, and ${mcp.length} mcp bundles validated`);
+  console.log(`OK: ${prefix} ${skills.length} skills, ${templates.length} templates, and ${mcpCount} mcp bundles validated`);
   return true;
 }
 
