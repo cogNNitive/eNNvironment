@@ -1,17 +1,28 @@
 name: Manifest validation
 
-# Validates the bootstrap manifest against the cogNNitive/actioNN repo:
-#   1. every skill is structurally complete (name/repo/path/version/commit, 40-char sha)
-#   2. the pinned commit exists in the source repo
-#   3. the skill path contains a SKILL.md at that commit
-#   4. the SKILL.md frontmatter version matches the manifest version
-#   5. every `requires` entry resolves to another validated skill (kills phantom deps)
+# Validates the bootstrap manifest release pipeline, per channel:
+#   generate --check  — manifest/source.yaml + manifest/body.md render byte-identical
+#                        to the committed docs/use/manifest*.md (no hand edits, no drift)
+#   validate           — every commit-bearing entry (skills/templates/mcp) is:
+#     1. structurally complete (name/repo/path/version/ref/commit, 40-char sha)
+#     2. reachable in its declared repo (repo-scoped existence; HTTP 422 = wrong repo)
+#     3. resolved from its declared ref via the GitHub API (ref-resolves-in-declared-repo)
+#     4. of the ref kind the channel requires (tag for stable, branch for preview)
+#     5. tag-shaped and tag/main-reachable (release provenance — stable only)
+#     6. path-valid (SKILL.md / template file present) with matching version
+#     7. free of dangling `requires`/`templates` dependency closure
+#     8. mcp bundle urls commit-pinned, never branch-pinned (no `/main/`)
+#
+# Scheduled independently of pushes so a deleted tag or force-moved branch tip
+# is caught without a new commit to eNNvironment.
 
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
 
 jobs:
   validate:
@@ -21,12 +32,33 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: validate-manifest unit tests
         run: node scripts/validate-manifest.test.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Validate bootstrap manifest against actioNN
-        run: node scripts/validate-manifest.js
+      - name: generate-manifest unit tests
+        run: node scripts/generate-manifest.test.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: generate --check (stable)
+        run: node scripts/generate-manifest.js --channel stable --check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: generate --check (preview)
+        run: node scripts/generate-manifest.js --channel preview --check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate manifest (stable)
+        run: node scripts/validate-manifest.js --channel stable
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate manifest (preview)
+        run: node scripts/validate-manifest.js --channel preview
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
