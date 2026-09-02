@@ -21,5 +21,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: validate-manifest unit tests
+        run: node scripts/validate-manifest.test.js
+
       - name: Validate bootstrap manifest against actioNN
         run: node scripts/validate-manifest.js
