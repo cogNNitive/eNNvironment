@@ -3,9 +3,37 @@ const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
+const https = require('node:https');
+const { EventEmitter } = require('node:events');
 const { spawnSync } = require('node:child_process');
 
 const validatorScript = path.join(__dirname, 'validate-manifest.js');
+
+function stubHttpsGetOnce(statusCode, body) {
+  const originalGet = https.get;
+  let capturedOptions = null;
+  https.get = (url, options, callback) => {
+    capturedOptions = options;
+    const res = new EventEmitter();
+    res.statusCode = statusCode;
+    const req = new EventEmitter();
+    process.nextTick(() => {
+      callback(res);
+      res.emit('data', Buffer.from(body));
+      res.emit('end');
+    });
+    return req;
+  };
+  return {
+    restore: () => { https.get = originalGet; },
+    capturedOptions: () => capturedOptions,
+  };
+}
+
+function freshValidatorModule() {
+  delete require.cache[require.resolve(validatorScript)];
+  return require(validatorScript);
+}
 
 function createTempManifestDir(manifestContent) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'eNNvironment-test-'));
@@ -15,6 +43,7 @@ function createTempManifestDir(manifestContent) {
   return tmpDir;
 }
 
+async function main() {
 console.log('Running validate-manifest unit tests...');
 
 // 1. Legacy manifest without templates passes or validates correctly
@@ -91,4 +120,44 @@ agent-bootstrap:
   }
 }
 
+// 4. GITHUB_TOKEN is sent as an Authorization: Bearer header by apiRequest and fetchString
+{
+  const previousToken = process.env.GITHUB_TOKEN;
+  process.env.GITHUB_TOKEN = 'test-token-12345';
+  const mod = freshValidatorModule();
+
+  {
+    const stub = stubHttpsGetOnce(200, '{}');
+    try {
+      await mod.apiRequest('https://api.github.com/repos/cogNNitive/eNNvironment/commits/abc');
+      const headers = stub.capturedOptions().headers;
+      assert.strictEqual(headers.Authorization, 'Bearer test-token-12345', 'apiRequest should send Authorization: Bearer when GITHUB_TOKEN is set');
+    } finally {
+      stub.restore();
+    }
+  }
+
+  {
+    const stub = stubHttpsGetOnce(200, 'raw body');
+    try {
+      await mod.fetchString('https://raw.githubusercontent.com/cogNNitive/eNNvironment/abc/README.md');
+      const headers = stub.capturedOptions().headers;
+      assert.strictEqual(headers.Authorization, 'Bearer test-token-12345', 'fetchString should send Authorization: Bearer when GITHUB_TOKEN is set');
+    } finally {
+      stub.restore();
+    }
+  }
+
+  if (previousToken === undefined) delete process.env.GITHUB_TOKEN;
+  else process.env.GITHUB_TOKEN = previousToken;
+  freshValidatorModule();
+  console.log('✔ GITHUB_TOKEN Authorization header test passed');
+}
+
 console.log('All validate-manifest unit tests passed successfully!');
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

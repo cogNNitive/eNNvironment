@@ -182,9 +182,14 @@ function parseManifest(text) {
 // GitHub API helpers
 // ---------------------------------------------------------------------------
 
+function authHeaders() {
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 function apiRequest(url) {
   return new Promise((resolve) => {
-    https.get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': USER_AGENT, ...authHeaders() } }, (res) => {
       let body = '';
       res.on('data', chunk => body += chunk);
       res.on('end', () => {
@@ -198,7 +203,7 @@ function apiRequest(url) {
 
 function fetchString(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {
+    https.get(url, { headers: { 'User-Agent': USER_AGENT, ...authHeaders() } }, (res) => {
       if (res.statusCode !== 200) {
         return reject(new Error(`Failed to fetch ${url}, status: ${res.statusCode}`));
       }
@@ -212,6 +217,8 @@ function fetchString(url) {
 function rateLimited(status) {
   return status === 403 || status === 429;
 }
+
+const RATE_LIMIT_HINT = 'set GITHUB_TOKEN to raise the rate limit';
 
 // ---------------------------------------------------------------------------
 // Validation
@@ -232,7 +239,7 @@ async function checkCommitExists(item) {
   const res = await apiRequest(`https://api.github.com/repos/${item.repo}/commits/${item.commit}`);
   if (res.status === 200) return null;
   if (rateLimited(res.status)) {
-    return `${item.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit. Wait and retry.`;
+    return `${item.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking commit; ${RATE_LIMIT_HINT}.`;
   }
   return `${item.name}: commit ${item.commit} does not exist in ${item.repo} (HTTP ${res.status || res.error || 'network error'})`;
 }
@@ -245,7 +252,7 @@ async function checkPathAtCommit(skill) {
     return `${skill.name}: ${skill.path} at ${skill.commit} has no SKILL.md entry`;
   }
   if (rateLimited(res.status)) {
-    return `${skill.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path. Wait and retry.`;
+    return `${skill.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path; ${RATE_LIMIT_HINT}.`;
   }
   return `${skill.name}: path ${skill.path} not found at ${skill.commit} (HTTP ${res.status || res.error || 'network error'})`;
 }
@@ -301,7 +308,7 @@ async function validateTemplate(template) {
   const res = await apiRequest(url);
   if (res.status !== 200) {
     if (rateLimited(res.status)) {
-      violations.push(`${template.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path. Wait and retry.`);
+      violations.push(`${template.name}: GitHub API rate limit hit (HTTP ${res.status}) while checking path; ${RATE_LIMIT_HINT}.`);
     } else {
       violations.push(`${template.name}: path ${template.path} not found at ${template.commit} (HTTP ${res.status || res.error || 'network error'})`);
     }
@@ -399,6 +406,22 @@ async function main() {
 
   console.log(`OK: ${skills.length} skills and ${templates.length} templates validated`);
 }
+
+module.exports = {
+  apiRequest,
+  fetchString,
+  authHeaders,
+  rateLimited,
+  parseFocusedYaml,
+  parseFrontmatter,
+  parseManifest,
+  structuralViolations,
+  checkCommitExists,
+  checkPathAtCommit,
+  checkVersionParity,
+  validateSkill,
+  validateTemplate,
+};
 
 if (require.main === module) {
   main();
