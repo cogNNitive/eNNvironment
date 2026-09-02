@@ -21,9 +21,15 @@ on a machine is recorded per-machine in `~/.agents/skills-state.json` (like lazy
 4. If any skill is outdated, show the diff preview and ask before updating:
    `node scripts/skills-manager.js update`. Never silently update, and never report
    "installed and up to date" without having run the check.
-5. For each skill that declares `mcp[]`, download the bundle `url` into
-   `~/.agents/mcp/{name}.bundle.js` and register it in your workspace MCP config.
-6. Present the `workflows[]` as a menu and hand over to the chosen skill.
+5. For each skill that declares `mcp[]`, download the bundle `url` into `~/.agents/mcp/{name}.bundle.js` and register it in your workspace MCP config.
+6. For each template declared in `templates:`, `innfo-mcp` resolves and hydrates versioned packages using 4-tier lookup:
+   - Workspace Package Directory: `./specs/templates/<name>/<version>/`
+   - Workspace Flat Fallback: `./templates/<name>_V_<version>_NN.md` or `./specs/`
+   - Global User Cache: `~/.agents/templates/<name>/<version>/`
+   - Installed Skills Directory: `~/.agents/skills/*/templates/<name>/<version>/`
+   Hydration into workspace `./specs/templates/<name>/<version>/` is atomic and write-once immutable.
+7. Attached SOP procedures (`procedures/`) and agent skills (`skills/`) declared in template frontmatter are dynamically discovered up to depth 10 via `list_template_procedures` and `list_template_skills`.
+8. Present the `workflows[]` as a menu and hand over to the chosen skill.
 
 ## For an agent that already has `agent-web-bootstrap`
 
