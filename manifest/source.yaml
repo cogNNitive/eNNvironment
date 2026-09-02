@@ -23,7 +23,7 @@ skills:
       - name: innfo-mcp
         repo: cogNNitive/iNNfo
         path: packages/innfo-mcp/bin/innfo-mcp.bundle.js
-        version: "0.2.3"
+        version: "0.2.4"
         ref_key: innfo-mcp
   - name: nn-preflight
     repo: cogNNitive/actioNN
@@ -84,13 +84,13 @@ channels:
     refs:
       - key: cogNNitive/actioNN
         repo: cogNNitive/actioNN
-        ref: skills-v1.1.0
+        ref: skills-v1.1.1
       - key: cogNNitive/iNNfo
         repo: cogNNitive/iNNfo
         ref: templates-v0.2.0
       - key: innfo-mcp
         repo: cogNNitive/iNNfo
-        ref: innfo-mcp-v0.2.3
+        ref: innfo-mcp-v0.2.4
   preview:
     refs:
       - key: cogNNitive/actioNN
